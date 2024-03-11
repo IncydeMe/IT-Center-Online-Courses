@@ -11,19 +11,19 @@ namespace App_BusinessObject.DTOs.Response.Order
         public int OrderId { get; set; }
         public DateTime CreatedDate { get; set; }
         public bool Status { get; set; }
-        public int Account { get; set; }
+        public int AccountId { get; set; }
 
         public GetOrderResponse()
         {
 
         }
 
-        public GetOrderResponse(int orderId, DateTime createdDate, bool status, int account)
+        public GetOrderResponse(int orderId, DateTime createdDate, bool status, int accountId)
         {
             OrderId = orderId;
             CreatedDate = createdDate;
             Status = status;
-            Account = account;
+            AccountId = accountId;
         }
     }
 }

@@ -26,7 +26,7 @@ namespace App_Service
                 _orderRepository = new OrderRepository();
         }
         public async Task<IPaginate<GetOrderResponse>> GetAllOrders(int page, int size) => await _orderRepository.GetAllOrders(page, size);
-        public async void CreateOrder(CreateOrderRequest createOrderRequest) => _orderRepository.CreateOrder(createOrderRequest);
+        public void CreateOrder(CreateOrderRequest createOrderRequest) => _orderRepository.CreateOrder(createOrderRequest);
         public async Task<UpdateOrderResponse> UpdateOrder(int orderId, UpdateOrderRequest updateOrderRequest) => await _orderRepository.UpdateOrder(orderId,updateOrderRequest);
     }
 }
