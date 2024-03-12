@@ -53,6 +53,7 @@ namespace App_DataAccessObject
                 CourseId = x.CourseId,
                 CourseName = x.CourseName,
                 Description = x.Description,
+                ImageUrl = x.ImageUrl,
                 IsAvailable = x.IsAvailable,
                 CategoryId = x.CategoryId
             }).Where(x => x.IsAvailable == true).ToPaginateAsync(page, size, 1);
@@ -82,6 +83,8 @@ namespace App_DataAccessObject
                 course.CourseName = updateCourseRequest.CourseName;
                 course.Description = updateCourseRequest.Description;
                 course.CategoryId = updateCourseRequest.CategoryId;
+                course.Price = updateCourseRequest.Price;
+                course.ImageUrl = updateCourseRequest.ImageUrl;
                 _dbContext.Courses.Update(course);
                 await _dbContext.SaveChangesAsync();
 
@@ -89,6 +92,11 @@ namespace App_DataAccessObject
                 return response;
             }
             return null;
+        }
+
+        public async Task<Course> GetCourseById(int courseId)
+        {
+            return await _dbContext.Courses.FirstOrDefaultAsync(c => c.CourseId == courseId);
         }
     }
 }

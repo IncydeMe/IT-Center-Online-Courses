@@ -24,11 +24,13 @@ namespace App_BusinessObject.Models
         public int CourseId { get; set; }
         [StringLength(100)]
         public string CourseName { get; set; }
+        public string ImageUrl { get; set; }
         public string Description { get; set; }
         [DefaultValue(true)]
         public bool IsAvailable { get; set; }
         [ForeignKey("CategoryId")]
         public int CategoryId { get; set; }
+        public double Price { get; set; }
 
         public virtual Category Category { get; set; }
         public virtual ICollection<Lesson> Lessons { get; set; }
