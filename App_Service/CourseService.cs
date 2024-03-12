@@ -1,6 +1,7 @@
 ﻿using App_BusinessObject.DTOs.Request.Course;
 using App_BusinessObject.DTOs.Response.Account;
 using App_BusinessObject.DTOs.Response.Course;
+using App_BusinessObject.Models;
 using App_BusinessObject.Paginate;
 using App_Repository;
 using System;
@@ -17,6 +18,7 @@ namespace App_Service
         public void CreateCourse(CreateCourseRequest createCourseRequest);
         public Task<UpdateCourseResponse> UpdateCourseInformation(int id, UpdateCourseRequest updateCourseRequest);
         public Task<bool> ChangeCourseStatus(int id);
+        public Task<Course> GetCourseById(int courseId);
     }
 
     public class CourseService : ICourseService
@@ -34,5 +36,7 @@ namespace App_Service
         public async Task<IPaginate<GetCourseResponse>> GetAllACourses(int page, int size) => await _courseRepository.GetAllCourses(page, size);
 
         public async Task<UpdateCourseResponse> UpdateCourseInformation(int id, UpdateCourseRequest updateCourseRequest) => await _courseRepository.UpdateCourseInformation(id, updateCourseRequest);
+
+        public async Task<Course> GetCourseById(int courseId) => await _courseRepository.GetCourseById(courseId);
     }
 }

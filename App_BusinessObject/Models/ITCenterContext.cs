@@ -32,6 +32,7 @@ namespace App_BusinessObject.Models
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<OwnedCourse> OwnedCourses { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<OwnedLesson> OwnedLessons { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
