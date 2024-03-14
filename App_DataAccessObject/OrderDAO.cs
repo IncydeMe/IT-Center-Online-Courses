@@ -62,6 +62,36 @@ namespace App_DataAccessObject
         }
         #endregion
 
+        #region GetUserOrderList
+        public async Task<IPaginate<GetOrderResponse>> GetUserOrderList(int accountId, int page, int size)
+        {
+            IPaginate<GetOrderResponse> userOrderList = await _dbContext.Orders
+                .Where(x => x.AccountId == accountId)
+                .Select(x => new GetOrderResponse
+                {
+                    OrderId = x.OrderId,
+                    CreatedDate = x.CreatedDate,
+                    Status = x.Status,
+                    AccountId = x.AccountId
+                })
+                .ToPaginateAsync(page, size, 1);
+            return userOrderList;
+        }
+        #endregion
+
+        #region GetOrderById
+        public async Task<GetOrderResponse> GetOrderById(int orderId)
+        {
+            Order order = await _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderId == orderId);
+            if (order != null)
+            {
+                GetOrderResponse response = _mapper.Map<GetOrderResponse>(order);
+                return response;
+            }
+            return null;
+        }
+        #endregion
+
         #region CreateOrder
         public async void CreateOrder(CreateOrderRequest createOrderRequest)
         {
@@ -70,22 +100,19 @@ namespace App_DataAccessObject
         }
         #endregion
 
-        #region UpdateOrder
-        public async Task<UpdateOrderResponse> UpdateOrder(int orderId, UpdateOrderRequest updateOrderRequest)
+        #region ChangeStatus
+        public async Task<bool> ChangeStatus(int orderId)
         {
             Order order = await _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderId == orderId);
 
             if (order != null)
             {
-                order.CreatedDate = DateTime.Now;
-                order.Status = updateOrderRequest.Status;
+                order.Status = !order.Status;
                 _dbContext.Orders.Update(order);
                 await _dbContext.SaveChangesAsync();
-
-                UpdateOrderResponse response = _mapper.Map<UpdateOrderResponse>(order);
-                return response;
+                return true;
             }
-            return null;
+            return false;
         }
         #endregion
 

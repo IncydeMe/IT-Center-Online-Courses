@@ -13,14 +13,15 @@ namespace App_Repository
     public interface IOrderDetailRepository
     {
         public Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size);
+        public Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId);
         public void CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest);
-        public Task<UpdateOrderDetailResponse> UpdateOrderDetail(int orderDetailId, UpdateOrderDetailRequest updateOrderDetailRequest);
+        
     }
 
     public class OrderDetailRepository : IOrderDetailRepository
     {
         public async Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size) => await OrderDetailDAO.Instance.GetAllOrderDetails(page, size);
+        public async Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId) => await OrderDetailDAO.Instance.GetOrderDetailsInOrder(orderId);
         public void CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest) => OrderDetailDAO.Instance.CreateOrderDetail(createOrderDetailRequest);
-        public async Task<UpdateOrderDetailResponse> UpdateOrderDetail(int orderDetailId, UpdateOrderDetailRequest updateOrderDetailRequest) => await OrderDetailDAO.Instance.UpdateOrderDetail(orderDetailId, updateOrderDetailRequest);
     }
 }

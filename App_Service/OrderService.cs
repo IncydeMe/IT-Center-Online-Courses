@@ -13,8 +13,10 @@ namespace App_Service
     public interface IOrderService
     {
         public Task<IPaginate<GetOrderResponse>> GetAllOrders(int page, int size);
+        public Task<IPaginate<GetOrderResponse>> GetUserOrderList(int accountId, int page, int size);
+        public Task<GetOrderResponse> GetOrderById(int orderId);
         public void CreateOrder(CreateOrderRequest createOrderRequest);
-        public Task<UpdateOrderResponse> UpdateOrder(int orderId, UpdateOrderRequest updateOrderRequest);
+        public Task<bool> ChangeStatus(int orderId);
     }
 
     public class OrderService : IOrderService
@@ -26,7 +28,9 @@ namespace App_Service
                 _orderRepository = new OrderRepository();
         }
         public async Task<IPaginate<GetOrderResponse>> GetAllOrders(int page, int size) => await _orderRepository.GetAllOrders(page, size);
+        public async Task<IPaginate<GetOrderResponse>> GetUserOrderList(int accountId, int page, int size) => await _orderRepository.GetUserOrderList(accountId, page, size);
+        public Task<GetOrderResponse> GetOrderById(int orderId) => _orderRepository.GetOrderById(orderId);
         public void CreateOrder(CreateOrderRequest createOrderRequest) => _orderRepository.CreateOrder(createOrderRequest);
-        public async Task<UpdateOrderResponse> UpdateOrder(int orderId, UpdateOrderRequest updateOrderRequest) => await _orderRepository.UpdateOrder(orderId,updateOrderRequest);
+        public async Task<bool> ChangeStatus(int orderId) => await _orderRepository.ChangeStatus(orderId);
     }
 }
