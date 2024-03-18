@@ -21,5 +21,8 @@ namespace App_Repository.Repositories
 
         public async Task<IPaginate<GetOwnedLessonResponse>> GetOwnedLessons(int accountId, int page, int size)
             => await OwnedLessonDAO.Instance.GetOwnedLesson(accountId, page, size);
+
+        public async Task<List<GetOwnedLessonResponse>> GetOwnedLessonsList(int accountId)
+            => await OwnedLessonDAO.Instance.GetOwnedLessonsList(accountId);
     }
 }

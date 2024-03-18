@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace App_DataAccessObject
 {
@@ -69,6 +70,19 @@ namespace App_DataAccessObject
                 return true;
             }
             return false;
+        }
+
+        public async Task<List<GetOwnedLessonResponse>> GetOwnedLessonsList(int accountId)
+        {
+            List<GetOwnedLessonResponse> list = await _dbContext.OwnedLessons.Select(x => new GetOwnedLessonResponse
+            {
+                OwnedLessonId = x.OwnedLessonId,
+                LessonId = x.LessonId,
+                AccountId = x.AccountId,
+                IsFinished = x.IsFinished,
+                FinishedDate = (DateTime)x.FinishedDate
+            }).Where(x => x.AccountId == accountId).ToListAsync();
+            return list;
         }
     }
 }

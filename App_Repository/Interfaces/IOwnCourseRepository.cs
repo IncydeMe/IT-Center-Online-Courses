@@ -11,7 +11,7 @@ namespace App_Repository.Interfaces
 {
     public interface IOwnedCourseRepository
     {
-        public Task<IPaginate<GetOwnedCourseResponse>> GetAllOwnedCourse(int courseId, int accountId, int page, int size);
+        public Task<IPaginate<GetOwnedCourseResponse>> GetAllOwnedCourse(int accountId, int page, int size);
         public Task CreateOwnedCourse(CreateOwnedCourseRequest createOwnedCourseRequest);
         public Task<bool> ChangeOwnedCourseStatus(int id);
     }
