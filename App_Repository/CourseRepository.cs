@@ -14,7 +14,7 @@ namespace App_Repository
     public interface ICourseRepository
     {
         public Task<IPaginate<GetCourseResponse>> GetAllCourses(int page, int size);
-        public void CreateCourse(CreateCourseRequest createCourseRequest);
+        public Task CreateCourse(CreateCourseRequest createCourseRequest);
         public Task<UpdateCourseResponse> UpdateCourseInformation(int id, UpdateCourseRequest updateCourseRequest);
         public Task<bool> ChangeCourseStatus(int id);
         public Task<Course> GetCourseById(int courseId);
@@ -23,7 +23,7 @@ namespace App_Repository
     {
         public async Task<IPaginate<GetCourseResponse>> GetAllCourses(int page, int size) => await CourseDAO.Instance.GetAllCourses(page, size);
 
-        public void CreateCourse(CreateCourseRequest createCourseRequest) => CourseDAO.Instance.CreateCourse(createCourseRequest);
+        public async Task CreateCourse(CreateCourseRequest createCourseRequest) => await CourseDAO.Instance.CreateCourse(createCourseRequest);
 
         public async Task<UpdateCourseResponse> UpdateCourseInformation(int id, UpdateCourseRequest updateCourseRequest) => await CourseDAO.Instance.UpdateCourseInformation(id, updateCourseRequest);
 

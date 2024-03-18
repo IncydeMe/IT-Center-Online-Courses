@@ -15,7 +15,7 @@ namespace App_Repository
         public Task<IPaginate<GetOrderResponse>> GetAllOrders(int page, int size);
         public Task<IPaginate<GetOrderResponse>> GetUserOrderList(int accountId, int page, int size);
         public Task<GetOrderResponse> GetOrderById(int orderId);
-        public void CreateOrder(CreateOrderRequest createOrderRequest);
+        public Task CreateOrder(CreateOrderRequest createOrderRequest);
         public Task<bool> ChangeStatus(int orderId);
     }
 
@@ -24,7 +24,7 @@ namespace App_Repository
         public async Task<IPaginate<GetOrderResponse>> GetAllOrders(int page, int size) => await OrderDAO.Instance.GetAllOrders(page, size);
         public async Task<IPaginate<GetOrderResponse>> GetUserOrderList(int accountId, int page, int size) => await OrderDAO.Instance.GetAllOrders(page, size);
         public Task<GetOrderResponse> GetOrderById(int orderId) =>  OrderDAO.Instance.GetOrderById(orderId);
-        public void CreateOrder(CreateOrderRequest createOrderRequest) => OrderDAO.Instance.CreateOrder(createOrderRequest);
+        public async Task CreateOrder(CreateOrderRequest createOrderRequest) => await OrderDAO.Instance.CreateOrder(createOrderRequest);
         public async Task<bool> ChangeStatus(int orderId) => await OrderDAO.Instance.ChangeStatus(orderId);
     }
 }

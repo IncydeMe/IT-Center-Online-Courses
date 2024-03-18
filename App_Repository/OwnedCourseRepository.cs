@@ -13,7 +13,7 @@ namespace App_Repository
     public interface IOwnedCourseRepository
     {
         public Task<IPaginate<GetOwnedCourseResponse>> GetAllOwnedCourse(int courseId, int accountId, int page, int size);
-        public void CreateOwnedCourse(CreateOwnedCourseRequest createOwnedCourseRequest);
+        public Task CreateOwnedCourse(CreateOwnedCourseRequest createOwnedCourseRequest);
         public Task<bool> ChangeOwnedCourseStatus(int id);
     }
 
@@ -22,7 +22,7 @@ namespace App_Repository
         public async Task<bool> ChangeOwnedCourseStatus(int id) 
             => await OwnedCourseDAO.Instance.ChangeOwnedCourseStatus(id);
 
-        public void CreateOwnedCourse(CreateOwnedCourseRequest createOwnedCourseRequest) 
+        public async Task CreateOwnedCourse(CreateOwnedCourseRequest createOwnedCourseRequest) 
             => OwnedCourseDAO.Instance.CreateOwnedCourse(createOwnedCourseRequest);
 
         public async Task<IPaginate<GetOwnedCourseResponse>> GetAllOwnedCourse(int courseId, int accountId, int page, int size)

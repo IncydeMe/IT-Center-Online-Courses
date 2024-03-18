@@ -14,7 +14,7 @@ namespace App_Repository
     {
         public Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size);
         public Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId);
-        public void CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest);
+        public Task CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest);
         
     }
 
@@ -22,6 +22,6 @@ namespace App_Repository
     {
         public async Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size) => await OrderDetailDAO.Instance.GetAllOrderDetails(page, size);
         public async Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId) => await OrderDetailDAO.Instance.GetOrderDetailsInOrder(orderId);
-        public void CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest) => OrderDetailDAO.Instance.CreateOrderDetail(createOrderDetailRequest);
+        public async Task CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest) => await OrderDetailDAO.Instance.CreateOrderDetail(createOrderDetailRequest);
     }
 }

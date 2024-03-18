@@ -39,7 +39,7 @@ namespace App_DataAccessObject
                 _mapper = new Mapper(new MapperConfiguration(mc => mc.AddProfile(new LessonMapper())).CreateMapper().ConfigurationProvider);
         }
 
-        public async void CreateLesson(CreateLessonRequest newLesson)
+        public async Task CreateLesson(CreateLessonRequest newLesson)
         {
             _dbContext.Lessons.Add(_mapper.Map<Lesson>(newLesson));
             await _dbContext.SaveChangesAsync();

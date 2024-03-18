@@ -15,7 +15,7 @@ namespace App_Service
         public Task<IPaginate<GetOrderResponse>> GetAllOrders(int page, int size);
         public Task<IPaginate<GetOrderResponse>> GetUserOrderList(int accountId, int page, int size);
         public Task<GetOrderResponse> GetOrderById(int orderId);
-        public void CreateOrder(CreateOrderRequest createOrderRequest);
+        public Task CreateOrder(CreateOrderRequest createOrderRequest);
         public Task<bool> ChangeStatus(int orderId);
     }
 
@@ -30,7 +30,7 @@ namespace App_Service
         public async Task<IPaginate<GetOrderResponse>> GetAllOrders(int page, int size) => await _orderRepository.GetAllOrders(page, size);
         public async Task<IPaginate<GetOrderResponse>> GetUserOrderList(int accountId, int page, int size) => await _orderRepository.GetUserOrderList(accountId, page, size);
         public Task<GetOrderResponse> GetOrderById(int orderId) => _orderRepository.GetOrderById(orderId);
-        public void CreateOrder(CreateOrderRequest createOrderRequest) => _orderRepository.CreateOrder(createOrderRequest);
+        public async Task CreateOrder(CreateOrderRequest createOrderRequest) => await _orderRepository.CreateOrder(createOrderRequest);
         public async Task<bool> ChangeStatus(int orderId) => await _orderRepository.ChangeStatus(orderId);
     }
 }

@@ -42,8 +42,6 @@ namespace App_DataAccessObject
         }
 
         #region OrderDetailFunction
-
-        #region GetAllOrderDetails
         public async Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size)
         {
             IPaginate<GetOrderDetailResponse> orderDetailList = await _dbContext.OrderDetails.Select(x => new GetOrderDetailResponse
@@ -55,9 +53,7 @@ namespace App_DataAccessObject
             }).ToPaginateAsync(page, size, 1);
             return orderDetailList;
         }
-        #endregion
-
-        #region GetOrderDetailsInOrder
+      
         public async Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId)
         {
             List<GetOrderDetailResponse> orderDetails = await _dbContext.OrderDetails
@@ -71,16 +67,12 @@ namespace App_DataAccessObject
                 .ToListAsync();
             return orderDetails;
         }
-        #endregion
 
-        #region CreateOrderDetail
-        public async void CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest)
+        public async Task CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest)
         {
-            _dbContext.OrderDetails.Add(_mapper.Map<OrderDetail>(createOrderDetailRequest));
+            await _dbContext.OrderDetails.AddAsync(_mapper.Map<OrderDetail>(createOrderDetailRequest));
             await _dbContext.SaveChangesAsync();
         }
-        #endregion
-
         #endregion
     }
 }

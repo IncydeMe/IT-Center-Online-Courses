@@ -14,7 +14,7 @@ namespace App_Service
     {
         public Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size);
         public Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId);
-        public void CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest);
+        public Task CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest);
     }
 
     public class OrderDetailService : IOrderDetailService
@@ -28,6 +28,6 @@ namespace App_Service
 
         public async Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size) => await _orderDetailRepository.GetAllOrderDetails(page, size);
         public async Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId) => await _orderDetailRepository.GetOrderDetailsInOrder(orderId);
-        public void CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest) => _orderDetailRepository.CreateOrderDetail(createOrderDetailRequest);       
+        public async Task CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest) => await _orderDetailRepository.CreateOrderDetail(createOrderDetailRequest);       
     }
 }
