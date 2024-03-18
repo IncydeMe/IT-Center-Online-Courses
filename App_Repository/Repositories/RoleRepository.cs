@@ -1,20 +1,14 @@
 ﻿using App_BusinessObject.Models;
 using App_DataAccessObject;
+using App_Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App_Repository
+namespace App_Repository.Repositories
 {
-    public interface IRoleRepository
-    {
-        public Task<List<Role>> GetAllRoles();
-
-        public Task CreateRole(Role newRole);
-    }
-
     public class RoleRepository : IRoleRepository
     {
         public async Task<List<Role>> GetAllRoles() => await RoleDAO.Instance.GetAllRoles();

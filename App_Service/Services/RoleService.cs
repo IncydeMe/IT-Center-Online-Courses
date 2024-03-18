@@ -1,27 +1,22 @@
 ﻿using App_BusinessObject.Models;
-using App_Repository;
+using App_Repository.Interfaces;
+using App_Repository.Repositories;
+using App_Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App_Service
+namespace App_Service.Services
 {
-    public interface IRoleService
-    {
-        public Task<List<Role>> GetAllRoles();
-        public Task CreateRole(Role newRole);
-    }
-
     public class RoleService : IRoleService
     {
-        private readonly IRoleRepository _roleRepository = null;
+        private readonly IRoleRepository _roleRepository;
 
-        public RoleService()
+        public RoleService(IRoleRepository roleRepository)
         {
-            if (_roleRepository == null)
-                _roleRepository = new RoleRepository();
+            _roleRepository = roleRepository;
         }
 
         public async Task<List<Role>> GetAllRoles() => await _roleRepository.GetAllRoles();

@@ -1,30 +1,24 @@
 ﻿using App_BusinessObject.DTOs.Request.Category;
 using App_BusinessObject.DTOs.Response.Category;
 using App_BusinessObject.Paginate;
-using App_Repository;
+using App_Repository.Interfaces;
+using App_Repository.Repositories;
+using App_Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App_Service
+namespace App_Service.Services
 {
-    public interface ICategoryService
-    {
-        public Task<IPaginate<GetCategoryResponse>> GetAllCategories(int page, int size);
-        public Task CreateCategory(CreateCategoryRequest createCategoryRequest);
-        public Task<UpdateCategoryResponse> UpdateCategoryInformation(int id, UpdateCategoryRequest updateCategoryRequest);
-    }
-
     public class CategoryService : ICategoryService
     {
-        private readonly ICategoryRepository _categoryRepository = null;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public CategoryService()
+        public CategoryService(ICategoryRepository categoryRepository)
         {
-            if (_categoryRepository == null)
-                _categoryRepository = new CategoryRepository();
+            _categoryRepository = categoryRepository;
         }
 
         public async Task CreateCategory(CreateCategoryRequest createCategoryRequest) => await _categoryRepository.CreateCategory(createCategoryRequest);
