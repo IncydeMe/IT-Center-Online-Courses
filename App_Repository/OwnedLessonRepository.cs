@@ -13,7 +13,7 @@ namespace App_Repository
     public interface IOwnedLessonRepository
     {
         public Task<IPaginate<GetOwnedLessonResponse>> GetOwnedLessons(int accountId, int page, int size);
-        public void CreateOwnedLesson(CreateOwnedLessonRequest newOwnedLesson);
+        public Task CreateOwnedLesson(CreateOwnedLessonRequest newOwnedLesson);
         public Task<bool> ChangeOwnedLessonStatus(int id);
     }
 
@@ -22,8 +22,8 @@ namespace App_Repository
         public async Task<bool> ChangeOwnedLessonStatus(int id)
             => await OwnedLessonDAO.Instance.ChangeOwnedLessonStatus(id);
 
-        public void CreateOwnedLesson(CreateOwnedLessonRequest newOwnedLesson)
-            => OwnedLessonDAO.Instance.CreateOwnedLesson(newOwnedLesson);
+        public async Task CreateOwnedLesson(CreateOwnedLessonRequest newOwnedLesson)
+            => await OwnedLessonDAO.Instance.CreateOwnedLesson(newOwnedLesson);
 
         public async Task<IPaginate<GetOwnedLessonResponse>> GetOwnedLessons(int accountId, int page, int size)
             => await OwnedLessonDAO.Instance.GetOwnedLesson(accountId, page, size);

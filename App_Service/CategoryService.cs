@@ -13,7 +13,7 @@ namespace App_Service
     public interface ICategoryService
     {
         public Task<IPaginate<GetCategoryResponse>> GetAllCategories(int page, int size);
-        public void CreateCategory(CreateCategoryRequest createCategoryRequest);
+        public Task CreateCategory(CreateCategoryRequest createCategoryRequest);
         public Task<UpdateCategoryResponse> UpdateCategoryInformation(int id, UpdateCategoryRequest updateCategoryRequest);
     }
 
@@ -27,7 +27,7 @@ namespace App_Service
                 _categoryRepository = new CategoryRepository();
         }
 
-        public async void CreateCategory(CreateCategoryRequest createCategoryRequest) => _categoryRepository.CreateCategory(createCategoryRequest);
+        public async Task CreateCategory(CreateCategoryRequest createCategoryRequest) => await _categoryRepository.CreateCategory(createCategoryRequest);
 
         public async Task<IPaginate<GetCategoryResponse>> GetAllCategories(int page, int size) => await _categoryRepository.GetAllCategories(page, size);
 

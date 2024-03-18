@@ -43,8 +43,6 @@ namespace App_DataAccessObject
         }
 
         #region AssignmentFunction
-
-        #region GetAssignmentsInCourse
         public async Task<List<GetAssignmentResponse>> GetAssignmentsInCourse(int courseId)
         {
             List<Assignment> assignments = await _dbContext.Assignments
@@ -54,9 +52,7 @@ namespace App_DataAccessObject
             List<GetAssignmentResponse> responses = _mapper.Map<List<GetAssignmentResponse>>(assignments);
             return responses;
         }
-        #endregion
 
-        #region GetAssignmentById
         public async Task<GetAssignmentResponse> GetAssignmentById(int assignmentId)
         {
             Assignment assignment = await _dbContext.Assignments.FirstOrDefaultAsync(x => x.AssignmentId == assignmentId);
@@ -67,17 +63,13 @@ namespace App_DataAccessObject
             }
             return null;
         }
-        #endregion
 
-        #region CreateAssignment
         public async void CreateAssignment(CreateAssignmentRequest createAssignmentRequest)
         {
             _dbContext.Assignments.Add(_mapper.Map<Assignment>(createAssignmentRequest));
             await _dbContext.SaveChangesAsync();
         }
-        #endregion
 
-        #region UpdateAssignment
         public async Task<UpdateAssignmentResponse> UpdateAssignment(int assignmentId, UpdateAssignmentRequest updateAssignment)
         {
             Assignment assignment = await _dbContext.Assignments.FirstOrDefaultAsync(x => x.AssignmentId == assignmentId);
@@ -97,8 +89,6 @@ namespace App_DataAccessObject
             }
             return null;
         }
-        #endregion
-
         #endregion
     }
 }

@@ -14,14 +14,14 @@ namespace App_Repository
     {
         public Task<List<GetLessonResponse>> GetAllLessonsOfCourse(int courseId);
         public List<GetLessonResponse> GetListLessonOfCourse(int courseId);
-        public void CreateLesson(CreateLessonRequest createLessonRequest);
+        public Task CreateLesson(CreateLessonRequest createLessonRequest);
         public Task<UpdateLessonResponse> UpdateLessonInformation(int id, UpdateLessonRequest updateLessonRequest);
         public Task<bool> DeleteLesson(int id);
     }
 
     public class LessonRepository : ILessonRepository
     {
-        public void CreateLesson(CreateLessonRequest createLessonRequest)
+        public async Task CreateLesson(CreateLessonRequest createLessonRequest)
             => LessonDAO.Instance.CreateLesson(createLessonRequest);
 
         public async Task<bool> DeleteLesson(int id)

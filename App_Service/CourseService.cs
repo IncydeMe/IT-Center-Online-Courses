@@ -15,7 +15,7 @@ namespace App_Service
     public interface ICourseService
     {
         public Task<IPaginate<GetCourseResponse>> GetAllACourses(int page, int size);
-        public void CreateCourse(CreateCourseRequest createCourseRequest);
+        public Task CreateCourse(CreateCourseRequest createCourseRequest);
         public Task<UpdateCourseResponse> UpdateCourseInformation(int id, UpdateCourseRequest updateCourseRequest);
         public Task<bool> ChangeCourseStatus(int id);
         public Task<Course> GetCourseById(int courseId);
@@ -31,7 +31,7 @@ namespace App_Service
         }
         public async Task<bool> ChangeCourseStatus(int id) => await _courseRepository.ChangeCourseStatus(id);
 
-        public async void CreateCourse(CreateCourseRequest createCourseRequest) => _courseRepository.CreateCourse(createCourseRequest);
+        public async Task CreateCourse(CreateCourseRequest createCourseRequest) => await _courseRepository.CreateCourse(createCourseRequest);
 
         public async Task<IPaginate<GetCourseResponse>> GetAllACourses(int page, int size) => await _courseRepository.GetAllCourses(page, size);
 

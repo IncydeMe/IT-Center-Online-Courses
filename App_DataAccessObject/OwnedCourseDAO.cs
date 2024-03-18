@@ -38,9 +38,9 @@ namespace App_BusinessObject
                 _mapper = new Mapper(new MapperConfiguration(mc => mc.AddProfile(new OwnedCourseMapper())).CreateMapper().ConfigurationProvider);
         }
 
-        public async void CreateOwnedCourse(CreateOwnedCourseRequest newOwnedCourse)
+        public async Task CreateOwnedCourse(CreateOwnedCourseRequest newOwnedCourse)
         {
-            _dbContext.OwnedCourses.Add(_mapper.Map<OwnedCourse>(newOwnedCourse));
+            await _dbContext.OwnedCourses.AddAsync(_mapper.Map<OwnedCourse>(newOwnedCourse));
             await _dbContext.SaveChangesAsync();
         }
 

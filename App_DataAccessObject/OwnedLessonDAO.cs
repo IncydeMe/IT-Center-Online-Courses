@@ -39,9 +39,9 @@ namespace App_DataAccessObject
                 _mapper = new Mapper(new MapperConfiguration(mc => mc.AddProfile(new OwnedLessonMapper())).CreateMapper().ConfigurationProvider);
         }
 
-        public async void CreateOwnedLesson(CreateOwnedLessonRequest newOwnedLesson)
+        public async Task CreateOwnedLesson(CreateOwnedLessonRequest newOwnedLesson)
         {
-            _dbContext.OwnedLessons.Add(_mapper.Map<OwnedLesson>(newOwnedLesson));
+            await _dbContext.OwnedLessons.AddAsync(_mapper.Map<OwnedLesson>(newOwnedLesson));
             await _dbContext.SaveChangesAsync();
         }
 
