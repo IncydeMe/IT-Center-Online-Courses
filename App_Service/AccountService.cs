@@ -16,7 +16,7 @@ namespace App_Service
     public interface IAccountService
     {
         public Task<IPaginate<GetAccountResponse>> GetAllAccounts(int page, int size);
-        public void CreateAccount(CreateAccountRequest createAccountRequest);
+        public Task CreateAccount(CreateAccountRequest createAccountRequest);
         public Task<UpdateAccountResponse> UpdateAccountInformation(int id, UpdateAccountRequest updateAccountRequest);
         public Task<bool> ChangeAccountStatus(int id);
 
@@ -35,7 +35,7 @@ namespace App_Service
         }
 
         public async Task<IPaginate<GetAccountResponse>> GetAllAccounts(int page, int size) => await _accountRepository.GetAllAccounts(page, size);
-        public async void CreateAccount(CreateAccountRequest createAccountRequest) => _accountRepository.CreateAccount(createAccountRequest);
+        public async Task CreateAccount(CreateAccountRequest createAccountRequest) => _accountRepository.CreateAccount(createAccountRequest);
         public async Task<UpdateAccountResponse> UpdateAccountInformation(int id, UpdateAccountRequest updateAccountRequest)
             => await _accountRepository.UpdateAccountInformation(id, updateAccountRequest);
         public async Task<bool> ChangeAccountStatus(int id) => await _accountRepository.ChangeAccountStatus(id);

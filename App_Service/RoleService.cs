@@ -11,7 +11,7 @@ namespace App_Service
     public interface IRoleService
     {
         public Task<List<Role>> GetAllRoles();
-        public void CreateRole(Role newRole);
+        public Task CreateRole(Role newRole);
     }
 
     public class RoleService : IRoleService
@@ -26,6 +26,6 @@ namespace App_Service
 
         public async Task<List<Role>> GetAllRoles() => await _roleRepository.GetAllRoles();
 
-        public async void CreateRole(Role newRole) => _roleRepository.CreateRole(newRole);
+        public async Task CreateRole(Role newRole) => await _roleRepository.CreateRole(newRole);
     }
 }

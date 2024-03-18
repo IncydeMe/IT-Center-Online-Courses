@@ -38,7 +38,7 @@ namespace App_DataAccessObject
                 _mapper = new Mapper(new MapperConfiguration(mc => mc.AddProfile(new CategoryMapper())).CreateMapper().ConfigurationProvider);
         }
 
-        #region AccountFunction
+        #region CategoryFunction
 
         public async Task<IPaginate<GetCategoryResponse>> GetAllCategories(int page, int size)
         {

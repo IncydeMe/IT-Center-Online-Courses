@@ -16,7 +16,7 @@ namespace App_Repository
     public interface IAccountRepository
     {
         public Task<IPaginate<GetAccountResponse>> GetAllAccounts(int page, int size);
-        public void CreateAccount(CreateAccountRequest createAccountRequest);
+        public Task CreateAccount(CreateAccountRequest createAccountRequest);
         public Task<UpdateAccountResponse> UpdateAccountInformation(int id, UpdateAccountRequest updateAccountRequest);
         public Task<bool> ChangeAccountStatus(int id);
 
@@ -27,7 +27,7 @@ namespace App_Repository
     public class AccountRepository : IAccountRepository
     {
         public async Task<IPaginate<GetAccountResponse>> GetAllAccounts(int page, int size) => await AccountDAO.Instance.GetAllAccounts(page, size);
-        public async void CreateAccount(CreateAccountRequest createAccountRequest) => AccountDAO.Instance.CreateAccount(createAccountRequest);
+        public async Task CreateAccount(CreateAccountRequest createAccountRequest) => await AccountDAO.Instance.CreateAccount(createAccountRequest);
         public async Task<UpdateAccountResponse> UpdateAccountInformation(int id, UpdateAccountRequest updateAccountRequest) 
             => await AccountDAO.Instance.UpdateAccountInformation(id, updateAccountRequest);
         public async Task<bool> ChangeAccountStatus(int id) => await AccountDAO.Instance.ChangeAccountStatus(id);

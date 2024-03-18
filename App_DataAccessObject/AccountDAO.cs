@@ -57,7 +57,7 @@ namespace App_DataAccessObject
             return accountList;
         }
 
-        public async void CreateAccount(CreateAccountRequest createAccountRequest)
+        public async Task CreateAccount(CreateAccountRequest createAccountRequest)
         {
             Account account = _dbContext.Accounts.FirstOrDefault(x => x.Email.Equals(createAccountRequest.Email));
 
