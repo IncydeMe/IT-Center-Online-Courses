@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App_Repository
+namespace App_Service.Services
 {
     public interface IOwnedCourseRepository
     {
@@ -19,10 +19,10 @@ namespace App_Repository
 
     public class OwnedCourseRepository : IOwnedCourseRepository
     {
-        public async Task<bool> ChangeOwnedCourseStatus(int id) 
+        public async Task<bool> ChangeOwnedCourseStatus(int id)
             => await OwnedCourseDAO.Instance.ChangeOwnedCourseStatus(id);
 
-        public void CreateOwnedCourse(CreateOwnedCourseRequest createOwnedCourseRequest) 
+        public void CreateOwnedCourse(CreateOwnedCourseRequest createOwnedCourseRequest)
             => OwnedCourseDAO.Instance.CreateOwnedCourse(createOwnedCourseRequest);
 
         public async Task<IPaginate<GetOwnedCourseResponse>> GetAllOwnedCourse(int courseId, int accountId, int page, int size)

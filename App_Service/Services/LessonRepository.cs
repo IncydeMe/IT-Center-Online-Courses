@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App_Repository
+namespace App_Service.Services
 {
     public interface ILessonRepository
     {

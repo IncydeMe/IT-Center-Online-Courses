@@ -3,21 +3,15 @@ using App_BusinessObject.DTOs.Response.Account;
 using App_BusinessObject.DTOs.Response.Category;
 using App_BusinessObject.Paginate;
 using App_DataAccessObject;
+using App_Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App_Repository
+namespace App_Repository.Repositories
 {
-    public interface ICategoryRepository
-    {
-        public Task<IPaginate<GetCategoryResponse>> GetAllCategories(int page, int size);
-        public Task CreateCategory(CreateCategoryRequest createCategoryRequest);
-        public Task<UpdateCategoryResponse> UpdateCategoryInformation(int id, UpdateCategoryRequest updateCategoryRequest);
-    }
-
     public class CategoryRepository : ICategoryRepository
     {
         public async Task CreateCategory(CreateCategoryRequest createCategoryRequest) => await CategoryDAO.Instance.CreateCategory(createCategoryRequest);

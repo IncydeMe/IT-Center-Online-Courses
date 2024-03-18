@@ -3,31 +3,23 @@ using App_BusinessObject.DTOs.Response.Account;
 using App_BusinessObject.DTOs.Response.Course;
 using App_BusinessObject.Models;
 using App_BusinessObject.Paginate;
-using App_Repository;
+using App_Repository.Interfaces;
+using App_Repository.Repositories;
+using App_Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App_Service
+namespace App_Service.Services
 {
-    public interface ICourseService
-    {
-        public Task<IPaginate<GetCourseResponse>> GetAllACourses(int page, int size);
-        public Task CreateCourse(CreateCourseRequest createCourseRequest);
-        public Task<UpdateCourseResponse> UpdateCourseInformation(int id, UpdateCourseRequest updateCourseRequest);
-        public Task<bool> ChangeCourseStatus(int id);
-        public Task<Course> GetCourseById(int courseId);
-    }
-
     public class CourseService : ICourseService
     {
-        private readonly ICourseRepository _courseRepository = null;
-        public CourseService()
+        private readonly ICourseRepository _courseRepository;
+        public CourseService(ICourseRepository courseRepository)
         {
-            if (_courseRepository == null)
-                _courseRepository = new CourseRepository();
+            _courseRepository = courseRepository;
         }
         public async Task<bool> ChangeCourseStatus(int id) => await _courseRepository.ChangeCourseStatus(id);
 

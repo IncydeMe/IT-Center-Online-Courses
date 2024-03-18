@@ -1,30 +1,23 @@
 ﻿using App_BusinessObject.DTOs.Request.Assignment;
 using App_BusinessObject.DTOs.Response.Assignment;
-using App_Repository;
+using App_Repository.Interfaces;
+using App_Repository.Repositories;
+using App_Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App_Service
+namespace App_Service.Services
 {
-    public interface IAssignmentService
-    {
-        public Task<List<GetAssignmentResponse>> GetAssignmentsInCourse(int courseId);
-        public Task<GetAssignmentResponse> GetAssignmentById(int assignmentId);
-        public void CreateAssignment(CreateAssignmentRequest createAssignmentRequest);
-        public Task<UpdateAssignmentResponse> UpdateAssignment(int assignmentId, UpdateAssignmentRequest updateAssignment);
-    }
-
     public class AssignmentService : IAssignmentService
     {
-        private readonly IAssignmentRepository _assignmentRepository = null;
+        private readonly IAssignmentRepository _assignmentRepository;
 
-        public AssignmentService()
+        public AssignmentService(IAssignmentRepository assignmentRepository)
         {
-            if (_assignmentRepository == null)
-                _assignmentRepository = new AssignmentRepository();
+            _assignmentRepository = assignmentRepository;
         }
 
         public async Task<GetAssignmentResponse> GetAssignmentById(int assignmentId) => await _assignmentRepository.GetAssignmentById(assignmentId);
