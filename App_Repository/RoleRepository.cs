@@ -12,13 +12,13 @@ namespace App_Repository
     {
         public Task<List<Role>> GetAllRoles();
 
-        public void CreateRole(Role newRole);
+        public Task CreateRole(Role newRole);
     }
 
     public class RoleRepository : IRoleRepository
     {
         public async Task<List<Role>> GetAllRoles() => await RoleDAO.Instance.GetAllRoles();
 
-        public async void CreateRole(Role newRole) => RoleDAO.Instance.CreateRole(newRole);
+        public async Task CreateRole(Role newRole) => await RoleDAO.Instance.CreateRole(newRole);
     }
 }
