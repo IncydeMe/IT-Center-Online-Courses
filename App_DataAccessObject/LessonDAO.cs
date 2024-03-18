@@ -59,9 +59,9 @@ namespace App_DataAccessObject
             return lessonList;
         }
 
-        public List<GetLessonResponse> GetListLessonOfCourse(int courseId)
+        public async Task<List<GetLessonResponse>> GetListLessonOfCourse(int courseId)
         {
-            List<GetLessonResponse> lessonList = _dbContext.Lessons.Select(x => new GetLessonResponse
+            List<GetLessonResponse> lessonList = await _dbContext.Lessons.Select(x => new GetLessonResponse
             {
                 LessonId = x.LessonId,
                 LessonName = x.LessonName,
@@ -69,7 +69,7 @@ namespace App_DataAccessObject
                 Type = x.Type,
                 MaterialUrl = x.MaterialUrl,
                 IsFinished = x.IsFinished
-            }).Where(c => c.CourseId == courseId).ToList();
+            }).Where(c => c.CourseId == courseId).ToListAsync();
             return lessonList;
         }
 

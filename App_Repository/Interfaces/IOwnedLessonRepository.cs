@@ -14,5 +14,6 @@ namespace App_Repository.Interfaces
         public Task<IPaginate<GetOwnedLessonResponse>> GetOwnedLessons(int accountId, int page, int size);
         public Task CreateOwnedLesson(CreateOwnedLessonRequest newOwnedLesson);
         public Task<bool> ChangeOwnedLessonStatus(int id);
+        public Task<List<GetOwnedLessonResponse>> GetOwnedLessonsList(int accountId);
     }
 }

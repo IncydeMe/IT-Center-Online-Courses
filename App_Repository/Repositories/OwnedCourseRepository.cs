@@ -17,9 +17,9 @@ namespace App_Repository.Repositories
             => await OwnedCourseDAO.Instance.ChangeOwnedCourseStatus(id);
 
         public async Task CreateOwnedCourse(CreateOwnedCourseRequest createOwnedCourseRequest)
-            => OwnedCourseDAO.Instance.CreateOwnedCourse(createOwnedCourseRequest);
+            => await OwnedCourseDAO.Instance.CreateOwnedCourse(createOwnedCourseRequest);
 
-        public async Task<IPaginate<GetOwnedCourseResponse>> GetAllOwnedCourse(int courseId, int accountId, int page, int size)
-            => await OwnedCourseDAO.Instance.GetOwnedCourse(courseId, accountId, page, size);
+        public async Task<IPaginate<GetOwnedCourseResponse>> GetAllOwnedCourse(int accountId, int page, int size)
+            => await OwnedCourseDAO.Instance.GetOwnedCourse(accountId, page, size);
     }
 }

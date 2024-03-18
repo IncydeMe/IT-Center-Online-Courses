@@ -44,7 +44,7 @@ namespace App_BusinessObject
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IPaginate<GetOwnedCourseResponse>> GetOwnedCourse(int courseId, int accountId, int page, int size)
+        public async Task<IPaginate<GetOwnedCourseResponse>> GetOwnedCourse(int accountId, int page, int size)
         {
             IPaginate<GetOwnedCourseResponse> ownedCourseList = await _dbContext.OwnedCourses.Select(x => new GetOwnedCourseResponse
             {
@@ -54,7 +54,7 @@ namespace App_BusinessObject
                 IsOwned = x.IsOwned,
                 IsFinished = x.IsFinished,
                 FinishedDate = (DateTime)x.FinishedDate
-            }).Where(x => x.CourseId == courseId && x.AccountId == accountId).ToPaginateAsync(page, size, 1);
+            }).Where(x => x.AccountId == accountId).ToPaginateAsync(page, size, 1);
             return ownedCourseList;
         }
 
