@@ -2,6 +2,7 @@
 using App_BusinessObject.DTOs.Response.OwnedCourse;
 using App_BusinessObject.Paginate;
 using App_Repository.Interfaces;
+using App_Repository.Repositories;
 using App_Service.Interfaces;
 using System;
 using System.Collections.Generic;

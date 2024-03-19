@@ -12,7 +12,8 @@ namespace App_Service.Interfaces
     public interface ICategoryService
     {
         public Task<IPaginate<GetCategoryResponse>> GetAllCategories(int page, int size);
-        public Task CreateCategory(CreateCategoryRequest createCategoryRequest);
+        public void CreateCategory(CreateCategoryRequest createCategoryRequest);
         public Task<UpdateCategoryResponse> UpdateCategoryInformation(int id, UpdateCategoryRequest updateCategoryRequest);
+        public Task<GetCategoryResponse> GetRandomCategoy();
     }
 }

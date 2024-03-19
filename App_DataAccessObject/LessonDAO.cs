@@ -33,9 +33,9 @@ namespace App_DataAccessObject
 
         public LessonDAO()
         {
-            if(_dbContext == null)
+            if (_dbContext == null)
                 _dbContext = new ITCenterContext();
-            if(_mapper == null)
+            if (_mapper == null)
                 _mapper = new Mapper(new MapperConfiguration(mc => mc.AddProfile(new LessonMapper())).CreateMapper().ConfigurationProvider);
         }
 
@@ -47,7 +47,7 @@ namespace App_DataAccessObject
 
         public async Task<List<GetLessonResponse>> GetAllLessonsOfCourse(int courseId)
         {
-            List<GetLessonResponse> lessonList =  _dbContext.Lessons.Select(x => new GetLessonResponse
+            List<GetLessonResponse> lessonList = _dbContext.Lessons.Select(x => new GetLessonResponse
             {
                 LessonId = x.LessonId,
                 LessonName = x.LessonName,

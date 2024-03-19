@@ -42,7 +42,7 @@ namespace App_DataAccessObject
 
         public async Task CreateOwnedLesson(CreateOwnedLessonRequest newOwnedLesson)
         {
-            await _dbContext.OwnedLessons.AddAsync(_mapper.Map<OwnedLesson>(newOwnedLesson));
+            _dbContext.OwnedLessons.Add(_mapper.Map<OwnedLesson>(newOwnedLesson));
             await _dbContext.SaveChangesAsync();
         }
 
