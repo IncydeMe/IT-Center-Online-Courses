@@ -35,7 +35,7 @@ namespace App_DataAccessObject
         {
             if (_dbContext == null)
                 _dbContext = new ITCenterContext();
-            if(_mapper  == null)
+            if (_mapper == null)
                 _mapper = new Mapper(new MapperConfiguration(mc => mc.AddProfile(new CategoryMapper())).CreateMapper().ConfigurationProvider);
         }
 
@@ -52,10 +52,10 @@ namespace App_DataAccessObject
             return categoryList;
         }
 
-        public async Task CreateCategory(CreateCategoryRequest createCategoryRequest)
+        public async void CreateCategory(CreateCategoryRequest createCategoryRequest)
         {
-            Category category = await _dbContext.Categories.FirstOrDefaultAsync(x => x.CategoryName.ToLower() == createCategoryRequest.CategoryName.ToLower());
-            
+            Category category = _dbContext.Categories.FirstOrDefault(x => x.CategoryName.ToLower() == createCategoryRequest.CategoryName.ToLower());
+
             if (category == null)
             {
                 _dbContext.Categories.Add(_mapper.Map<Category>(createCategoryRequest));
@@ -82,6 +82,22 @@ namespace App_DataAccessObject
             return null;
         }
 
+        public async Task<GetCategoryResponse> GetRandomCategoy()
+        {
+            Random rd = new Random();
+            int categoriesAmount = await _dbContext.Categories.CountAsync();
+            int toSkip = rd.Next(0, categoriesAmount - 1);
+
+            GetCategoryResponse randomCategory = await _dbContext.Categories
+                                                 .Select(ct => new GetCategoryResponse
+                                                 {
+                                                     CategoryId = ct.CategoryId,
+                                                     CategoryName = ct.CategoryName,
+                                                     Description = ct.Description,
+                                                 })
+                                                 .Skip(toSkip).Take(1).FirstAsync();
+            return randomCategory;
+        }
         #endregion
     }
 }

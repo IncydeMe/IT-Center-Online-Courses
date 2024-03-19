@@ -3,15 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppWeb", "AppWeb\AppWeb.csproj", "{ECA18AEA-405F-431C-871E-79D304553690}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppWeb", "AppWeb\AppWeb.csproj", "{ECA18AEA-405F-431C-871E-79D304553690}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App_BusinessObject", "App_BusinessObject\App_BusinessObject.csproj", "{A91FB092-A55E-419D-BBDC-1ED36EFB0B94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App_BusinessObject", "App_BusinessObject\App_BusinessObject.csproj", "{A91FB092-A55E-419D-BBDC-1ED36EFB0B94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App_Service", "App_Service\App_Service.csproj", "{37B0BAB0-6BB3-47B2-98C4-B58DB3E248C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App_Service", "App_Service\App_Service.csproj", "{37B0BAB0-6BB3-47B2-98C4-B58DB3E248C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App_DataAccessObject", "App_DataAccessObject\App_DataAccessObject.csproj", "{7ADFD406-ADC7-4BB1-A0C3-C92BEA7419CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App_DataAccessObject", "App_DataAccessObject\App_DataAccessObject.csproj", "{7ADFD406-ADC7-4BB1-A0C3-C92BEA7419CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App_Repository", "App_Repository\App_Repository.csproj", "{4E9D972C-CF1A-4FF0-8CEA-5753BBD5ADA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App_Repository", "App_Repository\App_Repository.csproj", "{4E9D972C-CF1A-4FF0-8CEA-5753BBD5ADA0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firebase.Service", "Firebase.Service\Firebase.Service.csproj", "{515E0EEC-8128-4DB1-AE97-F79FC1A6B15C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Domain", "Payment.Domain\Payment.Domain.csproj", "{923DCEE5-D596-4155-9704-C5466C7E6576}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Service", "Payment.Service\Payment.Service.csproj", "{93D838B5-B6C4-4A63-ABF6-1C0E190E2779}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +45,18 @@ Global
 		{4E9D972C-CF1A-4FF0-8CEA-5753BBD5ADA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E9D972C-CF1A-4FF0-8CEA-5753BBD5ADA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E9D972C-CF1A-4FF0-8CEA-5753BBD5ADA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{515E0EEC-8128-4DB1-AE97-F79FC1A6B15C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{515E0EEC-8128-4DB1-AE97-F79FC1A6B15C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{515E0EEC-8128-4DB1-AE97-F79FC1A6B15C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{515E0EEC-8128-4DB1-AE97-F79FC1A6B15C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{923DCEE5-D596-4155-9704-C5466C7E6576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{923DCEE5-D596-4155-9704-C5466C7E6576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{923DCEE5-D596-4155-9704-C5466C7E6576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{923DCEE5-D596-4155-9704-C5466C7E6576}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93D838B5-B6C4-4A63-ABF6-1C0E190E2779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93D838B5-B6C4-4A63-ABF6-1C0E190E2779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93D838B5-B6C4-4A63-ABF6-1C0E190E2779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93D838B5-B6C4-4A63-ABF6-1C0E190E2779}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
