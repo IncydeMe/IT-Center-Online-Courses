@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace App_DataAccessObject
 {
@@ -38,7 +39,7 @@ namespace App_DataAccessObject
                 _mapper = new Mapper(new MapperConfiguration(mc => mc.AddProfile(new CategoryMapper())).CreateMapper().ConfigurationProvider);
         }
 
-        #region AccountFunction
+        #region CategoryFunction
 
         public async Task<IPaginate<GetCategoryResponse>> GetAllCategories(int page, int size)
         {
@@ -51,9 +52,9 @@ namespace App_DataAccessObject
             return categoryList;
         }
 
-        public async void CreateCategory(CreateCategoryRequest createCategoryRequest)
+        public async Task CreateCategory(CreateCategoryRequest createCategoryRequest)
         {
-            Category category = _dbContext.Categories.FirstOrDefault(x => x.CategoryName.ToLower() == createCategoryRequest.CategoryName.ToLower());
+            Category category = await _dbContext.Categories.FirstOrDefaultAsync(x => x.CategoryName.ToLower() == createCategoryRequest.CategoryName.ToLower());
             
             if (category == null)
             {
@@ -82,6 +83,5 @@ namespace App_DataAccessObject
         }
 
         #endregion
-
     }
 }

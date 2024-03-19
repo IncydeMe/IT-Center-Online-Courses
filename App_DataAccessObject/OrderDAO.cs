@@ -46,8 +46,6 @@ namespace App_DataAccessObject
         }
 
         #region OrderFunction 
-
-        #region GetAllOrders
         public async Task<IPaginate<GetOrderResponse>> GetAllOrders(int page, int size)
         {
             IPaginate<GetOrderResponse> orderList = await _dbContext.Orders.Select(x => new GetOrderResponse
@@ -60,35 +58,52 @@ namespace App_DataAccessObject
             }).ToPaginateAsync(page, size, 1);
             return orderList;
         }
-        #endregion
-
-        #region CreateOrder
-        public async void CreateOrder(CreateOrderRequest createOrderRequest)
+        
+        public async Task<IPaginate<GetOrderResponse>> GetUserOrderList(int accountId, int page, int size)
         {
-                _dbContext.Orders.Add(_mapper.Map<Order>(createOrderRequest));
+            IPaginate<GetOrderResponse> userOrderList = await _dbContext.Orders
+                .Where(x => x.AccountId == accountId)
+                .Select(x => new GetOrderResponse
+                {
+                    OrderId = x.OrderId,
+                    CreatedDate = x.CreatedDate,
+                    Status = x.Status,
+                    AccountId = x.AccountId
+                })
+                .ToPaginateAsync(page, size, 1);
+            return userOrderList;
+        }
+        
+        public async Task<GetOrderResponse> GetOrderById(int orderId)
+        {
+            Order order = await _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderId == orderId);
+            if (order != null)
+            {
+                GetOrderResponse response = _mapper.Map<GetOrderResponse>(order);
+                return response;
+            }
+            return null;
+        }
+       
+        public async Task CreateOrder(CreateOrderRequest createOrderRequest)
+        {
+                await _dbContext.Orders.AddAsync(_mapper.Map<Order>(createOrderRequest));
                 await _dbContext.SaveChangesAsync();
         }
-        #endregion
 
-        #region UpdateOrder
-        public async Task<UpdateOrderResponse> UpdateOrder(int orderId, UpdateOrderRequest updateOrderRequest)
+        public async Task<bool> ChangeStatus(int orderId)
         {
             Order order = await _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderId == orderId);
 
             if (order != null)
             {
-                order.CreatedDate = DateTime.Now;
-                order.Status = updateOrderRequest.Status;
+                order.Status = !order.Status;
                 _dbContext.Orders.Update(order);
                 await _dbContext.SaveChangesAsync();
-
-                UpdateOrderResponse response = _mapper.Map<UpdateOrderResponse>(order);
-                return response;
+                return true;
             }
-            return null;
+            return false;
         }
-        #endregion
-
         #endregion
     }
 }

@@ -57,9 +57,9 @@ namespace App_DataAccessObject
             return accountList;
         }
 
-        public async void CreateAccount(CreateAccountRequest createAccountRequest)
+        public async Task CreateAccount(CreateAccountRequest createAccountRequest)
         {
-            Account account = _dbContext.Accounts.FirstOrDefault(x => x.Email.Equals(createAccountRequest.Email));
+            Account account = await _dbContext.Accounts.FirstOrDefaultAsync(x => x.Email.Equals(createAccountRequest.Email));
 
             if (account == null)
             {
@@ -100,7 +100,7 @@ namespace App_DataAccessObject
 
         public async Task<bool> ChangeAccountStatus(int id)
         {
-            Account account = _dbContext.Accounts.FirstOrDefault(x => x.AccountId == id);
+            Account account = await _dbContext.Accounts.FirstOrDefaultAsync(x => x.AccountId == id);
 
             if (account != null)
             {

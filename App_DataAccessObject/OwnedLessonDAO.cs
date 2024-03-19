@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace App_DataAccessObject
 {
@@ -39,9 +40,9 @@ namespace App_DataAccessObject
                 _mapper = new Mapper(new MapperConfiguration(mc => mc.AddProfile(new OwnedLessonMapper())).CreateMapper().ConfigurationProvider);
         }
 
-        public async void CreateOwnedLesson(CreateOwnedLessonRequest newOwnedLesson)
+        public async Task CreateOwnedLesson(CreateOwnedLessonRequest newOwnedLesson)
         {
-            _dbContext.OwnedLessons.Add(_mapper.Map<OwnedLesson>(newOwnedLesson));
+            await _dbContext.OwnedLessons.AddAsync(_mapper.Map<OwnedLesson>(newOwnedLesson));
             await _dbContext.SaveChangesAsync();
         }
 
@@ -69,6 +70,19 @@ namespace App_DataAccessObject
                 return true;
             }
             return false;
+        }
+
+        public async Task<List<GetOwnedLessonResponse>> GetOwnedLessonsList(int accountId)
+        {
+            List<GetOwnedLessonResponse> list = await _dbContext.OwnedLessons.Select(x => new GetOwnedLessonResponse
+            {
+                OwnedLessonId = x.OwnedLessonId,
+                LessonId = x.LessonId,
+                AccountId = x.AccountId,
+                IsFinished = x.IsFinished,
+                FinishedDate = (DateTime)x.FinishedDate
+            }).Where(x => x.AccountId == accountId).ToListAsync();
+            return list;
         }
     }
 }

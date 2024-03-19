@@ -42,8 +42,6 @@ namespace App_DataAccessObject
         }
 
         #region OrderDetailFunction
-
-        #region GetAllOrderDetails
         public async Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size)
         {
             IPaginate<GetOrderDetailResponse> orderDetailList = await _dbContext.OrderDetails.Select(x => new GetOrderDetailResponse
@@ -55,35 +53,26 @@ namespace App_DataAccessObject
             }).ToPaginateAsync(page, size, 1);
             return orderDetailList;
         }
-        #endregion
-
-        #region CreateOrderDetail
-        public async void CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest)
+      
+        public async Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId)
         {
-            _dbContext.OrderDetails.Add(_mapper.Map<OrderDetail>(createOrderDetailRequest));
+            List<GetOrderDetailResponse> orderDetails = await _dbContext.OrderDetails
+                .Where(x => x.OrderId == orderId)
+                .Select(x => new GetOrderDetailResponse
+                {
+                    OrderDetailId = x.OrderDetailId,
+                    OrderId = x.OrderId,
+                    CourseId = x.CourseId
+                })
+                .ToListAsync();
+            return orderDetails;
+        }
+
+        public async Task CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest)
+        {
+            await _dbContext.OrderDetails.AddAsync(_mapper.Map<OrderDetail>(createOrderDetailRequest));
             await _dbContext.SaveChangesAsync();
         }
-        #endregion
-
-        #region UpdateOrderDetail
-        public async Task<UpdateOrderDetailResponse> UpdateOrderDetail(int orderDetailId, UpdateOrderDetailRequest updateOrderDetailRequest)
-        {
-            OrderDetail orderDetail = await _dbContext.OrderDetails.FirstOrDefaultAsync(x => x.OrderDetailId == orderDetailId);
-
-            if (orderDetail != null)
-            {
-                orderDetail.OrderId = updateOrderDetailRequest.OrderId;
-                orderDetail.CourseId = updateOrderDetailRequest.CourseId;
-                _dbContext.OrderDetails.Update(orderDetail);
-                await _dbContext.SaveChangesAsync();
-
-                UpdateOrderDetailResponse response = _mapper.Map<UpdateOrderDetailResponse>(orderDetail);
-                return response;
-            }
-            return null;
-        }
-        #endregion
-
         #endregion
     }
 }

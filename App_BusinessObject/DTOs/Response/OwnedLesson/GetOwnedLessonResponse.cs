@@ -13,6 +13,6 @@ namespace App_BusinessObject.DTOs.Response.OwnedLesson
         public int AccountId { get; set; }
         public bool IsOwned { get; set; }
         public bool IsFinished { get; set; }
-        public DateTime FinishedDate { get; set; }
+        public DateTime? FinishedDate { get; set; }
     }
 }

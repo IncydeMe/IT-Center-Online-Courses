@@ -39,7 +39,7 @@ namespace App_DataAccessObject
                 _mapper = new Mapper(new MapperConfiguration(mc => mc.AddProfile(new CourseMapper())).CreateMapper().ConfigurationProvider);
         }
 
-        public async void CreateCourse(CreateCourseRequest newCourse)
+        public async Task CreateCourse(CreateCourseRequest newCourse)
         {
             _dbContext.Courses.Add(_mapper.Map<Course>(newCourse));
             await _dbContext.SaveChangesAsync();
