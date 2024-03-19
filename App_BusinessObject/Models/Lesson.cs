@@ -11,6 +11,11 @@ namespace App_BusinessObject.Models
 {
     public class Lesson
     {
+        public Lesson()
+        {
+            OwnedLessons = new HashSet<OwnedLesson>();
+        }
+
         [Key]
         public int LessonId { get; set; }
         [ForeignKey("CourseId")]
@@ -25,5 +30,6 @@ namespace App_BusinessObject.Models
         public bool IsFinished { get; set; }
 
         public virtual Course Course { get; set; }
+        public virtual ICollection<OwnedLesson> OwnedLessons { get; set; }
     }
 }

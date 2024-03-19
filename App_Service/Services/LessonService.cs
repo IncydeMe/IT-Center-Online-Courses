@@ -1,6 +1,7 @@
 ﻿using App_BusinessObject.DTOs.Request.Lesson;
 using App_BusinessObject.DTOs.Response.Lesson;
 using App_Repository.Interfaces;
+using App_Repository.Repositories;
 using App_Service.Interfaces;
 using System;
 using System.Collections.Generic;

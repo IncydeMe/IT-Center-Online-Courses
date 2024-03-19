@@ -29,6 +29,9 @@ namespace App_Service.Services
 
         public async Task<UpdateCourseResponse> UpdateCourseInformation(int id, UpdateCourseRequest updateCourseRequest) => await _courseRepository.UpdateCourseInformation(id, updateCourseRequest);
 
-        public async Task<Course> GetCourseById(int courseId) => await _courseRepository.GetCourseById(courseId);
+        public async Task<GetCourseResponse> GetCourseById(int courseId) => await _courseRepository.GetCourseById(courseId);
+
+        public async Task<IPaginate<Course>> GetCoursesByCategoryName(string categoryName, int page, int size)
+            => await _courseRepository.GetCoursesByCategoryName(categoryName, page, size);
     }
 }

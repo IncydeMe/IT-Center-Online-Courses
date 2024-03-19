@@ -13,6 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App_Repository", "App_Repos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IT Center Website", "IT Center Website\IT Center Website.csproj", "{ADA7575C-4922-4C95-A2B2-9F91EDFC6843}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firebase.Service", "Firebase.Service\Firebase.Service.csproj", "{515E0EEC-8128-4DB1-AE97-F79FC1A6B15C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Domain", "Payment.Domain\Payment.Domain.csproj", "{923DCEE5-D596-4155-9704-C5466C7E6576}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Service", "Payment.Service\Payment.Service.csproj", "{93D838B5-B6C4-4A63-ABF6-1C0E190E2779}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +45,7 @@ Global
 		{ADA7575C-4922-4C95-A2B2-9F91EDFC6843}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADA7575C-4922-4C95-A2B2-9F91EDFC6843}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADA7575C-4922-4C95-A2B2-9F91EDFC6843}.Release|Any CPU.Build.0 = Release|Any CPU
+
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

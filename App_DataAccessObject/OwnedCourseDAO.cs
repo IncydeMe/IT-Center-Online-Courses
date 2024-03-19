@@ -40,7 +40,7 @@ namespace App_BusinessObject
 
         public async Task CreateOwnedCourse(CreateOwnedCourseRequest newOwnedCourse)
         {
-            await _dbContext.OwnedCourses.AddAsync(_mapper.Map<OwnedCourse>(newOwnedCourse));
+            _dbContext.OwnedCourses.Add(_mapper.Map<OwnedCourse>(newOwnedCourse));
             await _dbContext.SaveChangesAsync();
         }
 

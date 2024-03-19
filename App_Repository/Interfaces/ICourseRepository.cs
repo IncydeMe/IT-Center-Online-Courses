@@ -16,6 +16,7 @@ namespace App_Repository.Interfaces
         public Task CreateCourse(CreateCourseRequest createCourseRequest);
         public Task<UpdateCourseResponse> UpdateCourseInformation(int id, UpdateCourseRequest updateCourseRequest);
         public Task<bool> ChangeCourseStatus(int id);
-        public Task<Course> GetCourseById(int courseId);
+        public Task<GetCourseResponse> GetCourseById(int courseId);
+        public Task<IPaginate<Course>> GetCoursesByCategoryName(string categoryName, int page, int size);
     }
 }

@@ -17,7 +17,7 @@ namespace App_BusinessObject.DTOs.Response.Lesson
 
         public GetLessonResponse()
         {
-            
+
         }
 
         public GetLessonResponse(int lessonId, string lessonName, int courseId, string type, string materialUrl, bool isFinished)

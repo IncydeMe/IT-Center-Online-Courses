@@ -14,17 +14,19 @@ namespace App_Service.Services
 {
     public class CategoryService : ICategoryService
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryRepository _categoryRepository = null;
 
         public CategoryService(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
         }
 
-        public async Task CreateCategory(CreateCategoryRequest createCategoryRequest) => await _categoryRepository.CreateCategory(createCategoryRequest);
+        public async void CreateCategory(CreateCategoryRequest createCategoryRequest) => _categoryRepository.CreateCategory(createCategoryRequest);
 
         public async Task<IPaginate<GetCategoryResponse>> GetAllCategories(int page, int size) => await _categoryRepository.GetAllCategories(page, size);
 
         public async Task<UpdateCategoryResponse> UpdateCategoryInformation(int id, UpdateCategoryRequest updateCategoryRequest) => await _categoryRepository.UpdateCategoryInformation(id, updateCategoryRequest);
+
+        public async Task<GetCategoryResponse> GetRandomCategoy() => await _categoryRepository.GetRandomCategoy();
     }
 }
