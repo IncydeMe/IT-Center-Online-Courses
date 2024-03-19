@@ -1,5 +1,6 @@
 ﻿using App_BusinessObject.DTOs.Request.OrderDetail;
 using App_BusinessObject.DTOs.Response.OrderDetail;
+using App_BusinessObject.Models;
 using App_BusinessObject.Paginate;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace App_Service.Interfaces
         public Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size);
         public Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId);
         public Task CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest);
+        public Task<List<OrderDetail>> GetOrderDetaiListlInOrder(int orderId);
     }
 }
