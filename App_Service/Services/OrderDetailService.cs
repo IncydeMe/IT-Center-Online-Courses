@@ -1,5 +1,6 @@
 ﻿using App_BusinessObject.DTOs.Request.OrderDetail;
 using App_BusinessObject.DTOs.Response.OrderDetail;
+using App_BusinessObject.Models;
 using App_BusinessObject.Paginate;
 using App_Repository.Interfaces;
 using App_Repository.Repositories;
@@ -20,8 +21,13 @@ namespace App_Service.Services
             _orderDetailRepository = orderDetailRepository;
         }
 
-        public async Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size) => await _orderDetailRepository.GetAllOrderDetails(page, size);
-        public async Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId) => await _orderDetailRepository.GetOrderDetailsInOrder(orderId);
-        public async Task CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest) => await _orderDetailRepository.CreateOrderDetail(createOrderDetailRequest);
+        public async Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size)
+            => await _orderDetailRepository.GetAllOrderDetails(page, size);
+        public async Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId) 
+            => await _orderDetailRepository.GetOrderDetailsInOrder(orderId);
+        public async Task CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest) 
+            => await _orderDetailRepository.CreateOrderDetail(createOrderDetailRequest);
+        public async Task<List<OrderDetail>> GetOrderDetaiListlInOrder(int orderId)
+            => await _orderDetailRepository.GetOrderDetaiListlInOrder(orderId);
     }
 }
