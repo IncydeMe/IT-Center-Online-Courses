@@ -1,14 +1,22 @@
 ﻿@page
+@using IT_Center_Website.Components;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model IndexModel
+
 @{
     ViewData["Title"] = "Home page";
     Layout = null;
 }
 <link rel="stylesheet" href="~/css/output.css" />
+
 <html>
-    <body>
+<body>
+    @*import header component*@
+    <div id="header">
+        <component type="typeof(Header)" render-mode="ServerPrerendered" />
+    </div>
     <div class="text-center text-[#31a8ff]">
-            Hello
-        </div>
-    </body>
+        Hello
+    </div>
+</body>
 </html>
