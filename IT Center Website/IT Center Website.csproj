@@ -7,4 +7,18 @@
     <RootNamespace>IT_Center_Website</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\images\header\ITCO_Logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="wwwroot\images\header\ITCO_Logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\header\ITCO_Logo.png" />
+  </ItemGroup>
+
 </Project>

@@ -1,25 +1,121 @@
-﻿<html>
-	<head>
-		<link href="/css/ComponentStyleSheet/LandingStyleSheet.css"/>
-	</head>
-	<body>
-		<header>
-			<div>
-				<h3>ITCO Group</h3>
-			</div>
-			<div>
-				<ul>
-					<li>Home</li>
-					<li>Courses</li>
-					<li>Pricing</li>
-					<li>Blogs</li>
-					<li>About Us</li>
-				</ul>
-				<ul>
-					<a>Login</a>
-					<a>Become a member</a>
-				</ul>
-			</div>
-		</header>
-	</body>
+﻿@*@using Microsoft.AspNetCore.Components.Web;
+@using IT_Center_Website.Components;
+
+
+
+<head>
+    <link rel="stylesheet" href="~/css/input.css" />
+    <link rel="stylesheet" href="~/css/output.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body>
+    <header class="flex">
+        <div>
+            <h3>ITCO Group</h3>
+        </div>
+        <div>
+            <ul class="flex items-center">
+                <li>
+                    <a class="text-blue-200">Home</a>
+                </li>
+                <li>
+                    <a>
+                        Courses
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        Pricing
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        Blogs
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        About Us
+                    </a>
+                </li>
+            </ul>
+            <ul>
+                <a>Login</a>
+                <a>Become a member</a>
+            </ul>
+        </div>
+    </header>
+</body>*@
+
+@using Microsoft.AspNetCore.Components.Web;
+@using IT_Center_Website.Components;
+@inherits Microsoft.AspNetCore.Components.ComponentBase
+@page "/header"
+
+<style>
+    .header_container{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        flex-shrink:0;
+    }
+    .nav_bar{
+        display:flex;
+        align-items:center;
+        font-size:18px;
+        gap:35px;
+    }
+
+    .header_bar{
+        display:flex;
+        align-items:center;
+        font-size: 18px;
+        color: #2F2155;
+        gap: 55px;
+    }
+    .title{
+        color: #5635AE;
+        font-size:48px;
+        font-weight:700;
+    }
+    .logo img{
+        width:100px;
+    }
+</style>
+
+<html>
+
+
+<body>
+    
+    <header class="header_container">
+        <div class="logo">
+            <img src="images/header/ITCO_Logo.png" alt="logo" />
+        </div>
+        <div class="header_bar">
+            <ul class="nav_bar">
+                <li>
+                    <a class="text-blue-200">Home</a>
+                </li>
+                <li>
+                    <a>Courses</a>
+                </li>
+                <li>
+                    <a>Pricing</a>
+                </li>
+                <li>
+                    <a>Blogs</a>
+                </li>
+                <li>
+                    <a>About Us</a>
+                </li>
+            </ul>
+            <ul>
+                <a>Login</a>
+                <a>Become a member</a>
+            </ul>
+        </div>
+    </header>
+</body>
 </html>
