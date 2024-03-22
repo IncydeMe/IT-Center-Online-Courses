@@ -3,13 +3,22 @@
     align-items: center;
     justify-content: space-between;
     flex-shrink: 0;
+    padding:20px 40px;
+    margin-top: 20px;
 }
 
 .nav_bar {
     display: flex;
     align-items: center;
     font-size: 18px;
-    gap: 35px;
+    gap: 45px;
+    cursor:pointer;
+}
+.nav_bar li {
+    transition:0.2s;
+}
+.nav_bar li:hover{
+    color:#FEBB8E
 }
 
 .header_bar {
@@ -17,9 +26,32 @@
     align-items: center;
     font-size: 18px;
     color: #2F2155;
-    gap: 55px;
+    gap: 40px;
+}
+.logo img{
+    width:100%;
+    cursor:pointer;
 }
 
-.logo img {
-    width: 100px;
+.member_btn{
+    gap:20px;
+    align-items:center;
+}
+.member_btn li {
+    transition:0.2s;
+    cursor:pointer;
+}
+.member_btn li:hover {
+    color:#FEBB8E
+}
+.register_btn {
+    border: 1px solid #5635AE;
+    border-radius: 40px;
+    padding: 10px 20px;
+    cursor:pointer;
+    transition: 0.3s;
+}
+.register_btn:hover{
+    background: #2F2155;
+    color:white;
 }

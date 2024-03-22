@@ -54,6 +54,8 @@
 @page "/header"
 <head>
     <link rel="stylesheet" href="css/Header/Header.css" />
+    <link rel="stylesheet" href="css/output.css" />
+    <link rel="stylesheet" href="css/input.css" />
 </head>
 
 
@@ -61,8 +63,7 @@
 
 
 <body>
-    
-    <header class="header_container">
+    <header class="header_container px-[30px] ">
         <div class="logo">
             <img src="images/header/ITCO_Logo.png" alt="logo" />
         </div>
@@ -75,18 +76,24 @@
                     <a>Courses</a>
                 </li>
                 <li>
-                    <a>Pricing</a>
-                </li>
-                <li>
                     <a>Blogs</a>
+
                 </li>
                 <li>
                     <a>About Us</a>
                 </li>
+                <li style="width:2px;">
+                    <img src="images/header/line_between.png" alt="line" />
+                </li>
             </ul>
-            <ul>
-                <a>Login</a>
-                <a>Become a member</a>
+            <ul class="member_btn flex gap-5">
+                <li class="">
+                    <a>Login</a>
+                </li>
+                <li class="register_btn ">
+                    <a class="">Become a member</a>
+                </li>
+                
             </ul>
         </div>
     </header>

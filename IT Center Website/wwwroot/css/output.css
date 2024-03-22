@@ -590,9 +590,34 @@ video {
   margin-bottom: 0.75rem;
 }
 
+.ml-\[30px\] {
+  margin-left: 30px;
+}
+
+.ml-\[300px\] {
+  margin-left: 300px;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-\[\#FFF4E8\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 244 232 / var(--tw-bg-opacity));
 }
 
 .pb-3 {
@@ -601,11 +626,6 @@ video {
 
 .text-center {
   text-align: center;
-}
-
-.text-\[\#fefefe\] {
-  --tw-text-opacity: 1;
-  color: rgb(254 254 254 / var(--tw-text-opacity));
 }
 
 .text-\[\#31a8ff\] {
