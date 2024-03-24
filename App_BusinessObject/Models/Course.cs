@@ -18,17 +18,14 @@ namespace App_BusinessObject.Models
 
         [Key]
         public int CourseId { get; set; }
-        [Required(ErrorMessage = "Course name is required.")]
-        [StringLength(100, ErrorMessage = "Course name cannot be longer than 100 characters.")]
+        [StringLength(100)]
         public string CourseName { get; set; }
         public string ImageUrl { get; set; }
-        [Required(ErrorMessage = "Description is required.")]
         public string Description { get; set; }
         [DefaultValue(true)]
         public bool IsAvailable { get; set; }
         [ForeignKey("CategoryId")]
         public int CategoryId { get; set; }
-        [Range(0, double.MaxValue, ErrorMessage = "Please enter a valid price.")]
         public double Price { get; set; }
 
         public virtual Category Category { get; set; }
