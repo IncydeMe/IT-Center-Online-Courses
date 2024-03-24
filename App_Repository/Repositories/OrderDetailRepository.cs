@@ -22,6 +22,7 @@ namespace App_Repository.Repositories
             => await OrderDetailDAO.Instance.CreateOrderDetail(createOrderDetailRequest);
         public async Task<List<OrderDetail>> GetOrderDetaiListlInOrder(int orderId)
             => await OrderDetailDAO.Instance.GetOrderDetaiListlInOrder(orderId);
-
+        public async Task<List<GetBestSellerCourseInOrderDetail>> GetBestSeller()
+            => await OrderDetailDAO.Instance.GetBestSeller();
     }
 }
