@@ -21,4 +21,8 @@
     <None Include="wwwroot\images\header\ITCO_Logo.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\App_Service\App_Service.csproj" />
+  </ItemGroup>
+
 </Project>
