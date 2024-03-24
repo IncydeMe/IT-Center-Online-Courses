@@ -16,8 +16,10 @@ namespace App_BusinessObject.Models
 
         [Key]
         public int CategoryId { get; set; }
-        [StringLength(100)]
+        [Required(ErrorMessage = "Category name is required.")]
+        [StringLength(100, ErrorMessage = "Category name cannot be longer than 100 characters.")]
         public string CategoryName { get; set; }
+        [Required(ErrorMessage = "Description is required.")]
         public string Description { get; set; }
 
         public virtual ICollection<Course> Courses { get; set; }

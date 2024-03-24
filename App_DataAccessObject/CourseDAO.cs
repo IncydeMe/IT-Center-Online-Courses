@@ -78,9 +78,9 @@ namespace App_DataAccessObject
             return false;
         }
 
-        public async Task<UpdateCourseResponse> UpdateCourseInformation(int courseId, UpdateCourseRequest updateCourseRequest)
+        public async Task<UpdateCourseResponse?> UpdateCourseInformation(int courseId, UpdateCourseRequest updateCourseRequest)
         {
-            Course course = await _dbContext.Courses.FirstOrDefaultAsync(x => x.CourseId == courseId);
+            Course course = await _dbContext.Courses.FirstOrDefaultAsync(x => x.CourseId.Equals(courseId));
 
             if (course != null)
             {
@@ -99,7 +99,7 @@ namespace App_DataAccessObject
         }
 
 
-        public async Task<GetCourseResponse> GetCourseById(int courseId)
+        public async Task<GetCourseResponse?> GetCourseById(int courseId)
         {
             GetCourseResponse? response = await _dbContext.Courses
                 .Include(c => c.Category)
