@@ -54,6 +54,9 @@ namespace App_DataAccessObject
 
         public async void CreateCategory(CreateCategoryRequest createCategoryRequest)
         {
+            //Can use Equals, Compare for better performance 
+            //Or ToUpperCase for more percisely in some cases, because there are ome upper case characters doesn't have an
+            //equivalent lower case character,so making them lower case would convert them into a different lower case character 
             Category category = _dbContext.Categories.FirstOrDefault(x => x.CategoryName.ToLower() == createCategoryRequest.CategoryName.ToLower());
 
             if (category == null)

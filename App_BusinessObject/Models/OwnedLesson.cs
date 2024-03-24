@@ -25,4 +25,7 @@ namespace App_BusinessObject.Models
         public virtual Lesson Lesson { get; set; }
     }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> d06456087c30ddc29bea966d258b4af1a63277b3
