@@ -15,28 +15,20 @@ namespace App_BusinessObject.Models
         public int AccountId { get; set; }
         [ForeignKey("RoleId")]
         public int RoleId { get; set; }
-        [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
+        [StringLength(50)]
         public string FirstName { get; set; }
-        [Required(ErrorMessage = "Last name is required.")]
         public string LastName { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime BirthDate { get; set; }
-        [Required]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
         public string Address { get; set; }
-        [Phone(ErrorMessage = "Invalid Phone number")]
         public string Phone { get; set; }
         public bool Gender { get; set; }
-        public string DigitalSignature { get; set; }
-        [Required]
-        [DataType(DataType.Password)]
+        public string DigitalSignature { get; set; }    
         public string Password { get; set; }
         [DefaultValue(true)]
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime LastUpdatedAt { get; set; }
+        public DateTime LastUpdatedAt { get; set;}
 
         public virtual Role Role { get; set; }
     }
