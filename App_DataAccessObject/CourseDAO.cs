@@ -42,6 +42,8 @@ namespace App_DataAccessObject
 
         public async Task CreateCourse(CreateCourseRequest newCourse)
         {
+            //Check is name duplicated
+
             _dbContext.Courses.Add(_mapper.Map<Course>(newCourse));
             await _dbContext.SaveChangesAsync();
 
@@ -97,7 +99,6 @@ namespace App_DataAccessObject
             }
             return null;
         }
-
 
         public async Task<GetCourseResponse> GetCourseById(int courseId)
         {
