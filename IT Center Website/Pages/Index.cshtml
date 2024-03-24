@@ -1,14 +1,27 @@
 ﻿@page
+@using IT_Center_Website.Components;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model IndexModel
+
 @{
     ViewData["Title"] = "Home page";
     Layout = null;
 }
 <link rel="stylesheet" href="~/css/output.css" />
+
 <html>
-    <body>
-    <div class="text-center text-[#31a8ff]">
-            Hello
-        </div>
-    </body>
+<body class="bg-[#FFF4E8]">
+    @*import header component*@
+    <div id="header">
+        <component type="typeof(Header)" render-mode="ServerPrerendered" />
+    </div>
+    <div style="min-height:100vh" class="">
+        
+        
+    </div>
+    @*import footer component*@
+    <div id="footer">
+        <component type="typeof(Footer)" render-mode="ServerPrerendered" />
+    </div>
+</body>
 </html>
