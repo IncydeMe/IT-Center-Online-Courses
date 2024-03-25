@@ -19,8 +19,8 @@ namespace App_Repository.Repositories
         public async Task<bool> DeleteLesson(int id)
             => await LessonDAO.Instance.DeleteLesson(id);
 
-        public async Task<List<GetLessonResponse>> GetAllLessonsOfCourse(int courseId)
-            => await LessonDAO.Instance.GetAllLessonsOfCourse(courseId);
+        public List<GetLessonResponse> GetAllLessonsOfCourse(int courseId)
+            => LessonDAO.Instance.GetAllLessonsOfCourse(courseId);
 
         public async Task<List<GetLessonResponse>> GetListLessonOfCourse(int courseId) => await LessonDAO.Instance.GetListLessonOfCourse(courseId);
 
