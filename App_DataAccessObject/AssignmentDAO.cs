@@ -85,10 +85,10 @@ namespace App_DataAccessObject
             {
                 assignment.AssignmentTitle = updateAssignment.AssignmentTitle;
                 assignment.Question = updateAssignment.Question;
-                assignment.Deadline = DateTime.Now;
+                assignment.Deadline = updateAssignment.Deadline;
                 assignment.Type = updateAssignment.Type;
                 assignment.CourseId = updateAssignment.CourseId;
-                assignment.AssignmentDuration = DateTime.Now;
+                assignment.AssignmentDuration = updateAssignment.AssignmentDuration;
                 _dbContext.Assignments.Update(assignment);
                 await _dbContext.SaveChangesAsync();
 
