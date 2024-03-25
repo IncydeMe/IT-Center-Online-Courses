@@ -13,15 +13,20 @@ namespace App_Repository
     public interface IOrderDetailRepository
     {
         public Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size);
-        public Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId);
+        public Task<IPaginate<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId, int page, int size);
         public void CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest);
         
     }
 
     public class OrderDetailRepository : IOrderDetailRepository
     {
-        public async Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size) => await OrderDetailDAO.Instance.GetAllOrderDetails(page, size);
-        public async Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId) => await OrderDetailDAO.Instance.GetOrderDetailsInOrder(orderId);
-        public void CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest) => OrderDetailDAO.Instance.CreateOrderDetail(createOrderDetailRequest);
+        public async Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size) 
+            => await OrderDetailDAO.Instance.GetAllOrderDetails(page, size);
+
+        public async Task<IPaginate<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId, int page, int size) 
+            => await OrderDetailDAO.Instance.GetOrderDetailsInOrder(orderId, page, size);
+
+        public void CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest) 
+            => OrderDetailDAO.Instance.CreateOrderDetail(createOrderDetailRequest);
     }
 }

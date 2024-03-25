@@ -58,17 +58,18 @@ namespace App_DataAccessObject
         #endregion
 
         #region GetOrderDetailsInOrder
-        public async Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId)
+        public async Task<IPaginate<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId, int page, int size)
         {
-            List<GetOrderDetailResponse> orderDetails = await _dbContext.OrderDetails
+            IPaginate<GetOrderDetailResponse> orderDetails = await _dbContext.OrderDetails
                 .Where(x => x.OrderId == orderId)
                 .Select(x => new GetOrderDetailResponse
-                {
-                    OrderDetailId = x.OrderDetailId,
-                    OrderId = x.OrderId,
-                    CourseId = x.CourseId
-                })
-                .ToListAsync();
+            {
+                OrderDetailId = x.OrderDetailId,
+                OrderId = x.OrderId,
+                CourseId = x.CourseId
+
+            })
+                .ToPaginateAsync(page, size, 1);
             return orderDetails;
         }
         #endregion

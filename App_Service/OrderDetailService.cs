@@ -13,7 +13,7 @@ namespace App_Service
     public interface IOrderDetailService
     {
         public Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size);
-        public Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId);
+        public Task<IPaginate<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId, int page, int size);
         public void CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest);
     }
 
@@ -26,8 +26,11 @@ namespace App_Service
                 _orderDetailRepository = new OrderDetailRepository();
         }
 
-        public async Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size) => await _orderDetailRepository.GetAllOrderDetails(page, size);
-        public async Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId) => await _orderDetailRepository.GetOrderDetailsInOrder(orderId);
-        public void CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest) => _orderDetailRepository.CreateOrderDetail(createOrderDetailRequest);       
+        public async Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size) 
+            => await _orderDetailRepository.GetAllOrderDetails(page, size);
+        public async Task<IPaginate<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId, int page, int size) 
+            => await _orderDetailRepository.GetOrderDetailsInOrder(orderId, page, size);
+        public void CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest) 
+            => _orderDetailRepository.CreateOrderDetail(createOrderDetailRequest);       
     }
 }
