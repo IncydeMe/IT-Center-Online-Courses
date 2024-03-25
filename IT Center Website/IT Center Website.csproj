@@ -32,4 +32,8 @@
     <ProjectReference Include="..\App_Service\App_Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\App_Service\App_Service.csproj" />
+  </ItemGroup>
+
 </Project>
