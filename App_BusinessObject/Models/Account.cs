@@ -29,14 +29,14 @@ namespace App_BusinessObject.Models
         [Phone(ErrorMessage = "Invalid Phone number")]
         public string Phone { get; set; }
         public bool Gender { get; set; }
-        public string DigitalSignature { get; set; }
+        public string DigitalSignature { get; set; }    
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [DefaultValue(true)]
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime LastUpdatedAt { get; set; }
+        public DateTime LastUpdatedAt { get; set;}
 
         public virtual Role Role { get; set; }
     }

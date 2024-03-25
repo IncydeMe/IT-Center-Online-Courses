@@ -40,7 +40,6 @@ namespace App_DataAccessObject
         }
 
         #region CategoryFunction
-
         public async Task<IPaginate<GetCategoryResponse>> GetAllCategories(int page, int size)
         {
             IPaginate<GetCategoryResponse> categoryList = await _dbContext.Categories.Select(x => new GetCategoryResponse

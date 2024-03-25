@@ -13,7 +13,7 @@ namespace App_Service.Interfaces
     public interface IOrderDetailService
     {
         public Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size);
-        public Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId);
+        public Task<IPaginate<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId, int page, int size);
         public Task CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest);
         public Task<List<OrderDetail>> GetOrderDetaiListlInOrder(int orderId);
         public Task<List<GetBestSellerCourseInOrderDetail>> GetBestSeller();
