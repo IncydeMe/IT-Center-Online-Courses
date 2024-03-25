@@ -70,11 +70,11 @@ namespace App_DataAccessObject
 
         public async Task<UpdateAccountResponse> UpdateAccountInformation(int id, UpdateAccountRequest updateAccountRequest)
         {
-            Account? account = await _dbContext.Accounts.FirstOrDefaultAsync(x => x.AccountId == id);
+            Account? account = await _dbContext.Accounts
+                .FirstOrDefaultAsync(x => x.AccountId == id) 
+                ?? throw new KeyNotFoundException($"No account found with ID {id}");
 
-            if (account != null)
-            {
-                account.FirstName = string.IsNullOrEmpty(updateAccountRequest.FirstName) ?
+            account.FirstName = string.IsNullOrEmpty(updateAccountRequest.FirstName) ?
                                     account.FirstName : updateAccountRequest.FirstName;
                 account.LastName = string.IsNullOrEmpty(updateAccountRequest.LastName) ?
                                     account.LastName : updateAccountRequest.LastName;
@@ -93,9 +93,6 @@ namespace App_DataAccessObject
 
                 UpdateAccountResponse response = _mapper.Map<UpdateAccountResponse>(account);
                 return response;
-            }
-
-            return null;
         }
 
         public async Task<bool> ChangeAccountStatus(int id)
