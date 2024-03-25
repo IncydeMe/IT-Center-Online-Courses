@@ -77,7 +77,13 @@ namespace App_DataAccessObject
         #region CreateOrderDetail
         public async void CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest)
         {
-            _dbContext.OrderDetails.Add(_mapper.Map<OrderDetail>(createOrderDetailRequest));
+            var orderDetails = createOrderDetailRequest.CourseIds.Select(courseId => new OrderDetail
+            {
+                OrderId = createOrderDetailRequest.OrderId,
+                CourseId = courseId
+            });
+
+            await _dbContext.OrderDetails.AddRangeAsync(orderDetails);
             await _dbContext.SaveChangesAsync();
         }
         #endregion
