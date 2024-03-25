@@ -53,24 +53,33 @@ namespace App_DataAccessObject
             }).ToPaginateAsync(page, size, 1);
             return orderDetailList;
         }
-      
-        public async Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId)
+        #endregion
+
+        #region GetOrderDetailsInOrder
+        public async Task<IPaginate<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId, int page, int size)
         {
-            List<GetOrderDetailResponse> orderDetails = await _dbContext.OrderDetails
+            IPaginate<GetOrderDetailResponse> orderDetails = await _dbContext.OrderDetails
                 .Where(x => x.OrderId == orderId)
                 .Select(x => new GetOrderDetailResponse
-                {
-                    OrderDetailId = x.OrderDetailId,
-                    OrderId = x.OrderId,
-                    CourseId = x.CourseId
-                })
-                .ToListAsync();
+            {
+                OrderDetailId = x.OrderDetailId,
+                OrderId = x.OrderId,
+                CourseId = x.CourseId
+
+            })
+                .ToPaginateAsync(page, size, 1);
             return orderDetails;
         }
 
         public async Task CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest)
         {
-            await _dbContext.OrderDetails.AddAsync(_mapper.Map<OrderDetail>(createOrderDetailRequest));
+            var orderDetails = createOrderDetailRequest.CourseIds.Select(courseId => new OrderDetail
+            {
+                OrderId = createOrderDetailRequest.OrderId,
+                CourseId = courseId
+            });
+
+            await _dbContext.OrderDetails.AddRangeAsync(orderDetails);
             await _dbContext.SaveChangesAsync();
         }
 

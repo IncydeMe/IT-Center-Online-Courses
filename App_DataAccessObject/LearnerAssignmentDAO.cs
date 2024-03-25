@@ -55,8 +55,8 @@ namespace App_DataAccessObject
                 learnerAssignment.AccountId = updateLearnerAssignment.AccountId;
                 learnerAssignment.AssignmentId = updateLearnerAssignment.AssignmentId;
                 learnerAssignment.Mark = learnerAssignment.Mark;
-                learnerAssignment.AssignmentTakenDate = DateTime.Now;
-                learnerAssignment.TakenDuration = DateTime.Now;
+                learnerAssignment.AssignmentTakenDate = learnerAssignment.AssignmentTakenDate;
+                learnerAssignment.TakenDuration = learnerAssignment.TakenDuration;
                 _dbContext.LearnerAssignments.Update(learnerAssignment);
                 await _dbContext.SaveChangesAsync();
 
