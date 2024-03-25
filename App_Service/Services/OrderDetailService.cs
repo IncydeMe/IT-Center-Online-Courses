@@ -29,5 +29,7 @@ namespace App_Service.Services
             => await _orderDetailRepository.CreateOrderDetail(createOrderDetailRequest);
         public async Task<List<OrderDetail>> GetOrderDetaiListlInOrder(int orderId)
             => await _orderDetailRepository.GetOrderDetaiListlInOrder(orderId);
+        public async Task<List<GetBestSellerCourseInOrderDetail>> GetBestSeller() 
+            => await _orderDetailRepository.GetBestSeller();
     }
 }

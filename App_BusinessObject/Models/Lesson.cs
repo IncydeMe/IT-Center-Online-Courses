@@ -20,8 +20,10 @@ namespace App_BusinessObject.Models
         public int LessonId { get; set; }
         [ForeignKey("CourseId")]
         public int CourseId { get; set; }
-        [StringLength(100)]
+        [Required(ErrorMessage = "Lesson name is required.")]
+        [StringLength(100, ErrorMessage = "Lesson name cannot be longer than 100 characters.")]
         public string LessonName { get; set; }
+        [Required(ErrorMessage = "Type is required.")]
         public string Type { get; set; }
         public string MaterialUrl { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;

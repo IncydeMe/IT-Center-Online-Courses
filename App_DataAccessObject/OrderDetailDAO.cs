@@ -78,6 +78,18 @@ namespace App_DataAccessObject
         {
             return await _dbContext.OrderDetails.Where(odd => odd.OrderId == orderId).ToListAsync();
         }
+
+        public async Task<List<GetBestSellerCourseInOrderDetail>> GetBestSeller()
+        {
+            return await _dbContext.OrderDetails.GroupBy(ord => ord.CourseId)
+                                 .Select(ord => new GetBestSellerCourseInOrderDetail
+                                 {
+                                     Id = ord.Key,
+                                     Count = ord.Count(),
+                                 })
+                                 .OrderByDescending(ord => ord.Count)
+                                 .Take(3).ToListAsync();
+        }
         #endregion
     }
 }
