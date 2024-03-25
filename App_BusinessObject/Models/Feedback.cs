@@ -16,6 +16,7 @@ namespace App_BusinessObject.Models
         public int CourseId { get; set; }
         [ForeignKey("AccountId")]
         public int AccountId { get; set; }
+        [Required(ErrorMessage = "Message is required.")]
         public string Message { get; set; }
         public bool Status { get; set; }
 

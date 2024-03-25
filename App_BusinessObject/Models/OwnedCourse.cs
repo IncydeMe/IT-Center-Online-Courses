@@ -26,3 +26,4 @@ namespace App_BusinessObject.Models
         public virtual Account Account { get; set; }
         public virtual Course Course { get; set; }
     }
+}

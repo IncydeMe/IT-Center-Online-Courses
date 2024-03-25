@@ -59,7 +59,7 @@ namespace App_DataAccessObject
 
         public async Task CreateAccount(CreateAccountRequest createAccountRequest)
         {
-            Account account = await _dbContext.Accounts.FirstOrDefaultAsync(x => x.Email.Equals(createAccountRequest.Email));
+            Account? account = await _dbContext.Accounts.FirstOrDefaultAsync(x => x.Email.Equals(createAccountRequest.Email));
 
             if (account == null)
             {
@@ -70,7 +70,7 @@ namespace App_DataAccessObject
 
         public async Task<UpdateAccountResponse> UpdateAccountInformation(int id, UpdateAccountRequest updateAccountRequest)
         {
-            Account account = await _dbContext.Accounts.FirstOrDefaultAsync(x => x.AccountId == id);
+            Account? account = await _dbContext.Accounts.FirstOrDefaultAsync(x => x.AccountId == id);
 
             if (account != null)
             {
@@ -100,7 +100,7 @@ namespace App_DataAccessObject
 
         public async Task<bool> ChangeAccountStatus(int id)
         {
-            Account account = await _dbContext.Accounts.FirstOrDefaultAsync(x => x.AccountId == id);
+            Account? account = await _dbContext.Accounts.FirstOrDefaultAsync(x => x.AccountId == id);
 
             if (account != null)
             {
@@ -116,7 +116,7 @@ namespace App_DataAccessObject
         #region AuthenticationFunction
         public async Task<LoginResponse> Login(LoginRequest loginRequest)
         {
-            Account account = await _dbContext.Accounts.Where(x => x.Email.Equals(loginRequest.Email) && 
+            Account? account = await _dbContext.Accounts.Where(x => x.Email.Equals(loginRequest.Email) && 
                                                                    x.Password.Equals(loginRequest.Password))
                                                        .Include(p => p.Role).SingleOrDefaultAsync();
 
@@ -131,7 +131,12 @@ namespace App_DataAccessObject
 
         public async Task<LoginResponse> SignUp(SignUpRequest signUpRequest)
         {
-            Account account = await _dbContext.Accounts.FirstOrDefaultAsync(x => x.Email.Equals(signUpRequest.Email));
+            if (signUpRequest == null)
+            {
+                throw new ArgumentNullException(nameof(signUpRequest));
+            }
+
+            Account? account = await _dbContext.Accounts.FirstOrDefaultAsync(x => x.Email.Equals(signUpRequest.Email));
 
             if (account != null) return null;
             Account newAccount = new Account()
@@ -156,9 +161,14 @@ namespace App_DataAccessObject
             await _dbContext.SaveChangesAsync();
 
             //Login
-            Account createdAccount = await _dbContext.Accounts.Where(x => x.Email.Equals(newAccount.Email) &&
+            Account? createdAccount = await _dbContext.Accounts.Where(x => x.Email.Equals(newAccount.Email) &&
                                                                    x.Password.Equals(newAccount.Password))
                                                        .Include(p => p.Role).SingleOrDefaultAsync();
+
+            if (createdAccount == null)
+            {
+                throw new Exception("Account was not created.");
+            }
 
             LoginResponse response = new LoginResponse(createdAccount.AccountId, createdAccount.Email, createdAccount.FirstName,
                                                        createdAccount.Role.RoleName, createdAccount.IsActive);
@@ -167,6 +177,7 @@ namespace App_DataAccessObject
             response.AccessToken = token;
             return response;
         }
+
         #endregion
     }
 }

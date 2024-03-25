@@ -24,7 +24,7 @@ namespace App_DataAccessObject
         private readonly ITCenterContext _dbContext = null;
         private readonly IMapper _mapper = null;
 
-        private static OrderDAO instance;        
+        private static OrderDAO instance;
         public static OrderDAO Instance
         {
             get
@@ -58,7 +58,7 @@ namespace App_DataAccessObject
             }).ToPaginateAsync(page, size, 1);
             return orderList;
         }
-        
+
         public async Task<IPaginate<GetOrderResponse>> GetUserOrderList(int accountId, int page, int size)
         {
             IPaginate<GetOrderResponse> userOrderList = await _dbContext.Orders
@@ -73,7 +73,7 @@ namespace App_DataAccessObject
                 .ToPaginateAsync(page, size, 1);
             return userOrderList;
         }
-        
+
         public async Task<GetOrderResponse> GetOrderById(int orderId)
         {
             Order order = await _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderId == orderId);
@@ -84,11 +84,11 @@ namespace App_DataAccessObject
             }
             return null;
         }
-       
+
         public async Task CreateOrder(CreateOrderRequest createOrderRequest)
         {
-                await _dbContext.Orders.AddAsync(_mapper.Map<Order>(createOrderRequest));
-                await _dbContext.SaveChangesAsync();
+            await _dbContext.Orders.AddAsync(_mapper.Map<Order>(createOrderRequest));
+            await _dbContext.SaveChangesAsync();
         }
 
         public async Task<bool> ChangeStatus(int orderId)
