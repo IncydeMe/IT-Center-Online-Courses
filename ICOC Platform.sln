@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppWeb", "AppWeb\AppWeb.csproj", "{ECA18AEA-405F-431C-871E-79D304553690}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App_BusinessObject", "App_BusinessObject\App_BusinessObject.csproj", "{A91FB092-A55E-419D-BBDC-1ED36EFB0B94}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App_Service", "App_Service\App_Service.csproj", "{37B0BAB0-6BB3-47B2-98C4-B58DB3E248C8}"
@@ -12,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App_DataAccessObject", "App_DataAccessObject\App_DataAccessObject.csproj", "{7ADFD406-ADC7-4BB1-A0C3-C92BEA7419CE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App_Repository", "App_Repository\App_Repository.csproj", "{4E9D972C-CF1A-4FF0-8CEA-5753BBD5ADA0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IT Center Website", "IT Center Website\IT Center Website.csproj", "{ADA7575C-4922-4C95-A2B2-9F91EDFC6843}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Firebase.Service", "Firebase.Service\Firebase.Service.csproj", "{515E0EEC-8128-4DB1-AE97-F79FC1A6B15C}"
 EndProject
@@ -25,10 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ECA18AEA-405F-431C-871E-79D304553690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ECA18AEA-405F-431C-871E-79D304553690}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ECA18AEA-405F-431C-871E-79D304553690}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ECA18AEA-405F-431C-871E-79D304553690}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A91FB092-A55E-419D-BBDC-1ED36EFB0B94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A91FB092-A55E-419D-BBDC-1ED36EFB0B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A91FB092-A55E-419D-BBDC-1ED36EFB0B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{4E9D972C-CF1A-4FF0-8CEA-5753BBD5ADA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E9D972C-CF1A-4FF0-8CEA-5753BBD5ADA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E9D972C-CF1A-4FF0-8CEA-5753BBD5ADA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADA7575C-4922-4C95-A2B2-9F91EDFC6843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADA7575C-4922-4C95-A2B2-9F91EDFC6843}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADA7575C-4922-4C95-A2B2-9F91EDFC6843}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADA7575C-4922-4C95-A2B2-9F91EDFC6843}.Release|Any CPU.Build.0 = Release|Any CPU
 		{515E0EEC-8128-4DB1-AE97-F79FC1A6B15C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{515E0EEC-8128-4DB1-AE97-F79FC1A6B15C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{515E0EEC-8128-4DB1-AE97-F79FC1A6B15C}.Release|Any CPU.ActiveCfg = Release|Any CPU

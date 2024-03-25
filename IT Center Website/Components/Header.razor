@@ -1,0 +1,101 @@
+﻿@*@using Microsoft.AspNetCore.Components.Web;
+@using IT_Center_Website.Components;
+
+
+
+<head>
+    <link rel="stylesheet" href="~/css/input.css" />
+    <link rel="stylesheet" href="~/css/output.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body>
+    <header class="flex">
+        <div>
+            <h3>ITCO Group</h3>
+        </div>
+        <div>
+            <ul class="flex items-center">
+                <li>
+                    <a class="text-blue-200">Home</a>
+                </li>
+                <li>
+                    <a>
+                        Courses
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        Pricing
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        Blogs
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        About Us
+                    </a>
+                </li>
+            </ul>
+            <ul>
+                <a>Login</a>
+                <a>Become a member</a>
+            </ul>
+        </div>
+    </header>
+</body>*@
+
+@using Microsoft.AspNetCore.Components.Web;
+@using IT_Center_Website.Components;
+@inherits Microsoft.AspNetCore.Components.ComponentBase
+@page "/header"
+<head>
+    <link rel="stylesheet" href="css/Header/Header.css" />
+    <link rel="stylesheet" href="css/output.css" />
+    <link rel="stylesheet" href="css/input.css" />
+</head>
+
+
+<html>
+
+
+<body>
+    <header class="header_container px-[30px] ">
+        <div class="logo">
+            <img src="images/header/ITCO_Logo.png" alt="logo" />
+        </div>
+        <div class="header_bar">
+            <ul class="nav_bar">
+                <li>
+                    <a class="text-blue-200">Home</a>
+                </li>
+                <li>
+                    <a>Courses</a>
+                </li>
+                <li>
+                    <a>Blogs</a>
+
+                </li>
+                <li>
+                    <a>About Us</a>
+                </li>
+                <li style="width:2px;">
+                    <img src="images/header/line_between.png" alt="line" />
+                </li>
+            </ul>
+            <ul class="member_btn flex gap-5">
+                <li class="">
+                    <a>Login</a>
+                </li>
+                <li class="register_btn ">
+                    <a class="">Become a member</a>
+                </li>
+                
+            </ul>
+        </div>
+    </header>
+</body>
+</html>
