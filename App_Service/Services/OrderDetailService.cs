@@ -23,8 +23,8 @@ namespace App_Service.Services
 
         public async Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size)
             => await _orderDetailRepository.GetAllOrderDetails(page, size);
-        public async Task<List<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId) 
-            => await _orderDetailRepository.GetOrderDetailsInOrder(orderId);
+        public async Task<IPaginate<GetOrderDetailResponse>> GetOrderDetailsInOrder(int orderId, int page, int size) 
+            => await _orderDetailRepository.GetOrderDetailsInOrder(orderId, page, size);
         public async Task CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest) 
             => await _orderDetailRepository.CreateOrderDetail(createOrderDetailRequest);
         public async Task<List<OrderDetail>> GetOrderDetaiListlInOrder(int orderId)
