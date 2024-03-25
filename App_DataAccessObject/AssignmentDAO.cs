@@ -110,11 +110,9 @@ namespace App_DataAccessObject
                 throw new ArgumentNullException(nameof(updateAssignment));
             }
 
-            Assignment? assignment = await _dbContext.Assignments.FirstOrDefaultAsync(x => x.AssignmentId == assignmentId);
-            if (assignment == null)
-            {
-                throw new KeyNotFoundException($"No assignment found with ID {assignmentId}");
-            }
+            Assignment? assignment = await _dbContext.Assignments
+                .FirstOrDefaultAsync(x => x.AssignmentId == assignmentId) 
+                ?? throw new KeyNotFoundException($"No assignment found with ID {assignmentId}");
 
             assignment.AssignmentTitle = updateAssignment.AssignmentTitle;
             assignment.Question = updateAssignment.Question;
