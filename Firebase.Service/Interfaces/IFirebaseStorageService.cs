@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,4 +11,3 @@ namespace Firebase.Service.Interfaces
         public Task<string> UploadFile(Stream fileStream, string fileName);
     }
 }
-*/

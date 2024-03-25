@@ -48,22 +48,23 @@ namespace App_DataAccessObject
 
         public async Task<UpdateLearnerAssignmentResponse> UpdateLearnerAssignment(int learnerAssignmentId, UpdateLearnerAssignmentRequest updateLearnerAssignment)
         {
-            LearnerAssignment learnerAssignment = await _dbContext.LearnerAssignments.FirstOrDefaultAsync(x => x.LearnerAssignmentId == learnerAssignmentId);
+            LearnerAssignment? learnerAssignment = await _dbContext.LearnerAssignments.FirstOrDefaultAsync(x => x.LearnerAssignmentId == learnerAssignmentId);
 
-            if (learnerAssignment != null)
+            if (learnerAssignment == null)
             {
+                throw new KeyNotFoundException("Learner Assignment not found");
+            }
+
                 learnerAssignment.AccountId = updateLearnerAssignment.AccountId;
                 learnerAssignment.AssignmentId = updateLearnerAssignment.AssignmentId;
                 learnerAssignment.Mark = learnerAssignment.Mark;
-                learnerAssignment.AssignmentTakenDate = DateTime.Now;
-                learnerAssignment.TakenDuration = DateTime.Now;
+                learnerAssignment.AssignmentTakenDate = learnerAssignment.AssignmentTakenDate;
+                learnerAssignment.TakenDuration = learnerAssignment.TakenDuration;
                 _dbContext.LearnerAssignments.Update(learnerAssignment);
                 await _dbContext.SaveChangesAsync();
 
                 UpdateLearnerAssignmentResponse response = _mapper.Map<UpdateLearnerAssignmentResponse>(learnerAssignment);
                 return response;
-            }
-            return null;
         }
     }
 }

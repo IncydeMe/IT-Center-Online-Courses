@@ -64,7 +64,7 @@ namespace App_DataAccessObject
 
         public async Task<bool> ChangeStatus(int feedbackId)
         {
-            Feedback feedback = await _dbContext.Feedbacks.FirstOrDefaultAsync(x => x.FeedbackId == feedbackId);
+            Feedback? feedback = await _dbContext.Feedbacks.FirstOrDefaultAsync(x => x.FeedbackId == feedbackId);
 
             if(feedback != null)
             {

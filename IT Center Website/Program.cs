@@ -5,6 +5,8 @@ using App_Repository.Repositories;
 using App_Service;
 using App_Service.Interfaces;
 using App_Service.Services;
+using Firebase.Service.Interfaces;
+using Firebase.Service.Services;
 using ITCenterService;
 using Payment.Service.VNPay.Interfaces;
 using Payment.Service.VNPay.Services;
@@ -35,11 +37,15 @@ builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IFeedbackService, FeedbackService>();
 builder.Services.AddScoped<ILessonService, LessonService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
 builder.Services.AddScoped<IOwnedCourseService, OwnedCourseService>();
 builder.Services.AddScoped<IOwnedLessonService, OwnedLessonService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<ILearnerAssignmentService, LearnerAssignmentService>();
+
+builder.Services.AddScoped<IVNPayService, VNPayService>();
+builder.Services.AddScoped<IFirebaseStorageService, FirebaseStorageService>();
 
 
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
