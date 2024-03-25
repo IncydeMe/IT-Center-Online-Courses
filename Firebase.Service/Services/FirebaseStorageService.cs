@@ -1,4 +1,4 @@
-﻿/*using Firebase.Service.Interfaces;
+﻿using Firebase.Service.Interfaces;
 using Firebase.Storage;
 using System;
 using System.Collections.Generic;
@@ -27,4 +27,3 @@ namespace Firebase.Service.Services
         }
     }
 }
-*/

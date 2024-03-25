@@ -10,6 +10,6 @@ namespace App_BusinessObject.DTOs.Request.OrderDetail
     public class CreateOrderDetailRequest
     {
         public int OrderId { get; set; }
-        public int CourseId { get; set; }
+        public List<int> CourseIds { get; set; }
     }
 }
