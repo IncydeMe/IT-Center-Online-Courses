@@ -76,7 +76,18 @@ builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<ILearnerAssignmentService, LearnerAssignmentService>();
 builder.Services.AddScoped<IVNPayService, VNPayService>();
 
+//for cookies
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = "YourSessionCookieName";
+    options.Cookie.HttpOnly = true;
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.IsEssential = true;
+});
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
+app.UseSession();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
