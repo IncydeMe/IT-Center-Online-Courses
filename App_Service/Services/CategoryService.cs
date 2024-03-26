@@ -21,7 +21,7 @@ namespace App_Service.Services
             _categoryRepository = categoryRepository;
         }
 
-        public async void CreateCategory(CreateCategoryRequest createCategoryRequest) => _categoryRepository.CreateCategory(createCategoryRequest);
+        public async Task CreateCategory(CreateCategoryRequest createCategoryRequest) => await _categoryRepository.CreateCategory(createCategoryRequest);
 
         public async Task<IPaginate<GetCategoryResponse>> GetAllCategories(int page, int size) => await _categoryRepository.GetAllCategories(page, size);
 

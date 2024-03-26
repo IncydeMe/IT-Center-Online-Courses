@@ -11,7 +11,7 @@ namespace App_Repository.Interfaces
 {
     public interface IFeedbackRepository
     {
-        public void CreateFeedBack(CreateFeedbackRequest request);
+        public Task CreateFeedBack(CreateFeedbackRequest request);
         public Task<IPaginate<Feedback>> GetAllFeedbacks(int page, int size);
         public Task<bool> ChangeStatus(int feedbackId);
     }

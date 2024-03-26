@@ -12,7 +12,7 @@ namespace App_Repository.Interfaces
     public interface ICategoryRepository
     {
         public Task<IPaginate<GetCategoryResponse>> GetAllCategories(int page, int size);
-        public void CreateCategory(CreateCategoryRequest createCategoryRequest);
+        public Task CreateCategory(CreateCategoryRequest createCategoryRequest);
         public Task<UpdateCategoryResponse> UpdateCategoryInformation(int id, UpdateCategoryRequest updateCategoryRequest);
         public Task<GetCategoryResponse> GetRandomCategoy();
     }
