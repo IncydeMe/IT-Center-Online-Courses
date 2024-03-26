@@ -20,7 +20,7 @@ namespace App_BusinessObject.Models
         [Required(ErrorMessage = "Last name is required.")]
         public string LastName { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+/*        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]*/
         public DateTime BirthDate { get; set; }
         [Required]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
