@@ -14,7 +14,7 @@ namespace App_Repository.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        public async void CreateCategory(CreateCategoryRequest createCategoryRequest) => CategoryDAO.Instance.CreateCategory(createCategoryRequest);
+        public async Task CreateCategory(CreateCategoryRequest createCategoryRequest) => await CategoryDAO.Instance.CreateCategory(createCategoryRequest);
 
         public async Task<IPaginate<GetCategoryResponse>> GetAllCategories(int page, int size) => await CategoryDAO.Instance.GetAllCategories(page, size);
 

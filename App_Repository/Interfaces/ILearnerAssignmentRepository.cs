@@ -10,7 +10,7 @@ namespace App_Repository.Interfaces
 {
     public interface ILearnerAssignmentRepository
     {
-        public void CreateLearnerAssignment(CreateLearnerAssignmentRequest newLearnerAssignment);
+        public Task CreateLearnerAssignment(CreateLearnerAssignmentRequest newLearnerAssignment);
         public Task<UpdateLearnerAssignmentResponse> UpdateLearnerAssignment(int learnerAssignmentId, UpdateLearnerAssignmentRequest updateLearnerAssignment);
     }
 }
