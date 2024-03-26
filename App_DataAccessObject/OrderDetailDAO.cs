@@ -42,8 +42,6 @@ namespace App_DataAccessObject
         }
 
         #region OrderDetailFunction
-
-        #region GetAllOrderDetails
         public async Task<IPaginate<GetOrderDetailResponse>> GetAllOrderDetails(int page, int size)
         {
             IPaginate<GetOrderDetailResponse> orderDetailList = await _dbContext.OrderDetails.Select(x => new GetOrderDetailResponse
@@ -72,10 +70,8 @@ namespace App_DataAccessObject
                 .ToPaginateAsync(page, size, 1);
             return orderDetails;
         }
-        #endregion
 
-        #region CreateOrderDetail
-        public async void CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest)
+        public async Task CreateOrderDetail(CreateOrderDetailRequest createOrderDetailRequest)
         {
             var orderDetails = createOrderDetailRequest.CourseIds.Select(courseId => new OrderDetail
             {
@@ -86,8 +82,23 @@ namespace App_DataAccessObject
             await _dbContext.OrderDetails.AddRangeAsync(orderDetails);
             await _dbContext.SaveChangesAsync();
         }
-        #endregion
 
+        public async Task<List<OrderDetail>> GetOrderDetaiListlInOrder(int orderId)
+        {
+            return await _dbContext.OrderDetails.Where(odd => odd.OrderId == orderId).ToListAsync();
+        }
+
+        public async Task<List<GetBestSellerCourseInOrderDetail>> GetBestSeller()
+        {
+            return await _dbContext.OrderDetails.GroupBy(ord => ord.CourseId)
+                                 .Select(ord => new GetBestSellerCourseInOrderDetail
+                                 {
+                                     Id = ord.Key,
+                                     Count = ord.Count(),
+                                 })
+                                 .OrderByDescending(ord => ord.Count)
+                                 .Take(3).ToListAsync();
+        }
         #endregion
     }
 }

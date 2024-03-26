@@ -24,7 +24,7 @@ namespace App_DataAccessObject
         private readonly ITCenterContext _dbContext = null;
         private readonly IMapper _mapper = null;
 
-        private static OrderDAO instance;        
+        private static OrderDAO instance;
         public static OrderDAO Instance
         {
             get
@@ -46,8 +46,6 @@ namespace App_DataAccessObject
         }
 
         #region OrderFunction 
-
-        #region GetAllOrders
         public async Task<IPaginate<GetOrderResponse>> GetAllOrders(int page, int size)
         {
             IPaginate<GetOrderResponse> orderList = await _dbContext.Orders.Select(x => new GetOrderResponse
@@ -60,9 +58,7 @@ namespace App_DataAccessObject
             }).ToPaginateAsync(page, size, 1);
             return orderList;
         }
-        #endregion
 
-        #region GetUserOrderList
         public async Task<IPaginate<GetOrderResponse>> GetUserOrderList(int accountId, int page, int size)
         {
             IPaginate<GetOrderResponse> userOrderList = await _dbContext.Orders
@@ -77,9 +73,7 @@ namespace App_DataAccessObject
                 .ToPaginateAsync(page, size, 1);
             return userOrderList;
         }
-        #endregion
 
-        #region GetOrderById
         public async Task<GetOrderResponse> GetOrderById(int orderId)
         {
             Order order = await _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderId == orderId);
@@ -90,17 +84,13 @@ namespace App_DataAccessObject
             }
             return null;
         }
-        #endregion
 
-        #region CreateOrder
-        public async void CreateOrder(CreateOrderRequest createOrderRequest)
+        public async Task CreateOrder(CreateOrderRequest createOrderRequest)
         {
-                _dbContext.Orders.Add(_mapper.Map<Order>(createOrderRequest));
-                await _dbContext.SaveChangesAsync();
+            await _dbContext.Orders.AddAsync(_mapper.Map<Order>(createOrderRequest));
+            await _dbContext.SaveChangesAsync();
         }
-        #endregion
 
-        #region ChangeStatus
         public async Task<bool> ChangeStatus(int orderId)
         {
             Order order = await _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderId == orderId);
@@ -114,8 +104,6 @@ namespace App_DataAccessObject
             }
             return false;
         }
-        #endregion
-
         #endregion
     }
 }

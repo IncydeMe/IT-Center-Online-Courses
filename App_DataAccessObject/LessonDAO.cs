@@ -33,33 +33,19 @@ namespace App_DataAccessObject
 
         public LessonDAO()
         {
-            if(_dbContext == null)
+            if (_dbContext == null)
                 _dbContext = new ITCenterContext();
-            if(_mapper == null)
+            if (_mapper == null)
                 _mapper = new Mapper(new MapperConfiguration(mc => mc.AddProfile(new LessonMapper())).CreateMapper().ConfigurationProvider);
         }
 
-        public async void CreateLesson(CreateLessonRequest newLesson)
+        public async Task CreateLesson(CreateLessonRequest newLesson)
         {
             _dbContext.Lessons.Add(_mapper.Map<Lesson>(newLesson));
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<GetLessonResponse>> GetAllLessonsOfCourse(int courseId)
-        {
-            List<GetLessonResponse> lessonList =  _dbContext.Lessons.Select(x => new GetLessonResponse
-            {
-                LessonId = x.LessonId,
-                LessonName = x.LessonName,
-                CourseId = x.CourseId,
-                Type = x.Type,
-                MaterialUrl = x.MaterialUrl,
-                IsFinished = x.IsFinished
-            }).Where(c => c.CourseId == courseId).ToList();
-            return lessonList;
-        }
-
-        public List<GetLessonResponse> GetListLessonOfCourse(int courseId)
+        public List<GetLessonResponse> GetAllLessonsOfCourse(int courseId)
         {
             List<GetLessonResponse> lessonList = _dbContext.Lessons.Select(x => new GetLessonResponse
             {
@@ -73,11 +59,23 @@ namespace App_DataAccessObject
             return lessonList;
         }
 
+        public async Task<List<GetLessonResponse>> GetListLessonOfCourse(int courseId)
+        {
+            List<GetLessonResponse> lessonList = await _dbContext.Lessons.Select(x => new GetLessonResponse
+            {
+                LessonId = x.LessonId,
+                LessonName = x.LessonName,
+                CourseId = x.CourseId,
+                Type = x.Type,
+                MaterialUrl = x.MaterialUrl,
+                IsFinished = x.IsFinished
+            }).Where(c => c.CourseId == courseId).ToListAsync();
+            return lessonList;
+        }
+
         public async Task<UpdateLessonResponse> UpdateLesson(int lessonId, UpdateLessonRequest updateLesson)
         {
-            Lesson lesson = await _dbContext.Lessons.FirstOrDefaultAsync(x => x.LessonId == lessonId);
-            if (lesson != null)
-            {
+            Lesson? lesson = await _dbContext.Lessons.FirstOrDefaultAsync(x => x.LessonId == lessonId) ?? throw new KeyNotFoundException("Lesson not found");
                 lesson.LessonName = updateLesson.LessonName;
                 lesson.Type = updateLesson.Type;
                 lesson.MaterialUrl = updateLesson.MaterialUrl;
@@ -87,14 +85,11 @@ namespace App_DataAccessObject
 
                 UpdateLessonResponse response = _mapper.Map<UpdateLessonResponse>(lesson);
                 return response;
-            }
-            return null;
         }
 
         public async Task<bool> DeleteLesson(int lessonId)
         {
-            Lesson lesson = _dbContext.Lessons.FirstOrDefault(x => x.LessonId.Equals(lessonId));
-
+            Lesson? lesson = _dbContext.Lessons.FirstOrDefault(x => x.LessonId.Equals(lessonId)) ?? throw new KeyNotFoundException("Lesson not found");
             if (lesson != null)
             {
                 _dbContext.Lessons.Remove(lesson);

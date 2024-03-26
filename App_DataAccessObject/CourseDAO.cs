@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace App_DataAccessObject
 {
@@ -39,8 +40,10 @@ namespace App_DataAccessObject
                 _mapper = new Mapper(new MapperConfiguration(mc => mc.AddProfile(new CourseMapper())).CreateMapper().ConfigurationProvider);
         }
 
-        public async void CreateCourse(CreateCourseRequest newCourse)
+        public async Task CreateCourse(CreateCourseRequest newCourse)
         {
+            //Check is name duplicated
+
             _dbContext.Courses.Add(_mapper.Map<Course>(newCourse));
             await _dbContext.SaveChangesAsync();
 
@@ -48,21 +51,24 @@ namespace App_DataAccessObject
 
         public async Task<IPaginate<GetCourseResponse>> GetAllCourses(int page, int size)
         {
-            IPaginate<GetCourseResponse> courseList = await _dbContext.Courses.Select(x => new GetCourseResponse
-            {
-                CourseId = x.CourseId,
-                CourseName = x.CourseName,
-                Description = x.Description,
-                ImageUrl = x.ImageUrl,
-                IsAvailable = x.IsAvailable,
-                CategoryId = x.CategoryId
-            }).Where(x => x.IsAvailable == true).ToPaginateAsync(page, size, 1);
+            IPaginate<GetCourseResponse> courseList = await _dbContext.Courses
+                .Include(c => c.Category)
+                .Select(x => new GetCourseResponse
+                {
+                    CourseId = x.CourseId,
+                    CourseName = x.CourseName,
+                    Description = x.Description,
+                    ImageUrl = x.ImageUrl,
+                    IsAvailable = x.IsAvailable,
+                    CategoryName = x.Category.CategoryName,
+                    Price = x.Price
+                }).Where(x => x.IsAvailable == true).ToPaginateAsync(page, size, 1);
             return courseList;
         }
 
         public async Task<bool> ChangeCourseStatus(int courseId)
         {
-            Course course = _dbContext.Courses.FirstOrDefault(x => x.CourseId.Equals(courseId));
+            Course? course = await _dbContext.Courses.FirstOrDefaultAsync(x => x.CourseId.Equals(courseId));
 
             if (course != null)
             {
@@ -74,9 +80,9 @@ namespace App_DataAccessObject
             return false;
         }
 
-        public async Task<UpdateCourseResponse> UpdateCourseInformation(int courseId, UpdateCourseRequest updateCourseRequest)
+        public async Task<UpdateCourseResponse?> UpdateCourseInformation(int courseId, UpdateCourseRequest updateCourseRequest)
         {
-            Course course = await _dbContext.Courses.FirstOrDefaultAsync(x => x.CourseId == courseId);
+            Course course = await _dbContext.Courses.FirstOrDefaultAsync(x => x.CourseId.Equals(courseId));
 
             if (course != null)
             {
@@ -94,9 +100,32 @@ namespace App_DataAccessObject
             return null;
         }
 
-        public async Task<Course> GetCourseById(int courseId)
+        public async Task<GetCourseResponse?> GetCourseById(int courseId)
         {
-            return await _dbContext.Courses.FirstOrDefaultAsync(c => c.CourseId == courseId);
+            GetCourseResponse? response = await _dbContext.Courses
+                .Include(c => c.Category)
+                .Select(x => new GetCourseResponse
+                {
+                    CourseId = x.CourseId,
+                    CourseName = x.CourseName,
+                    Description = x.Description,
+                    ImageUrl = x.ImageUrl,
+                    IsAvailable = x.IsAvailable,
+                    CategoryName = x.Category.CategoryName,
+                    Price = x.Price
+                }).FirstOrDefaultAsync(x => x.CourseId.Equals(courseId));
+            return response;
+        }
+
+        public async Task<IPaginate<Course>> GetCoursesByCategoryName(string categoryName, int page, int size)
+        {
+            //Check Category Name is exist
+            Category category = _dbContext.Categories.FirstOrDefault(c => c.CategoryName == categoryName);
+            if (category == null) throw new BadHttpRequestException("Category name is not existed");
+
+            return await _dbContext.Courses.Include(c => c.Category)
+                                           .Where(c => c.Category.CategoryName.Equals(categoryName))
+                                           .ToPaginateAsync(page, size, 1);
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace App_DataAccessObject
 {
@@ -34,12 +35,11 @@ namespace App_DataAccessObject
         {
             if (_dbContext == null)
                 _dbContext = new ITCenterContext();
-            if(_mapper  == null)
+            if (_mapper == null)
                 _mapper = new Mapper(new MapperConfiguration(mc => mc.AddProfile(new CategoryMapper())).CreateMapper().ConfigurationProvider);
         }
 
-        #region AccountFunction
-
+        #region CategoryFunction
         public async Task<IPaginate<GetCategoryResponse>> GetAllCategories(int page, int size)
         {
             IPaginate<GetCategoryResponse> categoryList = await _dbContext.Categories.Select(x => new GetCategoryResponse
@@ -53,8 +53,11 @@ namespace App_DataAccessObject
 
         public async void CreateCategory(CreateCategoryRequest createCategoryRequest)
         {
+            //Can use Equals, Compare for better performance 
+            //Or ToUpperCase for more percisely in some cases, because there are ome upper case characters doesn't have an
+            //equivalent lower case character,so making them lower case would convert them into a different lower case character 
             Category category = _dbContext.Categories.FirstOrDefault(x => x.CategoryName.ToLower() == createCategoryRequest.CategoryName.ToLower());
-            
+
             if (category == null)
             {
                 _dbContext.Categories.Add(_mapper.Map<Category>(createCategoryRequest));
@@ -81,7 +84,22 @@ namespace App_DataAccessObject
             return null;
         }
 
-        #endregion
+        public async Task<GetCategoryResponse> GetRandomCategoy()
+        {
+            Random rd = new Random();
+            int categoriesAmount = await _dbContext.Categories.CountAsync();
+            int toSkip = rd.Next(0, categoriesAmount - 1);
 
+            GetCategoryResponse randomCategory = await _dbContext.Categories
+                                                 .Select(ct => new GetCategoryResponse
+                                                 {
+                                                     CategoryId = ct.CategoryId,
+                                                     CategoryName = ct.CategoryName,
+                                                     Description = ct.Description,
+                                                 })
+                                                 .Skip(toSkip).Take(1).FirstAsync();
+            return randomCategory;
+        }
+        #endregion
     }
 }

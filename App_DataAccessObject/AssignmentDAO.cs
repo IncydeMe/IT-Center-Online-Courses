@@ -43,8 +43,6 @@ namespace App_DataAccessObject
         }
 
         #region AssignmentFunction
-
-        #region GetAssignmentsInCourse
         public async Task<List<GetAssignmentResponse>> GetAssignmentsInCourse(int courseId)
         {
             List<Assignment> assignments = await _dbContext.Assignments
@@ -54,50 +52,80 @@ namespace App_DataAccessObject
             List<GetAssignmentResponse> responses = _mapper.Map<List<GetAssignmentResponse>>(assignments);
             return responses;
         }
-        #endregion
 
-        #region GetAssignmentById
+        /*        public async Task<GetAssignmentResponse> GetAssignmentById(int assignmentId)
+                {
+                    Assignment? assignment = await _dbContext.Assignments.FirstOrDefaultAsync(x => x.AssignmentId == assignmentId);
+                    if (assignment != null)
+                    {
+                        GetAssignmentResponse response = _mapper.Map<GetAssignmentResponse>(assignment);
+                        return response;
+                    }
+                    return null;
+                }*/
+
         public async Task<GetAssignmentResponse> GetAssignmentById(int assignmentId)
         {
-            Assignment assignment = await _dbContext.Assignments.FirstOrDefaultAsync(x => x.AssignmentId == assignmentId);
-            if (assignment != null)
+            Assignment? assignment = await _dbContext.Assignments.FirstOrDefaultAsync(x => x.AssignmentId == assignmentId);
+            if (assignment == null)
             {
-                GetAssignmentResponse response = _mapper.Map<GetAssignmentResponse>(assignment);
-                return response;
+                throw new KeyNotFoundException($"No assignment found with ID {assignmentId}");
             }
-            return null;
-        }
-        #endregion
 
-        #region CreateAssignment
+            GetAssignmentResponse response = _mapper.Map<GetAssignmentResponse>(assignment);
+            return response;
+        }
+
+
         public async void CreateAssignment(CreateAssignmentRequest createAssignmentRequest)
         {
             _dbContext.Assignments.Add(_mapper.Map<Assignment>(createAssignmentRequest));
             await _dbContext.SaveChangesAsync();
         }
-        #endregion
 
-        #region UpdateAssignment
+        /*        public async Task<UpdateAssignmentResponse> UpdateAssignment(int assignmentId, UpdateAssignmentRequest updateAssignment)
+                {
+                    Assignment? assignment = await _dbContext.Assignments.FirstOrDefaultAsync(x => x.AssignmentId == assignmentId);
+                    if (assignment != null)
+                    {
+                        assignment.AssignmentTitle = updateAssignment.AssignmentTitle;
+                        assignment.Question = updateAssignment.Question;
+                        assignment.Deadline = DateTime.Now;
+                        assignment.Type = updateAssignment.Type;
+                        assignment.CourseId = updateAssignment.CourseId;
+                        assignment.AssignmentDuration = DateTime.Now;
+                        _dbContext.Assignments.Update(assignment);
+                        await _dbContext.SaveChangesAsync();
+
+                        UpdateAssignmentResponse response = _mapper.Map<UpdateAssignmentResponse>(assignment);
+                        return response;
+                    }
+                    return null;
+                }*/
+
         public async Task<UpdateAssignmentResponse> UpdateAssignment(int assignmentId, UpdateAssignmentRequest updateAssignment)
         {
-            Assignment assignment = await _dbContext.Assignments.FirstOrDefaultAsync(x => x.AssignmentId == assignmentId);
-            if (assignment != null)
+            if (updateAssignment == null)
             {
-                assignment.AssignmentTitle = updateAssignment.AssignmentTitle;
-                assignment.Question = updateAssignment.Question;
-                assignment.Deadline = updateAssignment.Deadline;
-                assignment.Type = updateAssignment.Type;
-                assignment.CourseId = updateAssignment.CourseId;
-                assignment.AssignmentDuration = updateAssignment.AssignmentDuration;
-                _dbContext.Assignments.Update(assignment);
-                await _dbContext.SaveChangesAsync();
-
-                UpdateAssignmentResponse response = _mapper.Map<UpdateAssignmentResponse>(assignment);
-                return response;
+                throw new ArgumentNullException(nameof(updateAssignment));
             }
-            return null;
+
+            Assignment? assignment = await _dbContext.Assignments
+                .FirstOrDefaultAsync(x => x.AssignmentId == assignmentId) 
+                ?? throw new KeyNotFoundException($"No assignment found with ID {assignmentId}");
+
+            assignment.AssignmentTitle = updateAssignment.AssignmentTitle;
+            assignment.Question = updateAssignment.Question;
+            assignment.Deadline = DateTime.Now;
+            assignment.Type = updateAssignment.Type;
+            assignment.CourseId = updateAssignment.CourseId;
+            assignment.AssignmentDuration = DateTime.Now;
+            _dbContext.Assignments.Update(assignment);
+            await _dbContext.SaveChangesAsync();
+
+            UpdateAssignmentResponse response = _mapper.Map<UpdateAssignmentResponse>(assignment);
+            return response;
         }
-        #endregion
 
         #endregion
     }
