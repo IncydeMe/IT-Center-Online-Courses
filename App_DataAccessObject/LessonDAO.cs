@@ -45,9 +45,9 @@ namespace App_DataAccessObject
             await _dbContext.SaveChangesAsync();
         }
 
-        public List<GetLessonResponse> GetAllLessonsOfCourse(int courseId)
+        public async Task<List<GetLessonResponse>> GetAllLessonsOfCourse(int courseId)
         {
-            List<GetLessonResponse> lessonList = _dbContext.Lessons.Select(x => new GetLessonResponse
+            List<GetLessonResponse> lessonList = await _dbContext.Lessons.Select(x => new GetLessonResponse
             {
                 LessonId = x.LessonId,
                 LessonName = x.LessonName,
@@ -55,7 +55,21 @@ namespace App_DataAccessObject
                 Type = x.Type,
                 MaterialUrl = x.MaterialUrl,
                 IsFinished = x.IsFinished
-            }).Where(c => c.CourseId == courseId).ToList();
+            }).Where(c => c.CourseId == courseId).ToListAsync();
+            return lessonList;
+        }
+
+        public async Task<List<GetLessonResponse>> GetListLessonOfCourse(int courseId)
+        {
+            List<GetLessonResponse> lessonList = await _dbContext.Lessons.Select(x => new GetLessonResponse
+            {
+                LessonId = x.LessonId,
+                LessonName = x.LessonName,
+                CourseId = x.CourseId,
+                Type = x.Type,
+                MaterialUrl = x.MaterialUrl,
+                IsFinished = x.IsFinished
+            }).Where(c => c.CourseId == courseId).ToListAsync();
             return lessonList;
         }
 
