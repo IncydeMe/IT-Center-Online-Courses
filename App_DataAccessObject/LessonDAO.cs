@@ -45,7 +45,7 @@ namespace App_DataAccessObject
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<GetLessonResponse>> GetAllLessonsOfCourse(int courseId)
+        public List<GetLessonResponse> GetAllLessonsOfCourse(int courseId)
         {
             List<GetLessonResponse> lessonList = _dbContext.Lessons.Select(x => new GetLessonResponse
             {
@@ -75,9 +75,7 @@ namespace App_DataAccessObject
 
         public async Task<UpdateLessonResponse> UpdateLesson(int lessonId, UpdateLessonRequest updateLesson)
         {
-            Lesson lesson = await _dbContext.Lessons.FirstOrDefaultAsync(x => x.LessonId == lessonId);
-            if (lesson != null)
-            {
+            Lesson? lesson = await _dbContext.Lessons.FirstOrDefaultAsync(x => x.LessonId == lessonId) ?? throw new KeyNotFoundException("Lesson not found");
                 lesson.LessonName = updateLesson.LessonName;
                 lesson.Type = updateLesson.Type;
                 lesson.MaterialUrl = updateLesson.MaterialUrl;
@@ -87,14 +85,11 @@ namespace App_DataAccessObject
 
                 UpdateLessonResponse response = _mapper.Map<UpdateLessonResponse>(lesson);
                 return response;
-            }
-            return null;
         }
 
         public async Task<bool> DeleteLesson(int lessonId)
         {
-            Lesson lesson = _dbContext.Lessons.FirstOrDefault(x => x.LessonId.Equals(lessonId));
-
+            Lesson? lesson = _dbContext.Lessons.FirstOrDefault(x => x.LessonId.Equals(lessonId)) ?? throw new KeyNotFoundException("Lesson not found");
             if (lesson != null)
             {
                 _dbContext.Lessons.Remove(lesson);
