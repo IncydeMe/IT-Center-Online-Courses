@@ -1,4 +1,5 @@
-﻿@*@using Microsoft.AspNetCore.Components.Web;
+@*
+@using Microsoft.AspNetCore.Components.Web;
 @using IT_Center_Website.Components;
 
 
@@ -46,14 +47,16 @@
             </ul>
         </div>
     </header>
-</body>*@
+</body>
+
+*@
 
 @using Microsoft.AspNetCore.Components.Web;
 @using IT_Center_Website.Components;
 @inherits Microsoft.AspNetCore.Components.ComponentBase
 @page "/header"
 <head>
-    <link rel="stylesheet" href="css/Header/Header.css" />
+    @*<link rel="stylesheet" href="css/Header/Header.css" />*@
     <link rel="stylesheet" href="css/output.css" />
     <link rel="stylesheet" href="css/input.css" />
 </head>
@@ -63,37 +66,37 @@
 
 
 <body>
-    <header class="header_container px-[30px] ">
+    <header class="header_container justify-between items-center flex px-[50px] pt-[40px]">
         <div class="logo">
             <img src="images/header/ITCO_Logo.png" alt="logo" />
         </div>
-        <div class="header_bar">
-            <ul class="nav_bar">
-                <li>
-                    <a class="text-blue-200">Home</a>
+        <div class="header_bar items-center flex gap-[40px] text-[#2F2155]">
+            <ul class="nav_bar items-center flex gap-[40px] cursor-pointer text-[18px] font-normal text-[#2F2155]">
+                <li class="hover:text-[#5635AE] transition-[0.3s] ">
+                    <a class="">Home</a>
                 </li>
-                <li>
+                <li class="hover:text-[#5635AE] transition-[0.3s] ">
                     <a>Courses</a>
                 </li>
-                <li>
+                <li class="hover:text-[#5635AE] transition-[0.3s] ">
                     <a>Blogs</a>
 
                 </li>
-                <li>
+                <li class="hover:text-[#5635AE] transition-[0.3s]  ">
                     <a>About Us</a>
                 </li>
-                <li style="width:2px;">
+                <li style="width:1.5px;">
                     <img src="images/header/line_between.png" alt="line" />
                 </li>
             </ul>
-            <ul class="member_btn flex gap-5">
-                <li class="">
+            
+            <ul class="member_btn flex items-center text-[18px] gap-[30px]">
+                <li class="cursor-pointer hover:text-[#5635AE] transition-[0.3s]">
                     <a>Login</a>
                 </li>
-                <li class="register_btn ">
+                <li class="register_btn border cursor-pointer border-[#5635AE] px-[23px] py-[7px] rounded-[40px] hover:bg-[#5635AE] hover:text-[#fff] transition-[0.3s]  ">
                     <a class="">Become a member</a>
                 </li>
-                
             </ul>
         </div>
     </header>
