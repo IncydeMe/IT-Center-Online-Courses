@@ -1,0 +1,19 @@
+﻿@using IT_Center_Website.Components;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="flex">
+        <component type="typeof(Sidebar)" render-mode="ServerPrerendered"/>
+        <div>
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

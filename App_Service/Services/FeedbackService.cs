@@ -21,7 +21,7 @@ namespace App_Service.Services
             _feedbackRepository = feedbackRepository;
         }
 
-        public async void CreateFeedBack(CreateFeedbackRequest request) => _feedbackRepository.CreateFeedBack(request);
+        public async Task CreateFeedBack(CreateFeedbackRequest request) => await _feedbackRepository.CreateFeedBack(request);
         public async Task<IPaginate<Feedback>> GetAllFeedbacks(int page, int size) => await _feedbackRepository.GetAllFeedbacks(page, size);
         public async Task<bool> ChangeStatus(int feedbackId) => await _feedbackRepository.ChangeStatus(feedbackId);
     }
