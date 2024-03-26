@@ -15,9 +15,33 @@
     <div id="header">
         <component type="typeof(Header)" render-mode="ServerPrerendered" />
     </div>
+    <div class="landing_page">
+        @*introduction*@
+        <div class="mt-[80px] relative z-[99]">
+            <div class="flex justify-center">
+                <h1 class="text-center font-extrabold text-[72px] w-[1077px] text-[#2F2155] leading-[96px]">Upgrade yourself quality to ready a better future</h1>
+            </div>
+            <div class="flex justify-center mt-[40px] mb-[30px] ">
+                <div class="flex items-center bg-[#5635AE] text-[24px] font-normal px-[69px] py-[10px] rounded-[40px] cursor-pointer gap-[10px] 
+                            hover:bg-[#FD7575] transition-[0.3s]">
+                    <a class="text-[#fff]">
+                        Get started
+                    </a>
+                    <img src="~/images/icon/arow_icon.png" />
+                </div>
+
+            </div>
+            <div class="flex justify-center gap-[50px]">
+                <img class="w-[260px] h-[350px]" src="~/images/landingPage/intro_img1.png" alt="" />
+                <img class="w-[260px] h-[350px] mt-[110px]" src="~/images/landingPage/intro_img2.png" alt="" />
+                <img class="w-[260px] h-[350px]" src="~/images/landingPage/intro_img3.png" alt="" />
+            </div>
+        </div>
+        <img class="absolute top-[20px] left-[-200px]" src="~/images/landingPage/bubble1.png" />
+        <img class="absolute right-[180px] bottom-[-180px] " src="~/images/landingPage/bubble2.png" />
+        @*end introduction*@
+    </div>
     <div style="min-height:100vh" class="">
-        
-        
     </div>
     @*import footer component*@
     <div id="footer">
