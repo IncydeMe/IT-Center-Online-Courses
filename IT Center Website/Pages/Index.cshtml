@@ -10,12 +10,12 @@
 <link rel="stylesheet" href="~/css/output.css" />
 
 <html>
-<body class="bg-[#FFF4E8]">
+<body class="bg-[#FFF4E8] overflow-x-hidden ">
     @*import header component*@
     <div id="header">
         <component type="typeof(Header)" render-mode="ServerPrerendered" />
     </div>
-    <div class="landing_page">
+    <div class="landing_page overflow-x-hidden overflow-y-hidden">
         @*introduction*@
         <div class="mt-[80px] relative z-[99]">
             <div class="flex justify-center">
@@ -105,7 +105,25 @@
                 <h2 class="text-[24px] text-[#5635AE] font-bold leading-[21px]">Read Duong's story</h2>
             </div>
         </div>
-
+        @*stats*@
+        <div class="flex justify-center gap-[115px] mt-[200px]">
+            <div class="">
+                <h2 class="text-[#2F2155] text-[72px] font-bold leading-[93px]">1000+</h2>
+                <p class="text-[#5D527A] text-[24px]">Students Active</p>
+            </div>
+            <div class="flex flex-col justify-center ">
+                <h2 class="text-[#2F2155] text-[72px] font-bold leading-[93px]">20+</h2>
+                <p class="text-[#5D527A] text-[24px]">Main Courses</p>
+            </div>
+            <div class="flex flex-col justify-center ">
+                <h2 class="text-[#2F2155] text-[72px] font-bold leading-[93px]">50+</h2>
+                <p class="text-[#5D527A] text-[24px]">Countries</p>
+            </div>
+            <div class="flex flex-col justify-center ">
+                <h2 class="text-[#2F2155] text-[72px] font-bold leading-[93px]">10+</h2>
+                <p class="text-[#5D527A] text-[24px]">Filter Course</p>
+            </div>
+        </div>
 
 
     </div>
