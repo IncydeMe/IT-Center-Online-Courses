@@ -1,0 +1,61 @@
+﻿@page
+@model IT_Center_Website.Pages.Admin.Courses.DetailsModel
+@{
+	Layout = "~/Pages/Admin/_AdminLayout.cshtml";
+}
+<body>
+	<h1>Course Details</h1>
+	<form class="grid grid-cols-2">
+		<!--Basic Course Information-->
+		<div>
+			<div>
+				<label asp-for="Course.CourseId"></label>
+				<input asp-for="Course.CourseId" disabled />
+			</div>
+			<div>
+				<label asp-for="Course.CourseName"></label>
+				<input asp-for="Course.CourseName" disabled />
+			</div>
+			<div>
+				<label asp-for="Course.Price"></label>
+				<input asp-for="Course.Price" disabled />
+			</div>
+			<div>
+				<label asp-for="Course.ImageUrl"></label>
+				<input asp-for="Course.ImageUrl" disabled />
+			</div>
+			<div>
+				<label asp-for="Course.Description"></label>
+				<textarea asp-for="Course.Description" disabled></textarea>
+			</div>
+			<div>
+				<label asp-for="Course.CategoryName"></label>
+				<input asp-for="Course.CategoryName" disabled />
+			</div>
+		</div>
+		<!--Instructors List for the Course: No Instructors-->
+		@* <div>
+			<h2>Instructors</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Instructor ID</th>
+						<th>Instructor Name</th>
+						<th>Instructor Email</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var instructor in Model.Instructors)
+					{
+						<tr>
+							<td>@instructor.Id</td>
+							<td>@instructor.Name</td>
+							<td>@instructor.Email</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div> *@
+	</form>
+	<button>Go Back</button>
+</body>

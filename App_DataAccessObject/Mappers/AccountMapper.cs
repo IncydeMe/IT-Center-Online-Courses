@@ -9,8 +9,9 @@ namespace App_DataAccessObject.Mappers
     {
         public AccountMapper()
         {
-            CreateMap<CreateAccountRequest, Account>();
-            CreateMap<Account, UpdateAccountResponse>();
+            CreateMap<CreateAccountRequest, Account>().ReverseMap();
+            CreateMap<Account, UpdateAccountResponse>().ReverseMap();
+            CreateMap<Account, GetAccountResponse>().ReverseMap();
         }
     }
 }

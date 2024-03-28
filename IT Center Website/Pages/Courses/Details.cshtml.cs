@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using App_BusinessObject.Models;
 using App_Service.Interfaces;
 
+using App_BusinessObject.DTOs.Response.Course;
+
 namespace IT_Center_Website.Pages.Courses
 {
     public class DetailsModel : PageModel
@@ -19,14 +21,11 @@ namespace IT_Center_Website.Pages.Courses
             _courseService = courseService;
         }
 
-      public Course Course { get; set; } = default!; 
+      public GetCourseResponse Course { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null || _courseService.GetAllACourses == null)
-            {
-                return NotFound();
-            }
+
 
             var course = await _courseService.GetCourseById(id);
             if (course == null)
