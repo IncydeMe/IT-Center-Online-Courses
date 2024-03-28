@@ -42,7 +42,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Admin\NewFolder\" />
     <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
 
