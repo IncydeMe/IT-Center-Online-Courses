@@ -126,5 +126,18 @@ namespace App_DataAccessObject
                                            .Where(c => c.Category.CategoryName.Equals(categoryName))
                                            .ToPaginateAsync(page, size, 1);
         }
+
+        public async Task<List<Course>> GetAllCourses()
+        {
+            List<Course> courseList = await _dbContext.Courses.ToListAsync();
+            return courseList;
+        }
+
+        public async Task<int> GetTotalCourses()
+        {
+            return await _dbContext.Courses.CountAsync();
+        }
+
+
     }
 }

@@ -33,5 +33,9 @@ namespace App_Service.Services
 
         public async Task<IPaginate<Course>> GetCoursesByCategoryName(string categoryName, int page, int size)
             => await _courseRepository.GetCoursesByCategoryName(categoryName, page, size);
+
+        public async Task<List<Course>> GetAllCourses() => await _courseRepository.GetAllCourses();
+
+        public async Task<int> GetTotalCourses() => await _courseRepository.GetTotalCourses();
     }
 }
