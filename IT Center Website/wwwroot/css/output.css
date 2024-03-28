@@ -656,13 +656,30 @@ video {
   margin-top: 24px;
 }
 
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.flex {
+  display: flex;
+
 .mt-\[14px\] {
   margin-top: 14px;
+
 }
 
 .mb-\[50px\] {
   margin-bottom: 50px;
 }
+
+
+.grid {
+  display: grid;
+}
+
+.hidden {
+  display: none;
 
 .mt-\[30px\] {
   margin-top: 30px;
@@ -686,10 +703,6 @@ video {
 
 .mr-2 {
   margin-right: 0.5rem;
-}
-
-.mt-4 {
-  margin-top: 1rem;
 }
 
 .flex {
