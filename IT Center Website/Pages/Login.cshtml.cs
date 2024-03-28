@@ -31,6 +31,7 @@ namespace IT_Center_Website.Pages
 
             if(account != null)
             {
+                HttpContext.Session.SetString("Token", account.AccessToken);
                 //Not use filter
                 switch(account.Role)
                 {
