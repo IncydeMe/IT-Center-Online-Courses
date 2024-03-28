@@ -26,5 +26,9 @@ namespace App_Repository.Repositories
 
         public async Task<IPaginate<Course>> GetCoursesByCategoryName(string categoryName, int page, int size)
             => await CourseDAO.Instance.GetCoursesByCategoryName(categoryName, page, size);
+
+        public async Task<List<Course>> GetAllCourses() => await CourseDAO.Instance.GetAllCourses();
+
+        public async Task<int> GetTotalCourses() => await CourseDAO.Instance.GetTotalCourses();
     }
 }

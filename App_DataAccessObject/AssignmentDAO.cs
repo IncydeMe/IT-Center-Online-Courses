@@ -53,17 +53,6 @@ namespace App_DataAccessObject
             return responses;
         }
 
-        /*        public async Task<GetAssignmentResponse> GetAssignmentById(int assignmentId)
-                {
-                    Assignment? assignment = await _dbContext.Assignments.FirstOrDefaultAsync(x => x.AssignmentId == assignmentId);
-                    if (assignment != null)
-                    {
-                        GetAssignmentResponse response = _mapper.Map<GetAssignmentResponse>(assignment);
-                        return response;
-                    }
-                    return null;
-                }*/
-
         public async Task<GetAssignmentResponse> GetAssignmentById(int assignmentId)
         {
             Assignment? assignment = await _dbContext.Assignments.FirstOrDefaultAsync(x => x.AssignmentId == assignmentId);
@@ -82,26 +71,6 @@ namespace App_DataAccessObject
             _dbContext.Assignments.Add(_mapper.Map<Assignment>(createAssignmentRequest));
             await _dbContext.SaveChangesAsync();
         }
-
-        /*        public async Task<UpdateAssignmentResponse> UpdateAssignment(int assignmentId, UpdateAssignmentRequest updateAssignment)
-                {
-                    Assignment? assignment = await _dbContext.Assignments.FirstOrDefaultAsync(x => x.AssignmentId == assignmentId);
-                    if (assignment != null)
-                    {
-                        assignment.AssignmentTitle = updateAssignment.AssignmentTitle;
-                        assignment.Question = updateAssignment.Question;
-                        assignment.Deadline = DateTime.Now;
-                        assignment.Type = updateAssignment.Type;
-                        assignment.CourseId = updateAssignment.CourseId;
-                        assignment.AssignmentDuration = DateTime.Now;
-                        _dbContext.Assignments.Update(assignment);
-                        await _dbContext.SaveChangesAsync();
-
-                        UpdateAssignmentResponse response = _mapper.Map<UpdateAssignmentResponse>(assignment);
-                        return response;
-                    }
-                    return null;
-                }*/
 
         public async Task<UpdateAssignmentResponse> UpdateAssignment(int assignmentId, UpdateAssignmentRequest updateAssignment)
         {

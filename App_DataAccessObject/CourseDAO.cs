@@ -116,15 +116,26 @@ namespace App_DataAccessObject
 			return response;
 		}
 
-		public async Task<IPaginate<Course>> GetCoursesByCategoryName(string categoryName, int page, int size)
-		{
-			//Check Category Name is exist
-			Category? category = _dbContext.Categories.FirstOrDefault(c => c.CategoryName == categoryName);
-			if (category == null) throw new BadHttpRequestException("Category name is not existed");
+		 public async Task<IPaginate<Course>> GetCoursesByCategoryName(string categoryName, int page, int size)
+        {
+            //Check Category Name is exist
+            Category? category = _dbContext.Categories.FirstOrDefault(c => c.CategoryName == categoryName);
+            if (category == null) throw new BadHttpRequestException("Category name is not existed");
 
-			return await _dbContext.Courses.Include(c => c.Category)
-										   .Where(c => c.Category.CategoryName.Equals(categoryName))
-										   .ToPaginateAsync(page, size, 1);
-		}
-	}
+            return await _dbContext.Courses.Include(c => c.Category)
+                                           .Where(c => c.Category.CategoryName.Equals(categoryName))
+                                           .ToPaginateAsync(page, size, 1);
+        }
+
+        public async Task<List<Course>> GetAllCourses()
+        {
+            List<Course> courseList = await _dbContext.Courses.ToListAsync();
+            return courseList;
+        }
+
+        public async Task<int> GetTotalCourses()
+        {
+            return await _dbContext.Courses.CountAsync();
+        }
+	  }
 }
