@@ -56,7 +56,7 @@ namespace App_DataAccessObject
             //Can use Equals, Compare for better performance 
             //Or ToUpperCase for more percisely in some cases, because there are ome upper case characters doesn't have an
             //equivalent lower case character,so making them lower case would convert them into a different lower case character 
-            Category category = _dbContext.Categories.FirstOrDefault(x => x.CategoryName.ToLower() == createCategoryRequest.CategoryName.ToLower());
+            Category? category = _dbContext.Categories.FirstOrDefault(x => x.CategoryName.ToLower() == createCategoryRequest.CategoryName.ToLower());
 
             if (category == null)
             {
@@ -67,9 +67,11 @@ namespace App_DataAccessObject
 
         public async Task<UpdateCategoryResponse> UpdateCategoryInformation(int id, UpdateCategoryRequest updateCategoryRequest)
         {
-            Category category = _dbContext.Categories.FirstOrDefault(x => x.CategoryId == id);
-            if (category != null)
+            Category? category = _dbContext.Categories.FirstOrDefault(x => x.CategoryId == id);
+            if (category == null)
             {
+                return null;
+            }
                 category.CategoryName = string.IsNullOrEmpty(updateCategoryRequest.CategoryName) ?
                     category.CategoryName : updateCategoryRequest.CategoryName;
                 category.Description = string.IsNullOrEmpty(updateCategoryRequest.Description) ?
@@ -80,8 +82,6 @@ namespace App_DataAccessObject
 
                 UpdateCategoryResponse response = _mapper.Map<UpdateCategoryResponse>(category);
                 return response;
-            }
-            return null;
         }
 
         public async Task<GetCategoryResponse> GetRandomCategoy()

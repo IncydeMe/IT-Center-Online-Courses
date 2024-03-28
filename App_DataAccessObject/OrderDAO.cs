@@ -76,13 +76,13 @@ namespace App_DataAccessObject
 
         public async Task<GetOrderResponse> GetOrderById(int orderId)
         {
-            Order order = await _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderId == orderId);
-            if (order != null)
+            Order? order = await _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderId == orderId);
+            if (order == null)
             {
+                return null;
+            }
                 GetOrderResponse response = _mapper.Map<GetOrderResponse>(order);
                 return response;
-            }
-            return null;
         }
 
         public async Task CreateOrder(CreateOrderRequest createOrderRequest)
@@ -93,16 +93,15 @@ namespace App_DataAccessObject
 
         public async Task<bool> ChangeStatus(int orderId)
         {
-            Order order = await _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderId == orderId);
-
-            if (order != null)
+            Order? order = await _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderId == orderId);
+            if (order == null)
             {
+                return false;
+            }
                 order.Status = !order.Status;
                 _dbContext.Orders.Update(order);
                 await _dbContext.SaveChangesAsync();
                 return true;
-            }
-            return false;
         }
         #endregion
     }
