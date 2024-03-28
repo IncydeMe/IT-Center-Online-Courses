@@ -26,9 +26,9 @@
 			@foreach (var account in Model.Accounts)
 			{
 				<tr>
-					<td>@account.Id</td>
-					<td>@account.Username</td>
 					<td>@account.Email</td>
+					<td>@account.FirstName</td>
+					<td>@account.LastName</td>
 					<td>@account.Role</td>
 					<td>
 						<button class="bg-green-500">Details</button>
