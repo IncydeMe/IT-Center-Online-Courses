@@ -1,0 +1,45 @@
+﻿@page
+@model IT_Center_Website.Pages.Admin.Accounts.DetailsModel
+@{
+	Layout = "~/Pages/Admin/_AdminLayout.cshtml";
+}
+<body>
+	<h1>Account Details</h1>
+	<form>
+		<div>
+			<label asp-for="Account.AccountId"></label>
+			<input asp-for="Account.AccountId" disabled />
+		</div>
+		<div>
+			<label asp-for="Account.FirstName"></label>
+			<input asp-for="Account.FirstName" disabled />
+		</div>
+		<div>
+			<label asp-for="Account.LastName"></label>
+			<input asp-for="Account.LastName" disabled />
+		</div>
+		<div>
+			<label asp-for="Account.BirthDate"></label>
+			<input asp-for="Account.BirthDate" disabled />
+		</div>
+		<div>
+			<label asp-for="Account.Gender"></label>
+			<input asp-for="Account.Gender" disabled />
+		</div>
+		<div>
+			<label asp-for="Account.Address"></label>
+			<input asp-for="Account.Address" disabled />
+		</div>
+		<div>
+			<label asp-for="Account.Email"></label>
+			<input asp-for="Account.Email" disabled />
+		</div>
+		<div>
+			<label asp-for="Account.Role"></label>
+			<input asp-for="Account.Role" disabled />
+		</div>
+	</form>
+	<button class="bg-yellow-500">Modify Account</button>
+	<button class="bg-red-500">Disable Account</button>
+	<button>Go Back</button>
+</body>
