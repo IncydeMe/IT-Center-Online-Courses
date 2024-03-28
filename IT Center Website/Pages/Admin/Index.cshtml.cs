@@ -18,6 +18,7 @@ namespace IT_Center_Website.Pages.Admin
         // Properties to hold the data for the charts
         public IList<Course> Courses { get; set; }
         public Dictionary<string, int> Orders { get; set; }
+        public Dictionary<string, int> CourseCountsByCategory { get; set; }
         public int TotalOrders { get; set; }
         public int TotalCourses { get; set; }
 
@@ -34,6 +35,7 @@ namespace IT_Center_Website.Pages.Admin
             Orders = await _orderService.GetDailyOrderCounts();
             TotalCourses = await _courseService.GetTotalCourses();
             TotalOrders = await _orderService.GetTotalOrders();
+            CourseCountsByCategory = await _courseService.GetCourseCountsByCategory();
         }
     }
 }
