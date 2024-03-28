@@ -1,29 +1,33 @@
 ﻿@page
 @model IT_Center_Website.Pages.Admin.Accounts.EditModel
 @{
-	Layout = "~/Pages/Admin/_AdminLayout.cshtml";
+    Layout = "~/Pages/Admin/_AdminLayout.cshtml";
 }
 <body>
-	<h1>Modify Account</h1>
-	<form method="post">
-		<div>
-			<label asp-for="Account.Id"></label>
-			<input asp-for="Account.Id" disabled />
-		</div>
-		<div>
-			<label asp-for="Account.Username"></label>
-			<input asp-for="Account.Username" disabled />
-		</div>
-		<div>
-			<label asp-for="Account.Email"></label>
-			<input asp-for="Account.Email" disabled />
-		</div>
-		<div>
-			<label asp-for="Account.Role"></label>
-			<input asp-for="Account.Role" disabled />
-		</div>
-		<div>
-			<button type="submit">Modify</button>
-		</div>
-	</form>
+    <h1>Modify Account</h1>
+    <form method="post">
+        <div>
+            <label asp-for="Account.AccountId"></label>
+            <input asp-for="Account.AccountId" disabled />
+        </div>
+        <div>
+            <label asp-for="Account.FirstName"></label>
+            <input asp-for="UpdateAccountRequest.FirstName" disabled />
+        </div>
+        <div>
+            <label asp-for="Account.LastName"></label>
+            <input asp-for="UpdateAccountRequest.LastName" disabled />
+        </div>
+        <div>
+            <label asp-for="Account.BirthDate"></label>
+            <input asp-for="UpdateAccountRequest.BirthDate" disabled />
+        </div>
+        <div>
+            <label asp-for="Account.Email"></label>
+            <input asp-for="UpdateAccountRequest.Email" disabled />
+        </div>
+        <div>
+            <button type="submit">Modify</button>
+        </div>
+    </form>
 </body>
