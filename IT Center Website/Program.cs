@@ -7,8 +7,11 @@ using App_Service.Services;
 using Firebase.Service.Interfaces;
 using Firebase.Service.Services;
 using ITCenterService;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Payment.Service.VNPay.Interfaces;
 using Payment.Service.VNPay.Services;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +47,20 @@ builder.Services.AddScoped<ILearnerAssignmentService, LearnerAssignmentService>(
 builder.Services.AddScoped<IVNPayService, VNPayService>();
 builder.Services.AddScoped<IFirebaseStorageService, FirebaseStorageService>();
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                        ValidAudience = builder.Configuration["Jwt:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                    };
+                });
+
 //for cookies
 builder.Services.AddSession(options =>
 {
@@ -68,8 +85,20 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+//add token to request header.
+app.Use(async (context, next) =>
+{
+    var token = context.Session.GetString("Token");
+    if (!string.IsNullOrEmpty(token))
+    {
+        context.Request.Headers.Add("Authorization", "Bearer " + token);
+    }
+    await next();
+});
+
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
