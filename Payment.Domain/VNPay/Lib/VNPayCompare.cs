@@ -18,5 +18,4 @@ namespace Payment.Domain.VNPay.Lib
             return vnpCompare.Compare(x, y, CompareOptions.Ordinal);
         }
     }
-    }
 }

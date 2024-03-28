@@ -34,7 +34,7 @@ namespace App_DataAccessObject
                 _dbContext = new ITCenterContext();
         }
 
-        public async void CreateFeedBack(CreateFeedbackRequest request)
+        public async Task CreateFeedBack(CreateFeedbackRequest request)
         {
             Feedback createdFeedback = new Feedback
             {
@@ -64,7 +64,7 @@ namespace App_DataAccessObject
 
         public async Task<bool> ChangeStatus(int feedbackId)
         {
-            Feedback feedback = await _dbContext.Feedbacks.FirstOrDefaultAsync(x => x.FeedbackId == feedbackId);
+            Feedback? feedback = await _dbContext.Feedbacks.FirstOrDefaultAsync(x => x.FeedbackId == feedbackId);
 
             if(feedback != null)
             {

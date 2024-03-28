@@ -1,0 +1,90 @@
+﻿@using Microsoft.AspNetCore.Components.Web;
+@using IT_Center_Website.Components;
+@inherits Microsoft.AspNetCore.Components.ComponentBase;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Sidebar with Dropdowns</title>
+    <!-- Include TailwindCSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="bg-white text-black shadow-lg w-48">
+            <div class="p-4">
+                <h1 class="text-2xl font-semibold">ITCO</h1>
+            </div>
+            <ul class="py-4 flex flex-col gap-y-4">
+                <li class="px-4 py-3 hover:bg-gray-400">
+                    <a href="#" class="flex pl-4 items-center">
+                        <span class="mr-2 flex items-center gap-x-4">
+                            <i class="fas fa-table-columns"></i>
+                            <p>Dashboard</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="px-4 py-3 hover:bg-gray-400">
+                    <a href="#" class="flex pl-4 items-center">
+                        <span class="mr-2 flex items-center gap-x-4">
+                            <i class="fas fa-user"></i>
+                            <p>Accounts</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="px-4 py-3 hover:bg-gray-400">
+                    <a href="#" class="flex pl-4 items-center">
+                        <span class="mr-2 flex items-center gap-x-4">
+                            <i class="fas fa-book"></i>
+                            <p>Courses</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="px-4 py-3 hover:bg-gray-400 relative">
+                    <a href="#" class="flex pl-4 items-center">
+                        <span class="mr-2 flex items-center gap-x-4">
+                            <i class="fas fal fa-money-bills"></i>
+                            <p>Orders</p>
+                        </span>
+                    </a>
+                </li>
+                <hr class="border-black border-[2px] mx-auto my-4" style="width: 80%; height: 2px;"/>
+                <li class="px-4 py-3 hover:bg-gray-400">
+                    <a href="#" class="flex pl-4 items-center">
+                        <span class="mr-2 flex items-center gap-x-4">
+                            <i class="fas fa-user-gear"></i>
+                            <p>Settings</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="px-4 py-3 hover:bg-gray-400">
+                    <a href="#" class="flex pl-4 items-center">
+                        <span class="mr-2 flex items-center gap-x-4">
+                            <i class="fas fa-right-from-bracket"></i>
+                            <p>Logout</p>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+</body>
+<!-- JavaScript to toggle dropdowns -->
+    @*<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const dropdownToggle = document.querySelector('.relative');
+
+            dropdownToggle.addEventListener('click', function (event) {
+                const dropdownContent = this.querySelector('ul');
+                dropdownContent.classList.toggle('hidden');
+            });
+        });
+    </script>*@
+</html>
+
+

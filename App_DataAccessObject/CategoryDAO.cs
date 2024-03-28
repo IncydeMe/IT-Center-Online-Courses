@@ -40,7 +40,6 @@ namespace App_DataAccessObject
         }
 
         #region CategoryFunction
-
         public async Task<IPaginate<GetCategoryResponse>> GetAllCategories(int page, int size)
         {
             IPaginate<GetCategoryResponse> categoryList = await _dbContext.Categories.Select(x => new GetCategoryResponse
@@ -52,7 +51,7 @@ namespace App_DataAccessObject
             return categoryList;
         }
 
-        public async void CreateCategory(CreateCategoryRequest createCategoryRequest)
+        public async Task CreateCategory(CreateCategoryRequest createCategoryRequest)
         {
             //Can use Equals, Compare for better performance 
             //Or ToUpperCase for more percisely in some cases, because there are ome upper case characters doesn't have an

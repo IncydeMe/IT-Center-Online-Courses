@@ -13,7 +13,7 @@ namespace App_Repository.Repositories
 {
     public class FeedbackRepository : IFeedbackRepository
     {
-        public async void CreateFeedBack(CreateFeedbackRequest request) => FeedbackDAO.Instance.CreateFeedBack(request);
+        public async Task CreateFeedBack(CreateFeedbackRequest request) => await FeedbackDAO.Instance.CreateFeedBack(request);
         public async Task<IPaginate<Feedback>> GetAllFeedbacks(int page, int size) => await FeedbackDAO.Instance.GetAllFeedbacks(page, size);
         public async Task<bool> ChangeStatus(int feedbackId) => await FeedbackDAO.Instance.ChangeStatus(feedbackId);
     }
