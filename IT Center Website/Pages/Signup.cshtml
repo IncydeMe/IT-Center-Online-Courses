@@ -32,7 +32,8 @@
 							</div>
 							<div class="div">
 								<h5>Email Address</h5>
-								<input type="email" class="input">
+								<input type="email" class="input" asp-for="SignupRequest.Email">
+								<span asp-validation-for="SignupRequest.Email" class="text-danger"></span>
 							</div>
 						</div>
 						<div class="input-div pass">
@@ -41,7 +42,8 @@
 							</div>
 							<div class="div">
 								<h5>Password</h5>
-								<input type="password" class="input">
+								<input type="password" class="input" asp-for="SignupRequest.Password">
+								<span asp-validation-for="SignupRequest.Password" class="text-danger"></span>
 							</div>
 						</div>
 						<input type="submit" class="btn" value="Sign up">
