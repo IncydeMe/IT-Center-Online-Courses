@@ -36,7 +36,7 @@ namespace App_DataAccessObject
 
         public async Task CreateRole(Role newRole)
         {
-            Role role = await _dbContext.Roles.FirstOrDefaultAsync(x => x.RoleId.Equals(newRole.RoleId));
+            Role? role = await _dbContext.Roles.FirstOrDefaultAsync(x => x.RoleId.Equals(newRole.RoleId));
 
             if(role == null)
             {

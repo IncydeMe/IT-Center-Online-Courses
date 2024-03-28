@@ -82,10 +82,11 @@ namespace App_DataAccessObject
 
         public async Task<UpdateCourseResponse?> UpdateCourseInformation(int courseId, UpdateCourseRequest updateCourseRequest)
         {
-            Course course = await _dbContext.Courses.FirstOrDefaultAsync(x => x.CourseId.Equals(courseId));
-
-            if (course != null)
+            Course? course = await _dbContext.Courses.FirstOrDefaultAsync(x => x.CourseId.Equals(courseId));
+            if (course == null)
             {
+                return null;
+            }
                 course.CourseName = updateCourseRequest.CourseName;
                 course.Description = updateCourseRequest.Description;
                 course.CategoryId = updateCourseRequest.CategoryId;
@@ -96,8 +97,6 @@ namespace App_DataAccessObject
 
                 UpdateCourseResponse response = _mapper.Map<UpdateCourseResponse>(course);
                 return response;
-            }
-            return null;
         }
 
         public async Task<GetCourseResponse?> GetCourseById(int courseId)
@@ -120,7 +119,7 @@ namespace App_DataAccessObject
         public async Task<IPaginate<Course>> GetCoursesByCategoryName(string categoryName, int page, int size)
         {
             //Check Category Name is exist
-            Category category = _dbContext.Categories.FirstOrDefault(c => c.CategoryName == categoryName);
+            Category? category = _dbContext.Categories.FirstOrDefault(c => c.CategoryName == categoryName);
             if (category == null) throw new BadHttpRequestException("Category name is not existed");
 
             return await _dbContext.Courses.Include(c => c.Category)
