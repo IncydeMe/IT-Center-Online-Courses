@@ -43,7 +43,7 @@ namespace IT_Center_Website.Pages
                         return RedirectToPage("/Staff/Index");
                     case "Learner":
                         HttpContext.Session.SetString("Role", "Learner");
-                        return RedirectToPage("/Learner/Index");
+                        return RedirectToPage("/LearnerCourses/Index");
                 }
             }
 
