@@ -1,9 +1,10 @@
+using App_BusinessObject.DTOs.Request.Authentication;
 using App_Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace IT_Center_Website.Pages
-{
+{   
     public class LoginModel : PageModel
     {
         private readonly ILogger<LoginModel> _logger;
@@ -14,22 +15,39 @@ namespace IT_Center_Website.Pages
             this._accountRepository = accountRepository;
         }
 
-
-        public void OnGet()
-        {
-        }
-
         [BindProperty]
-        public string username { get; set; }
-        [BindProperty]
-        public string password { get; set; }
+        public LoginRequest LoginRequest { get; set; }
 
-        public void OnPost()
+        public string ErrorMessage { get; set; } = string.Empty;
+
+        public async Task<IActionResult> OnPostAsync()
         {
-            string username = Request.Form["username"];
-            string password = Request.Form["password"];
-            //Login logic + set token
-            //HttpContext.Session.SetInt32("RoleId",1)
+            if(!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            var account = await _accountRepository.Login(LoginRequest);
+
+            if(account != null)
+            {
+                //Not use filter
+                switch(account.Role)
+                {
+                    case "Administrator":
+                        HttpContext.Session.SetString("Role", "Administrator");
+                        return RedirectToPage("/Admin/Index");
+                    case "Staff":
+                        HttpContext.Session.SetString("Role", "Staff");
+                        return RedirectToPage("/Staff/Index");
+                    case "Learner":
+                        HttpContext.Session.SetString("Role", "Learner");
+                        return RedirectToPage("/Learner/Index");
+                }
+            }
+
+            ErrorMessage = "Incorrect email or password";
+            return Page();
         }
     }
 }

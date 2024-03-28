@@ -27,8 +27,6 @@ builder.Services.AddScoped<IOwnedLessonRepository, OwnedLessonRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<ILearnerAssignmentRepository, LearnerAssignmentRepository>();
 
-
-
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IAssignmentService, AssignmentService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -45,36 +43,6 @@ builder.Services.AddScoped<ILearnerAssignmentService, LearnerAssignmentService>(
 
 builder.Services.AddScoped<IVNPayService, VNPayService>();
 builder.Services.AddScoped<IFirebaseStorageService, FirebaseStorageService>();
-
-
-builder.Services.AddScoped<IAccountRepository, AccountRepository>();
-builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-builder.Services.AddScoped<ICourseRepository, CourseRepository>();
-builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
-builder.Services.AddScoped<ILessonRepository, LessonRepository>();
-builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddScoped<IOwnedCourseRepository, OwnedCourseRepository>();
-builder.Services.AddScoped<IOwnedLessonRepository, OwnedLessonRepository>();
-builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-builder.Services.AddScoped<ILearnerAssignmentRepository, LearnerAssignmentRepository>();
-
-
-
-builder.Services.AddScoped<IAccountService, AccountService>();
-builder.Services.AddScoped<IAssignmentService, AssignmentService>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<ICourseService, CourseService>();
-builder.Services.AddScoped<IFeedbackService, FeedbackService>();
-builder.Services.AddScoped<ILessonService, LessonService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IOwnedCourseService, OwnedCourseService>();
-builder.Services.AddScoped<IOwnedLessonService, OwnedLessonService>();
-builder.Services.AddScoped<IPaymentService, PaymentService>();
-builder.Services.AddScoped<IRoleService, RoleService>();
-builder.Services.AddScoped<ILearnerAssignmentService, LearnerAssignmentService>();
-builder.Services.AddScoped<IVNPayService, VNPayService>();
 
 //for cookies
 builder.Services.AddSession(options =>
