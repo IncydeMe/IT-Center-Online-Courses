@@ -25,5 +25,8 @@ namespace App_Service.Services
         public async Task<GetOrderResponse> GetOrderById(int orderId) => await _orderRepository.GetOrderById(orderId);
         public async Task CreateOrder(CreateOrderRequest createOrderRequest) => await _orderRepository.CreateOrder(createOrderRequest);
         public async Task<bool> ChangeStatus(int orderId) => await _orderRepository.ChangeStatus(orderId);
+        public async Task<Dictionary<string, int>> GetMonthlyOrderCounts() => await _orderRepository.GetMonthlyOrderCounts();
+        public async Task<int> GetTotalOrders() => await _orderRepository.GetTotalOrders();
+        public async Task<Dictionary<string, int>> GetDailyOrderCounts() => await _orderRepository.GetDailyOrderCounts();
     }
 }

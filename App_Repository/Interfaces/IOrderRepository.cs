@@ -16,5 +16,8 @@ namespace App_Repository.Interfaces
         public Task<GetOrderResponse> GetOrderById(int orderId);
         public Task CreateOrder(CreateOrderRequest createOrderRequest);
         public Task<bool> ChangeStatus(int orderId);
+        public Task<Dictionary<string, int>> GetMonthlyOrderCounts();
+        public Task<int> GetTotalOrders();
+        public Task<Dictionary<string, int>> GetDailyOrderCounts();
     }
 }
