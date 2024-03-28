@@ -34,7 +34,7 @@ namespace IT_Center_Website.Pages
             var singup = await _accountRepository.SignUp(SignupRequest);
             if (singup != null)
             {
-                HttpContext.Session.SetString("Token", account.AccessToken);
+                HttpContext.Session.SetString("Token", singup.AccessToken);
 
                 switch (singup.Role)
                 {
