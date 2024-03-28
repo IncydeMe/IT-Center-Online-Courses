@@ -9,32 +9,24 @@
 		<!--Basic Order Information-->
 		<div>
 			<div>
-				<label asp-for="Order.Id"></label>
-				<input asp-for="Order.Id" disabled />
+				<label asp-for="Order.OrderId"></label>
+				<input asp-for="Order.OrderId" disabled />
 			</div>
 			<div>
-				<label asp-for="Order.Date"></label>
-				<input asp-for="Order.Date" disabled />
+				<label asp-for="Order.CreatedDate"></label>
+				<input asp-for="Order.CreatedDate" disabled />
 			</div>
 			<div>
 				<label asp-for="Order.Status"></label>
 				<input asp-for="Order.Status" disabled />
 			</div>
 			<div>
-				<label asp-for="Order.TotalPrice"></label>
-				<input asp-for="Order.TotalPrice" disabled />
+				<label asp-for="@Model.TotalPrice"></label>
+				<input asp-for="@Model.TotalPrice" disabled />
 			</div>
 			<div>
-				<label asp-for="Order.PaymentMethod"></label>
-				<input asp-for="Order.PaymentMethod" disabled />
-			</div>
-			<div>
-				<label asp-for="Order.PaymentStatus"></label>
-				<input asp-for="Order.PaymentStatus" disabled />
-			</div>
-			<div>
-				<label asp-for="Order.UserId"></label>
-				<input asp-for="Order.UserId" disabled />
+				<label asp-for="Order.AccountId"></label>
+				<input asp-for="Order.AccountId" disabled />
 			</div>
 		</div>
 		<!--Courses List in the Order-->
@@ -52,8 +44,8 @@
 					@foreach (var course in Model.Courses)
 					{
 						<tr>
-							<td>@course.Id</td>
-							<td>@course.Name</td>
+							<td>@course.CourseId</td>
+							<td>@course.CourseName</td>
 							<td>@course.Price</td>
 						</tr>
 					}

@@ -20,25 +20,28 @@ namespace IT_Center_Website.Pages.Admin.Accounts
             _accountService = accountService;
         }
 
-        [BindProperty]
-        public List<Account> Accounts { get; set; }
-        public int? PageNumber { get; set; }
-        public int TotalPages { get; set; }
+		[BindProperty]
+		public List<GetAccountResponse> Accounts { get; set; }
 
-        public async Task OnGetAsync(int page)
-        {
-            if (PageNumber == null)
-            {
-                page = 1;
-            }
-            var pagesize = await _accountService.GetAllAccounts(page, size);
-            TotalPages = pagesize.TotalPages;
-            PageNumber = pagesize.Page;
-            
-            if (pagesize!= null)
-            {
-                Accounts = (List<Account>)pagesize.Items;
-            }
-        }
-    }
+		[BindProperty(SupportsGet = true)]
+		public int PageNumber { get; set; }
+		public int TotalPages { get; set; }
+
+		public async Task OnGetAsync()
+		{
+			if (PageNumber == 0)
+			{
+				PageNumber = 1;
+			}
+
+			var pagesize = await _accountService.GetAllAccounts(PageNumber, size);
+			TotalPages = pagesize.TotalPages;
+			this.PageNumber = pagesize.Page;
+
+			if (pagesize != null)
+			{
+				Accounts = (List<GetAccountResponse>)pagesize.Items;
+			}
+		}
+	}
 }
