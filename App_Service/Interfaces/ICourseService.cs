@@ -20,5 +20,6 @@ namespace App_Service.Interfaces
         public Task<IPaginate<Course>> GetCoursesByCategoryName(string categoryName, int page, int size);
         public Task<List<Course>> GetAllCourses();
         public Task<int> GetTotalCourses();
+        public Task<Dictionary<string, int>> GetCourseCountsByCategory();
     }
 }

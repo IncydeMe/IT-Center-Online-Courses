@@ -138,6 +138,14 @@ namespace App_DataAccessObject
             return await _dbContext.Courses.CountAsync();
         }
 
+        public async Task<Dictionary<string, int>> GetCourseCountsByCategory()
+        {
+            return await _dbContext.Courses
+                .GroupBy(c => c.Category.CategoryName)
+                .Select(g => new { CategoryName = g.Key, CourseCount = g.Count() })
+                .ToDictionaryAsync(x => x.CategoryName, x => x.CourseCount);
+        }
+
 
     }
 }
