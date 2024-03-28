@@ -10,12 +10,12 @@
 <link rel="stylesheet" href="~/css/output.css" />
 
 <html>
-<body class="bg-[#FFF4E8]">
+<body class="bg-[#FFF4E8] overflow-x-hidden ">
     @*import header component*@
     <div id="header">
         <component type="typeof(Header)" render-mode="ServerPrerendered" />
     </div>
-    <div class="landing_page">
+    <div class="landing_page overflow-x-hidden overflow-y-hidden">
         @*introduction*@
         <div class="mt-[80px] relative z-[99]">
             <div class="flex justify-center">
@@ -42,9 +42,9 @@
         @*end introduction*@
 
         @*feature*@
-        <div>
-            <h1 class="text-left text-[56px] font-extrabold w-[582px] mb-[50px] leading-[60px] text-[#2F2155]">You need more than just studying</h1>
-            <div>
+        <div class="mt-[120px]">
+            <h1 class="text-left text-[56px] font-extrabold w-[582px] mb-[10px] leading-[60px] ml-[150px] text-[#2F2155]">You need more than just studying</h1>
+            <div class="flex items-center justify-center gap-[250px]">
                 <div>
                     <div class="flex gap-[41px]">
                         <div class="">
@@ -74,9 +74,95 @@
                         </div>
                     </div>
                 </div>
-                <div></div>
+                <div class="relative z-[99]">
+                    <img src="~/images/landingPage/profile_image.png" />
+
+                </div>
+                <img class="absolute right-[-180px] " src="~/images/landingPage/bubble1.png" />
+
+
+            </div>
+            <div class="infor absolute right-[350px] bg-[#fff] w-[333px] h-[147px] rounded-[20px] rounded-br-[0px] pl-[40px] flex justify-center flex-col top-[1450px] z-[999]">
+                <p class="text-[18px] text-[#2F2155] font-normal w-[273px] pb-[18px]">Duong earned $200K+ after joining in our courses</p>
+                <h2 class="text-[24px] text-[#5635AE] font-bold leading-[21px]">Read Duong's story</h2>
             </div>
         </div>
+        @*feature 2*@
+        <div class="relative">
+            <div class="flex justify-center items-center gap-[60px] mt-[100px] px-[100px]">
+                <div>
+                    <img src="~/images/landingPage/profile_image2.png" />
+                </div>
+                <div>
+                    <div>
+                        <h2 class="text-[48px] w-[517px] text-[#2F2155] leading-[60px] font-bold">We make distance learning easy</h2>
+                        <p class="text-[#5D527A] opacity-0.8 text-[24px] leading-[25px] w-[575px] mt-[24px]">We provide solutions to problems for the demands of market needs with quality services and learning materials that make this company community large and able to reach many sectors</p>
+                    </div>
+                </div>
+            </div>
+            <div class="infor absolute left-[50px] top-[350px] bg-[#fff] w-[333px] h-[147px] rounded-[20px] rounded-br-[0px] pl-[40px] flex justify-center flex-col z-[999]">
+                <p class="text-[18px] text-[#2F2155] font-normal w-[273px] pb-[18px]">Duong earned $200K+ after joining in our courses</p>
+                <h2 class="text-[24px] text-[#5635AE] font-bold leading-[21px]">Read Duong's story</h2>
+            </div>
+        </div>
+        @*stats*@
+        <div class="flex justify-center gap-[115px] mt-[200px]">
+            <div class="">
+                <h2 class="text-[#2F2155] text-[72px] font-bold leading-[93px]">1000+</h2>
+                <p class="text-[#5D527A] text-[24px]">Students Active</p>
+            </div>
+            <div class="flex flex-col justify-center ">
+                <h2 class="text-[#2F2155] text-[72px] font-bold leading-[93px]">20+</h2>
+                <p class="text-[#5D527A] text-[24px]">Main Courses</p>
+            </div>
+            <div class="flex flex-col justify-center ">
+                <h2 class="text-[#2F2155] text-[72px] font-bold leading-[93px]">50+</h2>
+                <p class="text-[#5D527A] text-[24px]">Countries</p>
+            </div>
+            <div class="flex flex-col justify-center ">
+                <h2 class="text-[#2F2155] text-[72px] font-bold leading-[93px]">10+</h2>
+                <p class="text-[#5D527A] text-[24px]">Filter Course</p>
+            </div>
+        </div>
+
+        @*comments*@
+        <div class="comment">
+            <h1 class="text-[56px] text-[#2F2155] leading-[60px] font-bold w-[578px] mt-[112px] mb-[32px] ml-[120px]">What Our Customers Say About Us</h1>
+            <div class="flex gap-[80px] justify-center">
+                <div class="">
+                    <img src="~/images/landingPage/comment_img_1.png" class="w-[350px]" />
+                    <img class="mt-[29px] mb-[15px]" src="~/images/icon/quotes.png" />
+                    <p class="text-[#2F2155] text-[24px] font-normal leading-[39px] w-[350px]">
+                        IT Course is made by people who care about online creators (like me) and who want creators to succeed.
+                    </p>
+                    <p class="text-[#5635AE] text-[18px] font-light leading-[30px]">
+                        Khang Thuan - Creator
+                    </p>
+                </div>
+                <div>
+                    <img src="~/images/landingPage/comment_img_2.png" class="w-[350px]" />
+                    <img class="mt-[29px] mb-[15px]" src="~/images/icon/quotes.png" />
+                    <p class="text-[#2F2155] text-[24px] font-normal leading-[39px] w-[350px]">
+                        I do recommend the course for anyone interested in getting started into Coding. I really love it!
+                    </p>
+                    <p class="text-[#5635AE] text-[18px] font-light leading-[30px]">
+                        Hong Anh - Learner
+                    </p>
+                </div>
+                <div>
+                    <img src="~/images/landingPage/comment_img_3.png" class="w-[350px]" />
+                    <img class="mt-[29px] mb-[15px]" src="~/images/icon/quotes.png" />
+                    <p class="text-[#2F2155] text-[24px] font-normal leading-[39px] w-[350px]">
+                        Just begin to learn when you want and never mind anything that make you distract. Believe yourself!
+                    </p>
+                    <p class="text-[#5635AE] text-[18px] font-light leading-[30px]">
+                        Thai Duong - Learner
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
 
     </div>
     <div style="min-height:100vh" class="">
