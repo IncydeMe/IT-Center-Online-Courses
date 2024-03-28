@@ -15,7 +15,7 @@ namespace App_Repository.Repositories
     {
         public async Task<List<GetAssignmentResponse>> GetAssignmentsInCourse(int courseId) => await AssignmentDAO.Instance.GetAssignmentsInCourse(courseId);
         public async Task<GetAssignmentResponse> GetAssignmentById(int assignmentId) => await AssignmentDAO.Instance.GetAssignmentById(assignmentId);
-        public void CreateAssignment(CreateAssignmentRequest createAssignmentRequest) => AssignmentDAO.Instance.CreateAssignment(createAssignmentRequest);
+        public async Task CreateAssignment(CreateAssignmentRequest createAssignmentRequest) => AssignmentDAO.Instance.CreateAssignment(createAssignmentRequest);
         public async Task<UpdateAssignmentResponse> UpdateAssignment(int assignmentId, UpdateAssignmentRequest updateAssignment) => await AssignmentDAO.Instance.UpdateAssignment(assignmentId, updateAssignment);
     }
 }

@@ -40,7 +40,7 @@ namespace App_DataAccessObject
                 _mapper = new Mapper(new MapperConfiguration(mc => mc.AddProfile(new LearnerAssignmentMapper())).CreateMapper().ConfigurationProvider);
         }
 
-        public async void CreateLearnerAssignment(CreateLearnerAssignmentRequest newLearnerAssignment)
+        public async Task CreateLearnerAssignment(CreateLearnerAssignmentRequest newLearnerAssignment)
         {
             _dbContext.LearnerAssignments.Add(_mapper.Map<LearnerAssignment>(newLearnerAssignment));
             await _dbContext.SaveChangesAsync();

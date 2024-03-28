@@ -10,7 +10,7 @@ namespace App_Service.Interfaces
 {
     public interface ILearnerAssignmentService
     {
-        public void CreateLearnerAssignment(CreateLearnerAssignmentRequest newLearnerAssignment);
+        public Task CreateLearnerAssignment(CreateLearnerAssignmentRequest newLearnerAssignment);
         public Task<UpdateLearnerAssignmentResponse> UpdateLearnerAssignment(int learnerAssignmentId, UpdateLearnerAssignmentRequest updateLearnerAssignment);
     }
 }

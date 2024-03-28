@@ -20,10 +20,10 @@ namespace App_Service.Services
                 _learnerAssignmentRepository = new LearnerAssignmentRepository();
         }
 
-        public void CreateLearnerAssignment(CreateLearnerAssignmentRequest newLearnerAssignment)
-            => _learnerAssignmentRepository.CreateLearnerAssignment(newLearnerAssignment);
+        public async Task CreateLearnerAssignment(CreateLearnerAssignmentRequest newLearnerAssignment)
+            => await _learnerAssignmentRepository.CreateLearnerAssignment(newLearnerAssignment);
 
-        public Task<UpdateLearnerAssignmentResponse> UpdateLearnerAssignment(int learnerAssignmentId, UpdateLearnerAssignmentRequest updateLearnerAssignment)
-            => _learnerAssignmentRepository.UpdateLearnerAssignment(learnerAssignmentId, updateLearnerAssignment);
+        public async Task<UpdateLearnerAssignmentResponse> UpdateLearnerAssignment(int learnerAssignmentId, UpdateLearnerAssignmentRequest updateLearnerAssignment)
+            => await _learnerAssignmentRepository.UpdateLearnerAssignment(learnerAssignmentId, updateLearnerAssignment);
     }
 }
