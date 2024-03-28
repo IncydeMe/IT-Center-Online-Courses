@@ -12,7 +12,7 @@ namespace App_Service.Interfaces
 {
     public interface ICourseService
     {
-        public Task<IPaginate<GetCourseResponse>> GetAllACourses(int page, int size);
+        public Task<IPaginate<GetCourseResponse>> GetAllCourses(int page, int size);
         public Task CreateCourse(CreateCourseRequest createCourseRequest);
         public Task<UpdateCourseResponse> UpdateCourseInformation(int id, UpdateCourseRequest updateCourseRequest);
         public Task<bool> ChangeCourseStatus(int id);
