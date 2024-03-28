@@ -3,6 +3,7 @@ using App_BusinessObject.Models;
 using App_Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Security.Principal;
 
 namespace IT_Center_Website.Pages
 {
@@ -33,6 +34,8 @@ namespace IT_Center_Website.Pages
             var singup = await _accountRepository.SignUp(SignupRequest);
             if (singup != null)
             {
+                HttpContext.Session.SetString("Token", account.AccessToken);
+
                 switch (singup.Role)
                 {
                     case "Administrator":
