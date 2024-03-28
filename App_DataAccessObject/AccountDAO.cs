@@ -68,32 +68,65 @@ namespace App_DataAccessObject
             }
         }
 
+        /*        public async Task<UpdateAccountResponse> UpdateAccountInformation(int id, UpdateAccountRequest updateAccountRequest)
+                {
+                    Account? account = await _dbContext.Accounts
+                        .FirstOrDefaultAsync(x => x.AccountId == id) 
+                        ?? throw new KeyNotFoundException($"No account found with ID {id}");
+
+                    account.FirstName = string.IsNullOrEmpty(updateAccountRequest.FirstName) ?
+                                            account.FirstName : updateAccountRequest.FirstName;
+                        account.LastName = string.IsNullOrEmpty(updateAccountRequest.LastName) ?
+                                            account.LastName : updateAccountRequest.LastName;
+                        account.Email = string.IsNullOrEmpty(updateAccountRequest.Email) ?
+                                            account.Email : updateAccountRequest.Email;
+                        account.Address = string.IsNullOrEmpty(updateAccountRequest.Address) ?
+                                            account.Address : updateAccountRequest.Address;
+                        account.Phone = string.IsNullOrEmpty(updateAccountRequest.Phone) ?
+                                            account.Phone : updateAccountRequest.Phone;
+                        account.DigitalSignature = string.IsNullOrEmpty(updateAccountRequest.DigitalSignature) ?
+                                            account.DigitalSignature : updateAccountRequest.DigitalSignature;
+                        account.BirthDate = updateAccountRequest.BirthDate;
+
+                        _dbContext.Accounts.Update(account);
+                        await _dbContext.SaveChangesAsync();
+
+                        UpdateAccountResponse response = _mapper.Map<UpdateAccountResponse>(account);
+                        return response;
+                }*/
+
         public async Task<UpdateAccountResponse> UpdateAccountInformation(int id, UpdateAccountRequest updateAccountRequest)
         {
             Account? account = await _dbContext.Accounts
-                .FirstOrDefaultAsync(x => x.AccountId == id) 
+                .FirstOrDefaultAsync(x => x.AccountId == id)
                 ?? throw new KeyNotFoundException($"No account found with ID {id}");
 
-            account.FirstName = string.IsNullOrEmpty(updateAccountRequest.FirstName) ?
-                                    account.FirstName : updateAccountRequest.FirstName;
-                account.LastName = string.IsNullOrEmpty(updateAccountRequest.LastName) ?
-                                    account.LastName : updateAccountRequest.LastName;
-                account.Email = string.IsNullOrEmpty(updateAccountRequest.Email) ?
-                                    account.Email : updateAccountRequest.Email;
-                account.Address = string.IsNullOrEmpty(updateAccountRequest.Address) ?
-                                    account.Address : updateAccountRequest.Address;
-                account.Phone = string.IsNullOrEmpty(updateAccountRequest.Phone) ?
-                                    account.Phone : updateAccountRequest.Phone;
-                account.DigitalSignature = string.IsNullOrEmpty(updateAccountRequest.DigitalSignature) ?
-                                    account.DigitalSignature : updateAccountRequest.DigitalSignature;
-                account.BirthDate = updateAccountRequest.BirthDate;
+            UpdateAccountProperties(account, updateAccountRequest);
 
-                _dbContext.Accounts.Update(account);
-                await _dbContext.SaveChangesAsync();
+            _dbContext.Accounts.Update(account);
+            await _dbContext.SaveChangesAsync();
 
-                UpdateAccountResponse response = _mapper.Map<UpdateAccountResponse>(account);
-                return response;
+            UpdateAccountResponse response = _mapper.Map<UpdateAccountResponse>(account);
+            return response;
         }
+
+        private void UpdateAccountProperties(Account account, UpdateAccountRequest updateAccountRequest)
+        {
+            account.FirstName = string.IsNullOrEmpty(updateAccountRequest.FirstName) ?
+                                account.FirstName : updateAccountRequest.FirstName;
+            account.LastName = string.IsNullOrEmpty(updateAccountRequest.LastName) ?
+                                account.LastName : updateAccountRequest.LastName;
+            account.Email = string.IsNullOrEmpty(updateAccountRequest.Email) ?
+                                account.Email : updateAccountRequest.Email;
+            account.Address = string.IsNullOrEmpty(updateAccountRequest.Address) ?
+                                account.Address : updateAccountRequest.Address;
+            account.Phone = string.IsNullOrEmpty(updateAccountRequest.Phone) ?
+                                account.Phone : updateAccountRequest.Phone;
+            account.DigitalSignature = string.IsNullOrEmpty(updateAccountRequest.DigitalSignature) ?
+                                account.DigitalSignature : updateAccountRequest.DigitalSignature;
+            account.BirthDate = updateAccountRequest.BirthDate;
+        }
+
 
         public async Task<bool> ChangeAccountStatus(int id)
         {
