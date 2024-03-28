@@ -5,6 +5,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    Layout = null;
 
     var prevDisabled = Model.PageNumber == 1 ? "disabled" : "";
     var nextDisabled = Model.PageNumber == Model.TotalPages ? "disabled" : "";
@@ -12,6 +13,7 @@
     var nextPage = Model.PageNumber + 1;
     var prevUrl = "/Course/Index?PageNumber=" + prevPage;
     var nextUrl = "/Course/Index?PageNumber=" + nextPage;
+
 }
 
 <h1>Index</h1>
@@ -79,9 +81,9 @@
     </div>
 
     <div class="grid grid-cols-3 mt-[50px] mb-[150px]">
-        @foreach (var item in Model.Course)
+        @*@foreach (var item in Model.Course)*@
         {
-            <div class="w-[350px] h-[650px]">
+            @*<div class="w-[350px] h-[650px]">
                 <img class="w-[350px] h-[227px] object-cover" src="@Html.DisplayFor(modelItem => item.ImageUrl)" />
                 <div class="">
                     <h2 class="text-[40px] pl-[15px] text-[#2F2155] font-bold leading-[60px]">@Html.DisplayFor(modelItem => item.Price)</h2>
@@ -95,8 +97,8 @@
                         Join now
                     </button>
                 </div>
-            </div>
-        }
+            </div>*@
+        @*}*@
     </div>
 
     <!--Pagination-->

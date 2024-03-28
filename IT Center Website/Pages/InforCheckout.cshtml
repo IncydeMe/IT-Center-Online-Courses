@@ -1,0 +1,68 @@
+﻿@page
+@model IT_Center_Website.Pages.InforCheckoutModel
+@{
+    Layout = null;
+}
+
+<link rel="stylesheet" href="~/css/output.css" />
+<link rel="stylesheet" href="~/css/input.css" />
+
+
+
+<body>
+    <div class="flex h-screen">
+        <div class=" w-1/2 max-h-screen bg-[#fefefe]  pt-[20px]">
+            <h1 class="text-[24px] font-bold text-[#5635AE] opacity-[0.8]  pl-[10px]">
+                <a asp-page="/Course/Detail">
+                    Back to ITCO Group
+                </a>
+            </h1>
+            <p class="text-[40px] font-bold text-center text-[#FD7575]">Checkout</p>
+            <div class="flex items-center flex-col mt-[100px]">
+                <form>
+                    <div class="relative">
+                        <p class="text-[18px] text-[#3D4449]">Card information</p>
+                        <input type="text" class="outline-none placeholder-opacity-50 text-[#000000] text-opacity-[0.7] font-light text-[18px] w-[400px] h-[45px] rounded-[5px] pl-[15px] border border-[#9CA3A8]" placeholder="1234 1234 1234 1234" />
+                        <img src="~/images/icon/card_icon.png" class="w-[120px] absolute top-[38px] right-[10px]" />
+                    </div>
+                    <div class="flex gap-[20px] mt-[20px]">
+                        <div class="">
+                            <input type="text" class="w-[150px] outline-none placeholder-opacity-50 text-[#000000] text-opacity-[0.7] font-light text-[18px] h-[45px] rounded-[5px] pl-[15px] border border-[#9CA3A8]" placeholder="MM/YY" />
+                        </div>
+                        <div class="relative">
+                            <input type="text" class="w-[230px] outline-none placeholder-opacity-50 text-[#000000] text-opacity-[0.7] font-light text-[18px]  h-[45px] rounded-[5px] pl-[15px] border border-[#9CA3A8]" placeholder="CVC" />
+                            <img src="~/images/icon/cvc_icon.png" class="absolute top-[5px] right-[10px]" />
+                        </div>
+                    </div>
+                    <div class="mt-[30px]">
+                        <p class="text-[18px] text-[#3D4449]">Fullname's card</p>
+                        <input type="text" class="outline-none placeholder-opacity-50 text-[#000000] text-opacity-[0.7] font-light text-[18px] w-[400px] h-[45px] rounded-[5px] pl-[15px] border border-[#9CA3A8]" placeholder="Nguyen Van Anh" />
+                    </div>
+                    <p class="w-[400px] mt-[10px] text-[#A67E4E] ">
+                        Make sure your information is real. Please check all fields carefully
+                    </p>
+
+                    <div class="flex justify-center mt-[20px]">
+                        <input type="submit" value="Complete Checkout" class="cursor-pointer px-[100px] bg-[#000000] text-white text-[20px] font-normal py-[8px] rounded-[10px] hover:bg-[#5635AE] transition-[0.3s]" />
+                    </div>
+
+                </form>
+
+
+
+            </div>
+
+        </div>
+        <div class="w-1/2 max-h-screen flex flex-col pl-[200px] justify-center bg-[#FFF4E8]">
+            <h1 class="text-[40px] text-[#5635AE] font-bold">Summary</h1>
+            <hr class="w-[450px] border-[#888888] opacity-50" />
+            <div class="flex gap-[300px] mt-[20px] text-[20px]">
+                <p>Price:</p>
+                <p>999,000</p>
+            </div>
+            <p class="text-[14px] mt-[5px] font-light">By completing your purchase you agree to these <span class="text-[#AEA3ED] font-normal">Terms of Service.</span> </p>
+        </div>
+    </div>
+</body>
+
+
