@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using App_BusinessObject.DTOs.Request.Course;
 using App_BusinessObject.DTOs.Response.Course;
 using App_BusinessObject.Models;

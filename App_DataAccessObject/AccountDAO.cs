@@ -141,6 +141,32 @@ namespace App_DataAccessObject
             }
             return false;
         }
+
+        public async Task<Account> GetAccountById(int accountId)
+        {
+            Account? account = await _dbContext.Accounts.FirstOrDefaultAsync(x => x.AccountId == accountId);
+
+            if (account == null)
+            {
+                throw new KeyNotFoundException($"No account found with ID {accountId}");
+            }
+
+            return account;
+        }
+
+        public async Task<bool> ChangeRole(int accountId, int roleId)
+        {
+			Account? account = await _dbContext.Accounts.FirstOrDefaultAsync(x => x.AccountId == accountId);
+
+			if (account != null)
+            {
+				account.RoleId = roleId;
+				_dbContext.Accounts.Update(account);
+				await _dbContext.SaveChangesAsync();
+				return true;
+			}
+			return false;
+		}
         #endregion
 
         #region AuthenticationFunction

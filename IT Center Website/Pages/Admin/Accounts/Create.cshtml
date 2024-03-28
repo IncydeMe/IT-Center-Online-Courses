@@ -1,0 +1,48 @@
+﻿@page
+@model IT_Center_Website.Pages.Admin.Accounts.CreateStaffAccountModel
+@{
+    Layout = "~/Pages/Admin/_AdminLayout.cshtml";
+}
+<body>
+    <h1>Create Account</h1>
+    <form method="post">
+        <div>
+            <label asp-for="CreateAccountRequest.FirstName"></label>
+            <input asp-for="CreateAccountRequest.FirstName" disabled />
+        </div>
+        <div>
+            <label asp-for="CreateAccountRequest.LastName"></label>
+            <input asp-for="CreateAccountRequest.LastName" disabled />
+        </div>
+        <div>
+            <label asp-for="CreateAccountRequest.Email"></label>
+            <input asp-for="CreateAccountRequest.Email" disabled />
+        </div>
+        <div>
+            <label asp-for="CreateAccountRequest.Address"></label>
+            <input asp-for="CreateAccountRequest.Address" disabled />
+        </div>
+        <div>
+            <label asp-for="CreateAccountRequest.Phone"></label>
+            <input asp-for="CreateAccountRequest.Phone" disabled />
+        </div>
+        <div>
+            <label asp-for="CreateAccountRequest.BirthDate"></label>
+            <input asp-for="CreateAccountRequest.BirthDate" disabled />
+        </div>
+        <div>
+            <label asp-for="CreateAccountRequest.Gender"></label>
+            <input asp-for="CreateAccountRequest.Gender" disabled />
+        </div>
+        <div>
+            <label asp-for="CreateAccountRequest.DigitalSignature"></label>
+            <input asp-for="CreateAccountRequest.DigitalSignature" disabled />
+        </div>
+        <div>
+            <label asp-for="CreateAccountRequest.RoleId"></label>
+            <input asp-for="CreateAccountRequest.RoleId" disabled />
+        </div><div>
+            <button type="submit">Create</button>
+        </div>
+    </form>
+</body>
