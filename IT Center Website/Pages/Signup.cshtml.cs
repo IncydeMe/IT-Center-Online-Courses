@@ -31,12 +31,12 @@ namespace IT_Center_Website.Pages
                 return Page();
             }
 
-            var singup = await _accountRepository.SignUp(SignupRequest);
-            if (singup != null)
+            var signup = await _accountRepository.SignUp(SignupRequest);
+            if (signup != null)
             {
-                HttpContext.Session.SetString("Token", account.AccessToken);
+                HttpContext.Session.SetString("Token", signup.AccessToken);
 
-                switch (singup.Role)
+                switch (signup.Role)
                 {
                     case "Administrator":
                         HttpContext.Session.SetString("Role", "Administrator");
