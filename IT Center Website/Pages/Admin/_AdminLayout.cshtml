@@ -7,11 +7,16 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="/css/input.css" />
+    <link rel="stylesheet" href="/css/output.css" />
+
 </head>
 <body>
-    <div class="flex">
-        <component type="typeof(Sidebar)" render-mode="ServerPrerendered"/>
-        <div>
+    <div class="flex w-screen">
+        <div class="">
+            <component type="typeof(Sidebar)" render-mode="ServerPrerendered"/>
+        </div>
+        <div class="w-full">
             @RenderBody()
         </div>
     </div>
