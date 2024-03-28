@@ -1,0 +1,47 @@
+﻿@page
+@model IT_Center_Website.Pages.Admin.IndexModel
+@{
+	Layout = "_AdminLayout";
+}
+<head>
+	<link rel="stylesheet" href="/css/input.css" />
+	<link rel="stylesheet" href="/css/output.css" />
+</head>
+
+<section class="p-4">
+	<h1 class="text-4xl font-bold pb-4">IT Center Online Courses Dashboard</h1>
+	<p class="text-md font-semibold pb-2">Monthly Statistic:</p>
+	<!--Highlight Statistic Section-->
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+		<div class="bg-blue-500 text-white px-4 py-8 rounded-lg ">
+			<h2 class="text-2xl font-bold">Total Courses</h2>
+			<p class="text-xl font-semibold">20</p>
+		</div>
+		<div class="bg-green-500 text-white px-4 py-8 rounded-lg ">
+			<h2 class="text-2xl font-bold">Total Students</h2>
+			<p class="text-xl font-semibold">200</p>
+		</div>
+		<div class="bg-yellow-500 text-white px-4 py-8 rounded-lg ">
+			<h2 class="text-2xl font-bold">Total Orders</h2>
+			<p class="text-xl font-semibold">100</p>
+		</div>
+		<div class="bg-red-500 text-white px-4 py-8 rounded-lg ">
+			<h2 class="text-2xl font-bold">Total Instructors</h2>
+			<p class="text-xl font-semibold">10</p>
+		</div>
+	</div>
+	<!--End Highlight Statistic Section-->
+	<!--Charts Section-->
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+		<div class="bg-white p-4 rounded-lg">
+			<h2 class="text-lg font-semibold pb-2">Courses Chart</h2>
+			<canvas id="coursesChart"></canvas>
+		</div>
+		<div class="bg-white p-4 rounded-lg">
+			<h2 class="text-lg font-semibold pb-2">Orders Chart</h2>
+			<canvas id="ordersChart"></canvas>
+		</div>
+	</div>
+	<!--End Charts Section-->
+
+</section>
