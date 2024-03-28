@@ -34,11 +34,11 @@
 	<!--End Highlight Statistic Section-->
 	<!--Charts Section-->
 	<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-		<div class="bg-white p-4 rounded-lg">
+		<div class="bg-white p-4 rounded-lg coursechart">
 			<h2 class="text-lg font-semibold pb-2">Courses Chart</h2>
 			<canvas id="coursesChart"></canvas>
 		</div>
-		<div class="bg-white p-4 rounded-lg">
+		<div class="bg-white p-4 rounded-lg orderchart">
 			<h2 class="text-lg font-semibold pb-2">Orders Chart</h2>
 			<canvas id="ordersChart"></canvas>
 		</div>
@@ -75,14 +75,25 @@
         }
     }
 
-    // Assuming you have the data for the charts
-    var coursesData = {
-        labels: ['January', 'February', 'March', 'April', 'May'],
+    var backgroundColors = ['rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)',
+                            'rgb(75, 192, 192)',
+                            'rgb(153, 102, 255)']
+
+    var borderColors = ['rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+			            'rgb(255, 205, 86)',
+			            'rgb(75, 192, 192)',
+			            'rgb(153, 102, 255)']
+
+
+    var courseCountsData = {
+        labels: Object.keys(@Html.Raw(Json.Serialize(Model.CourseCountsByCategory))),
         datasets: [{
-            label: 'Courses',
-            data: @Html.Raw(Json.Serialize(Model.Courses.Select(c => c.CourseName))),
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
+            data: Object.values(@Html.Raw(Json.Serialize(Model.CourseCountsByCategory))),
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
             borderWidth: 1
         }]
     };
@@ -92,23 +103,19 @@
         datasets: [{
             label: 'Orders',
             data: data,
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
             borderWidth: 1
         }]
     };
 
-    var ctxCourses = document.getElementById('coursesChart').getContext('2d');
-    var coursesChart = new Chart(ctxCourses, {
-        type: 'bar',
-        data: coursesData,
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
+    var ctxCourseCounts = document.getElementById('coursesChart').getContext('2d');
+    var coursesChart = new Chart(ctxCourseCounts, {
+        type: 'pie',
+        data: courseCountsData,
+      options: {
+          aspectRatio: 2,
+		}
     });
 
     var ctxOrders = document.getElementById('ordersChart').getContext('2d');
