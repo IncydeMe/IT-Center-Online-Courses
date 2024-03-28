@@ -25,7 +25,7 @@ namespace App_Service.Services
 
         public async Task CreateCourse(CreateCourseRequest createCourseRequest) => await _courseRepository.CreateCourse(createCourseRequest);
 
-        public async Task<IPaginate<GetCourseResponse>> GetAllACourses(int page, int size) => await _courseRepository.GetAllCourses(page, size);
+        public async Task<IPaginate<GetCourseResponse>> GetAllCourses(int page, int size) => await _courseRepository.GetAllCourses(page, size);
 
         public async Task<UpdateCourseResponse> UpdateCourseInformation(int id, UpdateCourseRequest updateCourseRequest) => await _courseRepository.UpdateCourseInformation(id, updateCourseRequest);
 
