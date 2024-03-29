@@ -1,6 +1,8 @@
 ﻿@page
 @model IT_Center_Website.Pages.Courses.IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using IT_Center_Website.Components;
+
 
 
 @{
@@ -15,7 +17,7 @@
     var nextUrl = "/LearnerCourses/Index?PageNumber=" + nextPage;
 }
 
-<h1>Index</h1>
+
 
 <head>
     <link rel="stylesheet" href="~/css/output.css" />
@@ -49,6 +51,9 @@
             selectBox.appendChild(optionElement);
         });
     });
+
+    //money
+    
 </script>
 <head>
     <link rel="stylesheet" href="~/css/output.css" />
@@ -57,7 +62,11 @@
 
 
 
-<body>
+<body class="bg-[#FFF4E8] overflow-x-hidden">
+    <div id="header">
+        <component type="typeof(Header)" render-mode="ServerPrerendered" />
+    </div>
+    
     <div class="flex justify-center gap-[700px] mt-[60px]">
         <div class='search_name relative'>
             <input type="search" name='search_name' placeholder='Course name...' class='bg-[#E5E4E4] border border-[#3D4449]
@@ -79,33 +88,36 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-3 mt-[50px] mb-[150px]">
-        @foreach (var item in Model.Course)
-        {
-            <div class="w-[350px] h-[650px]">
-                <img class="w-[350px] h-[227px] object-cover" src="@Html.DisplayFor(modelItem => item.ImageUrl)" />
-                <div class="">
-                    <h2 class="text-[40px] pl-[15px] text-[#2F2155] font-bold leading-[60px]">@Html.DisplayFor(modelItem => item.Price)</h2>
-                    <p class="text-[24px] text-[#2F2155] pl-[15px] leading-[30px] font-normal">@Html.DisplayFor(modelItem => item.CourseName)</p>
-                </div>
-                <div class="flex justify-center items-center gap-[100px]">
-                    <button class="bg-[#FDDB9E] px-[20px] py-[8px]">
-                        <a asp-page="./Details" asp-route-id="@item.CourseId">Details</a>
-                    </button>
-                    <form method="post">
-                        <input name="id" type="hidden" value="@item.CourseId" />
-                        <button type="submit" class="bg-[#FEBB8E] px-[20px] py-[8px]">
-                            Join Now
+    <h1 class="text-[56px] ml-[60px] font-bold text-[#FD7575]">
+        Courses:
+    </h1>
+    <div class="flex justify-center">
+        <div class="grid grid-cols-3 gap-x-[80px] mt-[50px] mb-[150px] ">
+            @foreach (var item in Model.Course)
+            {
+                <div class="w-[350px] h-[450px] bg-[#fefefe] rounded-bl-[20px] rounded-tr-[25px]">
+                    <img class="w-[350px] rounded-tr-[25px] h-[227px] object-cover" src="@Html.DisplayFor(modelItem => item.ImageUrl)" />
+                    <div class="h-[120px]">
+                        <h2 class="text-[40px] pl-[15px] text-[#2F2155] font-bold leading-[60px]">@Html.DisplayFor(modelItem => item.Price) VND</h2>
+                        <p class="text-[24px] text-[#2F2155] pl-[15px] leading-[30px] font-normal">@Html.DisplayFor(modelItem => item.CourseName)</p>
+                    </div>
+                    <div class="flex justify-center items-center gap-[110px] mt-[40px]">
+                        <button class="bg-[#FDDB9E] px-[20px] py-[8px] rounded-[8px]">
+                            <a asp-page="./Details" asp-route-id="@item.CourseId">Details</a>
                         </button>
-                    </form>
-                </div>
-            </div>
-        }
+                        <button class="bg-[#FEBB8E] px-[20px] py-[8px] rounded-[8px]">
+                            Join now
+                        </button>
+                    </div>
+
+    
     </div>
 
     <!--Pagination-->
-    <div class="flex justify-center">
-        <a href="@prevUrl" class="bg-blue-500 text-white px-4 py-2 m-2 @prevDisabled">Previous</a>
+    <div class="flex justify-center items-center">
+        <a href="@prevUrl" class=" text-white px-4 py-2 m-2 @prevDisabled">
+            <img src="~/images/icon/prev_icon.png" />
+        </a>
         @foreach (var i in Enumerable.Range(1, Model.TotalPages))
         {
             var url = "/LearnerCourses/Index?PageNumber=" + i;
@@ -115,7 +127,13 @@
             </a>
         }
         <span>Page @Model.PageNumber of @Model.TotalPages</span>
-        <a href="@nextUrl" class="bg-blue-500 text-white px-4 py-2 m-2 @nextDisabled">Next</a>
+        <a href="@nextUrl" class="bg-[#5635AE] rounded-[30px] px-[8px] py-[8px] ml-[20px] @nextDisabled">
+            <img src="~/images/icon/next-icon.png" />
+        </a>
+    </div>
+
+    <div id="header">
+        <component type="typeof(Footer)" render-mode="ServerPrerendered" />
     </div>
 </body>
 
