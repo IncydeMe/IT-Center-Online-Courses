@@ -92,9 +92,11 @@
                     <button class="bg-[#FDDB9E] px-[20px] py-[8px]">
                         <a asp-page="./Details" asp-route-id="@item.CourseId">Details</a>
                     </button>
-                    <button class="bg-[#FEBB8E] px-[20px] py-[8px]">
-                        Join now
-                    </button>
+                    <form method="post">
+                        <button type="submit" class="bg-[#FEBB8E] px-[20px] py-[8px]">
+                            <a asp-route-id="@item.CourseId">Join Now</a>
+                        </button>
+                    </form>
                 </div>
             </div>
         } *@
