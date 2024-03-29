@@ -29,5 +29,7 @@ namespace App_Service.Services
         public async Task<Dictionary<string, int>> GetMonthlyOrderCounts() => await _orderRepository.GetMonthlyOrderCounts();
         public async Task<int> GetTotalOrders() => await _orderRepository.GetTotalOrders();
         public async Task<Dictionary<string, int>> GetDailyOrderCounts() => await _orderRepository.GetDailyOrderCounts();
+        public async Task<Dictionary<string, double>> GetDailyRevenue(int month, int year) 
+            => await _orderRepository.GetDailyRevenue(month, year);
     }
 }

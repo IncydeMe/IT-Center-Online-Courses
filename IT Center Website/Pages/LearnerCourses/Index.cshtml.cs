@@ -42,16 +42,20 @@ namespace IT_Center_Website.Pages.Courses
 
         public async Task OnGetAsync()
         {
-            if (PageNumber == 0)
+            if (_courseService.GetAllCourses(1, 6) != null)
             {
-                PageNumber = 1;
-            }
+                Course = (List<GetCourseResponse>)await _courseService.GetAllCourses(1, 6);
+                if (PageNumber == 0)
+                {
+                    PageNumber = 1;
+                }
 
-            var courses = await _courseService.GetAllCourses(PageNumber, size);
+                var courses = await _courseService.GetAllCourses(PageNumber, size);
 
-            if (courses.Items != null)
-            {
-                Course = (List<GetCourseResponse>)courses.Items;
+                if (courses.Items != null)
+                {
+                    Course = (List<GetCourseResponse>)courses.Items;
+                }
             }
         }
 

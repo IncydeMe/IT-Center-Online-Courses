@@ -20,7 +20,7 @@
 		</div>
 		<div class="bg-green-500 text-white px-4 py-8 rounded-lg ">
 			<h2 class="text-2xl font-bold">Total Students</h2>
-			<p class="text-xl font-semibold">200</p>
+			<p class="text-xl font-semibold">@Model.TotalStudent</p>
 		</div>
         <div class="bg-yellow-500 text-white px-4 py-8 rounded-lg ">
             <h2 class="text-2xl font-bold">Total Orders</h2>
@@ -34,14 +34,18 @@
 	<!--End Highlight Statistic Section-->
 	<!--Charts Section-->
 	<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-		<div class="bg-white p-4 rounded-lg">
+		<div class="bg-white p-4 rounded-lg coursechart">
 			<h2 class="text-lg font-semibold pb-2">Courses Chart</h2>
 			<canvas id="coursesChart"></canvas>
 		</div>
-		<div class="bg-white p-4 rounded-lg">
+		<div class="bg-white p-4 rounded-lg orderchart">
 			<h2 class="text-lg font-semibold pb-2">Orders Chart</h2>
 			<canvas id="ordersChart"></canvas>
 		</div>
+        <div class="bg-white p-4 rounded-lg revenuechart">
+            <h2 class="text-lg font-semibold pb-2">Revenue Chart</h2>
+            <canvas id="revenueChart"></canvas>
+        </div>
 	</div>
 	<!--End Charts Section-->
 
@@ -75,14 +79,25 @@
         }
     }
 
-    // Assuming you have the data for the charts
-    var coursesData = {
-        labels: ['January', 'February', 'March', 'April', 'May'],
+    var backgroundColors = ['rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)',
+                            'rgb(75, 192, 192)',
+                            'rgb(153, 102, 255)']
+
+    var borderColors = ['rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+			            'rgb(255, 205, 86)',
+			            'rgb(75, 192, 192)',
+			            'rgb(153, 102, 255)']
+
+
+    var courseCountsData = {
+        labels: Object.keys(@Html.Raw(Json.Serialize(Model.CourseCountsByCategory))),
         datasets: [{
-            label: 'Courses',
-            data: @Html.Raw(Json.Serialize(Model.Courses.Select(c => c.CourseName))),
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
+            data: Object.values(@Html.Raw(Json.Serialize(Model.CourseCountsByCategory))),
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
             borderWidth: 1
         }]
     };
@@ -92,23 +107,30 @@
         datasets: [{
             label: 'Orders',
             data: data,
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
             borderWidth: 1
         }]
     };
 
-    var ctxCourses = document.getElementById('coursesChart').getContext('2d');
-    var coursesChart = new Chart(ctxCourses, {
-        type: 'bar',
-        data: coursesData,
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
+    var dailyRevenueData = {
+        labels: Object.keys(@Html.Raw(Json.Serialize(Model.DailyRevenue))),
+        datasets: [{
+            label: 'Daily Revenue',
+            data: Object.values(@Html.Raw(Json.Serialize(Model.DailyRevenue))),
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
+            borderWidth: 1
+        }]
+    };
+
+    var ctxCourseCounts = document.getElementById('coursesChart').getContext('2d');
+    var coursesChart = new Chart(ctxCourseCounts, {
+        type: 'pie',
+        data: courseCountsData,
+      options: {
+          aspectRatio: 2,
+		}
     });
 
     var ctxOrders = document.getElementById('ordersChart').getContext('2d');
@@ -119,6 +141,23 @@
             title: {
                 display: true,
                 text: `Orders for ${monthYear}`
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    var ctxDailyRevenue = document.getElementById('revenueChart').getContext('2d');
+    var revenueChart = new Chart(ctxDailyRevenue, {
+        type: 'bar',
+        data: dailyRevenueData,
+        options: {
+            title: {
+                display: true,
+                text: `Daily Revenue for ${monthYear}`
             },
             scales: {
                 y: {
