@@ -43,5 +43,10 @@ namespace IT_Center_Website.Pages.Courses
                 Course = (List<GetCourseResponse>)courses.Items;
             }
         }
+
+        public async Task OnPostAsync(int id)
+        {
+                
+        }
     }
 }
