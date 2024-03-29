@@ -33,6 +33,7 @@ namespace IT_Center_Website.Pages
             {
                 HttpContext.Session.SetString("Token", account.AccessToken);
                 HttpContext.Session.SetInt32("Id", account.Id);
+                HttpContext.Session.SetString("FirstName", account.FirstName);
                 //Not use filter
                 switch(account.Role)
                 {
