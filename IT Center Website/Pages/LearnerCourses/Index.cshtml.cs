@@ -14,6 +14,7 @@ using App_BusinessObject.DTOs.Request.Order;
 using App_BusinessObject.DTOs.Request.OrderDetail;
 using App_BusinessObject.DTOs.Response.Payment;
 using App_Service.Services;
+using System.Drawing.Printing;
 
 namespace IT_Center_Website.Pages.Courses
 {
@@ -48,8 +49,10 @@ namespace IT_Center_Website.Pages.Courses
 			}
 
 			var courses = await _courseService.GetAllCourses(PageNumber, size);
+            TotalPages = courses.TotalPages;
+            this.PageNumber = courses.Page;
 
-			if (courses.Items != null)
+            if (courses.Items != null)
 			{
 				Course = (List<GetCourseResponse>)courses.Items;
 			}
