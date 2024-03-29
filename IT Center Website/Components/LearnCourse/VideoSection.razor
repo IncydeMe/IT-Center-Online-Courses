@@ -1,0 +1,13 @@
+﻿@using Microsoft.AspNetCore.Components.Web;
+@using IT_Center_Website.Components;
+@inherits Microsoft.AspNetCore.Components.ComponentBase;
+
+@code{
+    [Parameter]
+    public Material VideoMaterial { get; set; } //Replace this with appropriate model
+}
+
+<video controls>
+    <source src="@VideoMaterial.Content" type="video/mp4">
+</video>
+
