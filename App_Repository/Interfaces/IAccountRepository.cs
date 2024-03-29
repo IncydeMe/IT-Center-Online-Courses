@@ -19,7 +19,8 @@ namespace App_Repository.Interfaces
         public Task<UpdateAccountResponse> UpdateAccountInformation(int id, UpdateAccountRequest updateAccountRequest);
         public Task<bool> ChangeAccountStatus(int id);
         public Task<Account> GetAccountById(int accountId);
-        public Task<bool> ChangeRole(int accountId, int roleId);   
+        public Task<bool> ChangeRole(int accountId, int roleId);
+        public int CountAllStudents();
 
         public Task<LoginResponse> Login(LoginRequest loginRequest);
         public Task<LoginResponse> SignUp(SignUpRequest signUpRequest);

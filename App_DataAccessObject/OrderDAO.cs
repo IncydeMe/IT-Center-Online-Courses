@@ -129,6 +129,16 @@ namespace App_DataAccessObject
                 await _dbContext.SaveChangesAsync();
                 return true;
         }
+
+        public async Task<Dictionary<string, double>> GetDailyRevenue(int month, int year)
+        {
+            return await _dbContext.OrderDetails
+                .Where(od => od.Order.CreatedDate.Month == month && od.Order.CreatedDate.Year == year)
+                .GroupBy(od => new { od.Order.CreatedDate.Day })
+                .Select(g => new { Day = g.Key.Day, Revenue = g.Sum(od => od.Course.Price) })
+                .ToDictionaryAsync(x => $"{month.ToString().PadLeft(2, '0')}-{x.Day.ToString().PadLeft(2, '0')}", x => x.Revenue);
+        }
+
         #endregion
     }
 }
