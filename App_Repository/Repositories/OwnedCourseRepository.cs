@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using App_BusinessObject.Models;
 
 namespace App_Repository.Repositories
 {
@@ -22,5 +23,8 @@ namespace App_Repository.Repositories
 
         public async Task<IPaginate<GetOwnedCourseResponse>> GetAllOwnedCourse(int accountId, int page, int size)
             => await OwnedCourseDAO.Instance.GetOwnedCourse(accountId, page, size);
+
+        public async Task<List<Lesson>> GetLessonInOwnedCourse(int courseId)
+            => await OwnedCourseDAO.Instance.GetLessonInOwnedCourse(courseId);
     }
 }

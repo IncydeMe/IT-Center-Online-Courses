@@ -1,0 +1,79 @@
+﻿@using Microsoft.AspNetCore.Components.Web;
+@using IT_Center_Website.Components;
+@inherits Microsoft.AspNetCore.Components.ComponentBase;
+
+@code{
+    [Parameter]
+    public string VideoMaterial { get; set; } //Replace this with appropriate model
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<body>
+    <section class="flex items-start justify-between">
+        <!--Div for inserting title, adding styling and a radio button to check progress of watching the video-->
+        <div id="videoCard" class="bg-white shadow-lg rounded-lg mb-4 p-4 w-fit cursor-pointer">
+            <span class="flex items-center gap-x-4 p-2">
+                <i class="fas fa-video" />
+                <h1 class="text-xl font-bold">Video Title</h1>
+            </span>
+            <div class="mt-4 p-2">
+                <input type="checkbox" id="watched" name="watched" value="watched" class="form-checkbox text-green-500 h-4 w-4 rounded-full" style="display: none;">
+                <label for="watched" id="watchedLabel" class="ml-2">Pending</label>
+            </div>
+            <span class="mt-4 flex p-2">
+                <p id="videoLength" class="mt-4"></p>
+            </span>
+        </div>
+        <div>
+            <video id="videoPlayer" width="560" height="480" controls style="display: none;">
+                <source src="@VideoMaterial" type="video/mp4">
+            </video>
+            <div id="nextButtonContainer"></div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('videoCard').addEventListener('click', function () {
+            // Show the video player when the div is clicked
+            document.getElementById('videoPlayer').style.display = 'block';
+
+            // Start playing the video
+            document.getElementById('videoPlayer').play();
+        });
+
+        document.getElementById('videoPlayer').addEventListener('timeupdate', function () {
+            // Check if the video has been watched for at least 80% of its duration
+            if (this.currentTime >= this.duration * 0.9) {
+                // Show the checkbox and update the label
+                document.getElementById('watched').style.display = 'inline';
+                document.getElementById('watchedLabel').textContent = 'Watched';
+                document.getElementById('watched').checked = true;
+
+                // Create the next button if it doesn't already exist
+                if (!document.getElementById('nextButton')) {
+                    var nextButton = document.createElement('button');
+                    nextButton.id = 'nextButton';
+                    nextButton.className = 'mt-4 bg-blue-500 text-white rounded px-4 py-2';
+                    nextButton.textContent = 'Next Section';
+                    document.getElementById('nextButtonContainer').appendChild(nextButton);
+                }
+            }
+        });
+
+        document.getElementById('videoPlayer').addEventListener('loadedmetadata', function () {
+            // Get the duration of the video in minutes
+            var duration = this.duration / 60;
+
+            // Round up to the nearest 10 minutes or hour
+            if (duration < 60) {
+                duration = Math.ceil(duration / 10) * 10;
+            } else {
+                duration = Math.ceil(duration / 60) * 60;
+            }
+
+            // Display the rounded duration in the div
+            document.getElementById('videoLength').textContent = 'Length: ' + duration + ' minutes';
+        });
+    </script>
+</body>
+

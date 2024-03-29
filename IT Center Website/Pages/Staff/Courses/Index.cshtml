@@ -1,0 +1,56 @@
+﻿@* @page
+@model IT_Center_Website.Pages.Staff.Courses.IndexModel
+@{
+	Layout = "~/Pages/Staff/_StaffLayout.cshtml";
+
+	//For Pagination
+	var prevDisabled = Model.PageNumber == 1 ? "disabled" : "";
+	var nextDisabled = Model.PageNumber == Model.TotalPages ? "disabled" : "";
+	var prevPage = Model.PageNumber - 1;
+	var nextPage = Model.PageNumber + 1;
+	var prevUrl = "/Staff/Courses/Index?PageNumber=" + prevPage;
+	var nextUrl = "/Staff/Courses/Index?PageNumber=" + nextPage;
+}
+<body>
+	<h1>Courses</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Price</th>
+				<th colspan="2">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var course in Model.Courses)
+			{
+				<tr>
+					<td>@course.CourseId</td>
+					<td>@course.CourseName</td>
+					<td>@course.Price</td>
+					<td>
+						<a href="#">Details</a>
+						<a>Remove</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	<!--Pagination-->
+	<div class="flex justify-center">
+		<a href="@prevUrl" class="bg-blue-500 text-white px-4 py-2 m-2 @prevDisabled">Previous</a>
+		@foreach (var i in Enumerable.Range(1, Model.TotalPages))
+		{
+			var url = "/Staff/Courses/Index?PageNumber=" + i;
+			var active = i == Model.PageNumber ? "bg-blue-500" : "bg-gray-300";
+			<a href="@url" class="text-white px-4 py-2 m-2 @active">
+				<p>@i</p>
+			</a>
+		}
+		<span>Page @Model.PageNumber of @Model.TotalPages</span>
+		<a href="@nextUrl" class="bg-blue-500 text-white px-4 py-2 m-2 @nextDisabled">Next</a>
+	</div>
+</body>
+
+ *@
