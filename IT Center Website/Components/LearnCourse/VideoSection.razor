@@ -4,10 +4,10 @@
 
 @code{
     [Parameter]
-    public Material VideoMaterial { get; set; } //Replace this with appropriate model
+    public string VideoMaterial { get; set; } //Replace this with appropriate model
 }
 
 <video controls>
-    <source src="@VideoMaterial.Content" type="video/mp4">
+    <source src="@VideoMaterial" type="video/mp4">
 </video>
 

@@ -1,5 +1,6 @@
 ﻿using App_BusinessObject.DTOs.Request.OwnedCourse;
 using App_BusinessObject.DTOs.Response.OwnedCourse;
+using App_BusinessObject.Models;
 using App_BusinessObject.Paginate;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace App_Service.Interfaces
         public Task<IPaginate<GetOwnedCourseResponse>> GetOwnedCourse(int accountId, int page, int size);
         public Task CreateOwnedCourse(CreateOwnedCourseRequest createOwnedCourseRequest);
         public Task<bool> ChangeOwnedCourseStatus(int id);
+        public Task<List<Lesson>> GetLessonInOwnedCourse(int courseId);
     }
 }

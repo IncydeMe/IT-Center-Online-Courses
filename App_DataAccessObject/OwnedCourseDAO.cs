@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace App_BusinessObject
 {
@@ -69,6 +70,11 @@ namespace App_BusinessObject
                 return true;
             }
             return false;
+        }
+
+        public async Task<List<Lesson>> GetLessonInOwnedCourse(int courseId)
+        {
+            return await _dbContext.Lessons.Where(x => x.CourseId == courseId).ToListAsync();
         }
     }
 }
