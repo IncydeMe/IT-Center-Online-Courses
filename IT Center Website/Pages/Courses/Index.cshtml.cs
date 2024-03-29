@@ -26,9 +26,9 @@ namespace IT_Center_Website.Pages.Courses
 
         public async Task OnGetAsync()
         {
-            if (_courseService.GetAllACourses(1, 6) != null)
+            if (_courseService.GetAllCourses(1, 6) != null)
             {
-                Course = await _courseService.GetAllACourses(1,6);
+                Course = await _courseService.GetAllCourses(1,6);
             }
         }
     }

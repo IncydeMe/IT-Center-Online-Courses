@@ -6,12 +6,12 @@
 @{
     ViewData["Title"] = "Index";
 
-    var prevDisabled = Model.PageNumber == 1 ? "disabled" : "";
-    var nextDisabled = Model.PageNumber == Model.TotalPages ? "disabled" : "";
-    var prevPage = Model.PageNumber - 1;
-    var nextPage = Model.PageNumber + 1;
-    var prevUrl = "/Course/Index?page=" + prevPage;
-    var nextUrl = "/Course/Index?page=" + nextPage;
+    // var prevDisabled = Model.PageNumber == 1 ? "disabled" : "";
+    // var nextDisabled = Model.PageNumber == Model.TotalPages ? "disabled" : "";
+    // var prevPage = Model.PageNumber - 1;
+    // var nextPage = Model.PageNumber + 1;
+    // var prevUrl = "/Course/Index?page=" + prevPage;
+    // var nextUrl = "/Course/Index?page=" + nextPage;
 }
 
 <h1>Index</h1>
@@ -79,7 +79,7 @@
     </div>
 
     <div class="grid grid-cols-3 mt-[50px] mb-[150px]">
-        @foreach (var item in Model.Course)
+@*         @foreach (var item in Model.Course)
         {
             <div class="w-[350px] h-[650px]">
                 <img class="w-[350px] h-[227px] object-cover" src="@Html.DisplayFor(modelItem => item.ImageUrl)" />
@@ -96,7 +96,7 @@
                     </button>
                 </div>
             </div>
-        }
+        } *@
     </div>
 </body>
 

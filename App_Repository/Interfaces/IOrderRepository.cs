@@ -19,5 +19,6 @@ namespace App_Repository.Interfaces
         public Task<Dictionary<string, int>> GetMonthlyOrderCounts();
         public Task<int> GetTotalOrders();
         public Task<Dictionary<string, int>> GetDailyOrderCounts();
+        public Task<Dictionary<string, double>> GetDailyRevenue(int month, int year);
     }
 }
