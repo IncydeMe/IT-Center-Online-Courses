@@ -31,6 +31,7 @@ namespace App_Service.Services
 		public async Task<bool> ChangeAccountStatus(int id) => await _accountRepository.ChangeAccountStatus(id);
 		public async Task<Account> GetAccountById(int accountId) => await _accountRepository.GetAccountById(accountId);
 		public async Task<bool> ChangeRole(int accountId, int roleId) => await _accountRepository.ChangeRole(accountId, roleId);
+        public int CountAllStudents() => _accountRepository.CountAllStudents();
 
 		public async Task<LoginResponse> Login(LoginRequest loginRequest) => await _accountRepository.Login(loginRequest);
 		public async Task<LoginResponse> SignUp(SignUpRequest signUpRequest) => await _accountRepository.SignUp(signUpRequest);
