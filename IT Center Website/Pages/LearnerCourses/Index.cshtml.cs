@@ -47,5 +47,10 @@ namespace IT_Center_Website.Pages.Courses
                 }
             }
         }
+
+        public async Task OnPostAsync(int id)
+        {
+                
+        }
     }
 }
