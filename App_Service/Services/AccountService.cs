@@ -15,22 +15,27 @@ using App_Repository.Interfaces;
 
 namespace App_Service.Services
 {
-    public class AccountService : IAccountService
-    {
-        private readonly IAccountRepository _accountRepository;
+	public class AccountService : IAccountService
+	{
+		private readonly IAccountRepository _accountRepository;
 
-        public AccountService(IAccountRepository accountRepository)
-        {
-            _accountRepository = accountRepository;
-        }
+		public AccountService(IAccountRepository accountRepository)
+		{
+			_accountRepository = accountRepository;
+		}
 
-        public async Task<IPaginate<GetAccountResponse>> GetAllAccounts(int page, int size) => await _accountRepository.GetAllAccounts(page, size);
-        public async Task CreateAccount(CreateAccountRequest createAccountRequest) => _accountRepository.CreateAccount(createAccountRequest);
-        public async Task<UpdateAccountResponse> UpdateAccountInformation(int id, UpdateAccountRequest updateAccountRequest)
-            => await _accountRepository.UpdateAccountInformation(id, updateAccountRequest);
-        public async Task<bool> ChangeAccountStatus(int id) => await _accountRepository.ChangeAccountStatus(id);
+		public async Task<IPaginate<GetAccountResponse>> GetAllAccounts(int page, int size) => await _accountRepository.GetAllAccounts(page, size);
+		public async Task CreateAccount(CreateAccountRequest createAccountRequest) => _accountRepository.CreateAccount(createAccountRequest);
+		public async Task<UpdateAccountResponse> UpdateAccountInformation(int id, UpdateAccountRequest updateAccountRequest)
+			=> await _accountRepository.UpdateAccountInformation(id, updateAccountRequest);
+		public async Task<bool> ChangeAccountStatus(int id) => await _accountRepository.ChangeAccountStatus(id);
+		public async Task<Account> GetAccountById(int accountId) => await _accountRepository.GetAccountById(accountId);
+		public async Task<bool> ChangeRole(int accountId, int roleId) => await _accountRepository.ChangeRole(accountId, roleId);
+        public int CountAllStudents() => _accountRepository.CountAllStudents();
 
-        public async Task<LoginResponse> Login(LoginRequest loginRequest) => await _accountRepository.Login(loginRequest);
-        public async Task<LoginResponse> SignUp(SignUpRequest signUpRequest) => await _accountRepository.SignUp(signUpRequest);
-    }
+		public async Task<LoginResponse> Login(LoginRequest loginRequest) => await _accountRepository.Login(loginRequest);
+		public async Task<LoginResponse> SignUp(SignUpRequest signUpRequest) => await _accountRepository.SignUp(signUpRequest);
+
+
+	}
 }

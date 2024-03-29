@@ -2,6 +2,7 @@
 using App_BusinessObject.DTOs.Request.Authentication;
 using App_BusinessObject.DTOs.Response.Account;
 using App_BusinessObject.DTOs.Response.Authentication;
+using App_BusinessObject.Models;
 using App_BusinessObject.Paginate;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,9 @@ namespace App_Service.Interfaces
         public Task CreateAccount(CreateAccountRequest createAccountRequest);
         public Task<UpdateAccountResponse> UpdateAccountInformation(int id, UpdateAccountRequest updateAccountRequest);
         public Task<bool> ChangeAccountStatus(int id);
+        public Task<Account> GetAccountById(int accountId);
+        public Task<bool> ChangeRole(int accountId, int roleId);
+        public int CountAllStudents();
 
         public Task<LoginResponse> Login(LoginRequest loginRequest);
         public Task<LoginResponse> SignUp(SignUpRequest signUpRequest);

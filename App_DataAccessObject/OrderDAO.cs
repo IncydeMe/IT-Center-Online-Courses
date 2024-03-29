@@ -59,6 +59,32 @@ namespace App_DataAccessObject
             return orderList;
         }
 
+        public async Task<Dictionary<string, int>> GetMonthlyOrderCounts()
+        {
+            var orderCounts = await _dbContext.Orders
+                .GroupBy(o => new { o.CreatedDate.Year, o.CreatedDate.Month })
+                .Select(g => new { Month = $"{g.Key.Year}-{g.Key.Month:D2}", Count = g.Count() })
+                .ToDictionaryAsync(x => x.Month, x => x.Count);
+
+            return orderCounts;
+        }
+
+        public async Task<int> GetTotalOrders()
+        {
+            return await _dbContext.Orders.CountAsync();
+        }
+
+        public async Task<Dictionary<string, int>> GetDailyOrderCounts()
+        {
+            var orderCounts = await _dbContext.Orders
+                .GroupBy(o => o.CreatedDate.Date)
+                .Select(g => new { Date = g.Key.ToString("MM-dd"), Count = g.Count() })
+                .ToDictionaryAsync(x => x.Date, x => x.Count);
+
+            return orderCounts;
+        }
+
+
         public async Task<IPaginate<GetOrderResponse>> GetUserOrderList(int accountId, int page, int size)
         {
             IPaginate<GetOrderResponse> userOrderList = await _dbContext.Orders
@@ -103,6 +129,16 @@ namespace App_DataAccessObject
                 await _dbContext.SaveChangesAsync();
                 return true;
         }
+
+        public async Task<Dictionary<string, double>> GetDailyRevenue(int month, int year)
+        {
+            return await _dbContext.OrderDetails
+                .Where(od => od.Order.CreatedDate.Month == month && od.Order.CreatedDate.Year == year)
+                .GroupBy(od => new { od.Order.CreatedDate.Day })
+                .Select(g => new { Day = g.Key.Day, Revenue = g.Sum(od => od.Course.Price) })
+                .ToDictionaryAsync(x => $"{month.ToString().PadLeft(2, '0')}-{x.Day.ToString().PadLeft(2, '0')}", x => x.Revenue);
+        }
+
         #endregion
     }
 }

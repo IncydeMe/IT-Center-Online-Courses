@@ -18,5 +18,10 @@ namespace App_Repository.Repositories
         public async Task<GetOrderResponse> GetOrderById(int orderId) => await OrderDAO.Instance.GetOrderById(orderId);
         public async Task CreateOrder(CreateOrderRequest createOrderRequest) => await OrderDAO.Instance.CreateOrder(createOrderRequest);
         public async Task<bool> ChangeStatus(int orderId) => await OrderDAO.Instance.ChangeStatus(orderId);
+        public async Task<Dictionary<string, int>> GetMonthlyOrderCounts() => await OrderDAO.Instance.GetMonthlyOrderCounts();
+        public async Task<int> GetTotalOrders() => await OrderDAO.Instance.GetTotalOrders();
+        public async Task<Dictionary<string, int>> GetDailyOrderCounts() => await OrderDAO.Instance.GetDailyOrderCounts();
+        public async Task<Dictionary<string, double>> GetDailyRevenue(int month, int year) 
+            => await OrderDAO.Instance.GetDailyRevenue(month, year);
     }
 }

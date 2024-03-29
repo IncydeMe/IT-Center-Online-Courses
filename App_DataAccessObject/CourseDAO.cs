@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using App_BusinessObject.DTOs.Request.Course;
 using App_BusinessObject.DTOs.Response.Course;
 using App_BusinessObject.Models;
@@ -126,5 +126,26 @@ namespace App_DataAccessObject
                                            .Where(c => c.Category.CategoryName.Equals(categoryName))
                                            .ToPaginateAsync(page, size, 1);
         }
+
+        public async Task<List<Course>> GetAllCourses()
+        {
+            List<Course> courseList = await _dbContext.Courses.ToListAsync();
+            return courseList;
+        }
+
+        public async Task<int> GetTotalCourses()
+        {
+            return await _dbContext.Courses.CountAsync();
+        }
+
+        public async Task<Dictionary<string, int>> GetCourseCountsByCategory()
+        {
+            return await _dbContext.Courses
+                .GroupBy(c => c.Category.CategoryName)
+                .Select(g => new { CategoryName = g.Key, CourseCount = g.Count() })
+                .ToDictionaryAsync(x => x.CategoryName, x => x.CourseCount);
+        }
+
+
     }
 }

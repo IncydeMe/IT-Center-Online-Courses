@@ -6,6 +6,7 @@
 <head>
 	<link rel="stylesheet" href="/css/input.css" />
 	<link rel="stylesheet" href="/css/output.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <section class="p-4">
@@ -15,16 +16,16 @@
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
 		<div class="bg-blue-500 text-white px-4 py-8 rounded-lg ">
 			<h2 class="text-2xl font-bold">Total Courses</h2>
-			<p class="text-xl font-semibold">20</p>
+			<p class="text-xl font-semibold">@Model.TotalCourses</p>
 		</div>
 		<div class="bg-green-500 text-white px-4 py-8 rounded-lg ">
 			<h2 class="text-2xl font-bold">Total Students</h2>
-			<p class="text-xl font-semibold">200</p>
+			<p class="text-xl font-semibold">@Model.TotalStudent</p>
 		</div>
-		<div class="bg-yellow-500 text-white px-4 py-8 rounded-lg ">
-			<h2 class="text-2xl font-bold">Total Orders</h2>
-			<p class="text-xl font-semibold">100</p>
-		</div>
+        <div class="bg-yellow-500 text-white px-4 py-8 rounded-lg ">
+            <h2 class="text-2xl font-bold">Total Orders</h2>
+            <p class="text-xl font-semibold">@Model.TotalOrders</p>
+        </div>
 		<div class="bg-red-500 text-white px-4 py-8 rounded-lg ">
 			<h2 class="text-2xl font-bold">Total Instructors</h2>
 			<p class="text-xl font-semibold">10</p>
@@ -33,15 +34,139 @@
 	<!--End Highlight Statistic Section-->
 	<!--Charts Section-->
 	<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-		<div class="bg-white p-4 rounded-lg">
+		<div class="bg-white p-4 rounded-lg coursechart">
 			<h2 class="text-lg font-semibold pb-2">Courses Chart</h2>
 			<canvas id="coursesChart"></canvas>
 		</div>
-		<div class="bg-white p-4 rounded-lg">
+		<div class="bg-white p-4 rounded-lg orderchart">
 			<h2 class="text-lg font-semibold pb-2">Orders Chart</h2>
 			<canvas id="ordersChart"></canvas>
 		</div>
+        <div class="bg-white p-4 rounded-lg revenuechart">
+            <h2 class="text-lg font-semibold pb-2">Revenue Chart</h2>
+            <canvas id="revenueChart"></canvas>
+        </div>
 	</div>
 	<!--End Charts Section-->
 
 </section>
+
+<script>
+    // This will generate the days in a month
+    function getDatesInMonth(month, year) {
+        var date = new Date(year, month, 1);
+        var dates = [];
+        while (date.getMonth() === month) {
+            dates.push(new Date(date));
+            date.setDate(date.getDate() + 1);
+        }
+        return dates.map(d => `${(d.getMonth() + 1).toString().padStart(2, '0')}-${d.getDate().toString().padStart(2, '0')}`);
+    }
+
+
+    var currentYear = new Date().getFullYear();
+    var currentMonth = new Date().getMonth();
+    var monthYear = `${currentMonth + 1}-${currentYear}`;
+    var labels = getDatesInMonth(currentMonth, currentYear);
+
+    var data = new Array(labels.length).fill(0);
+
+    var ordersDataFromDb = @Html.Raw(Json.Serialize(Model.Orders));
+    for (var key in ordersDataFromDb) {
+        var index = labels.indexOf(key);
+        if (index !== -1) {
+            data[index] = ordersDataFromDb[key];
+        }
+    }
+
+    var backgroundColors = ['rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)',
+                            'rgb(75, 192, 192)',
+                            'rgb(153, 102, 255)']
+
+    var borderColors = ['rgb(255, 99, 132)',
+                        'rgb(54, 162, 235)',
+			            'rgb(255, 205, 86)',
+			            'rgb(75, 192, 192)',
+			            'rgb(153, 102, 255)']
+
+
+    var courseCountsData = {
+        labels: Object.keys(@Html.Raw(Json.Serialize(Model.CourseCountsByCategory))),
+        datasets: [{
+            data: Object.values(@Html.Raw(Json.Serialize(Model.CourseCountsByCategory))),
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
+            borderWidth: 1
+        }]
+    };
+
+    var ordersData = {
+        labels: labels,
+        datasets: [{
+            label: 'Orders',
+            data: data,
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
+            borderWidth: 1
+        }]
+    };
+
+    var dailyRevenueData = {
+        labels: Object.keys(@Html.Raw(Json.Serialize(Model.DailyRevenue))),
+        datasets: [{
+            label: 'Daily Revenue',
+            data: Object.values(@Html.Raw(Json.Serialize(Model.DailyRevenue))),
+            backgroundColor: backgroundColors,
+            borderColor: borderColors,
+            borderWidth: 1
+        }]
+    };
+
+    var ctxCourseCounts = document.getElementById('coursesChart').getContext('2d');
+    var coursesChart = new Chart(ctxCourseCounts, {
+        type: 'pie',
+        data: courseCountsData,
+      options: {
+          aspectRatio: 2,
+		}
+    });
+
+    var ctxOrders = document.getElementById('ordersChart').getContext('2d');
+    var ordersChart = new Chart(ctxOrders, {
+        type: 'bar',
+        data: ordersData,
+        options: {
+            title: {
+                display: true,
+                text: `Orders for ${monthYear}`
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    var ctxDailyRevenue = document.getElementById('revenueChart').getContext('2d');
+    var revenueChart = new Chart(ctxDailyRevenue, {
+        type: 'bar',
+        data: dailyRevenueData,
+        options: {
+            title: {
+                display: true,
+                text: `Daily Revenue for ${monthYear}`
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+
+</script>
+

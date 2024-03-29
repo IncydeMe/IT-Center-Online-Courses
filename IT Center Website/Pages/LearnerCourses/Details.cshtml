@@ -5,7 +5,32 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+
+<head>
+    <link rel="stylesheet" href="~/css/output.css" />
+    <link rel="stylesheet" href="~/css/input.css" />
+</head>
+
+<a asp-page="./Index">Back to Courses</a>
+<h1>Course Detail</h1>
+
+<div class="mt-[150px] mb-[150px]">
+    <div>
+        <div class="rounded-[30px] mb-[80px]">
+            <img class="rounded-[30px]" src="@Html.DisplayFor(model => model.Course.ImageUrl)" />
+        </div>
+        <h2 class="text-[40px] text-[#FD7575] text-[leading-[30px] mb-[10px]">
+             @Html.DisplayFor(model => model.Course.CourseName)
+        </h2>
+        
+    </div>
+    <div>
+        <h1 class="price">
+            @Html.DisplayFor(model => model.Course.Price)
+        </h1>
+        
+    </div>
+</div>
 
 <div>
     <h4>Course</h4>
@@ -42,14 +67,14 @@
             @Html.DisplayFor(model => model.Course.Price)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Course.Category)
+            @Html.DisplayNameFor(model => model.Course.CategoryName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Course.Category.CategoryName)
+            @Html.DisplayFor(model => model.Course.CategoryName)
         </dd>
     </dl>
 </div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Course?.CourseId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    
 </div>

@@ -18,5 +18,8 @@ namespace App_Repository.Interfaces
         public Task<bool> ChangeCourseStatus(int id);
         public Task<GetCourseResponse> GetCourseById(int courseId);
         public Task<IPaginate<Course>> GetCoursesByCategoryName(string categoryName, int page, int size);
+        public Task<List<Course>> GetAllCourses();
+        public Task<int> GetTotalCourses();
+        public Task<Dictionary<string, int>> GetCourseCountsByCategory();
     }
 }

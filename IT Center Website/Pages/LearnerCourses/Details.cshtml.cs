@@ -6,30 +6,37 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using App_BusinessObject.Models;
-using App_Repository.Interfaces;
 using App_Service.Interfaces;
-using App_BusinessObject.Paginate;
+
 using App_BusinessObject.DTOs.Response.Course;
 
 namespace IT_Center_Website.Pages.Courses
 {
-    public class IndexModel : PageModel
+    public class DetailsModel : PageModel
     {
         private readonly ICourseService _courseService;
 
-        public IndexModel(ICourseService courseService)
+        public DetailsModel(ICourseService courseService)
         {
             _courseService = courseService;
         }
 
-        public IPaginate<GetCourseResponse> Course { get; set; } = default!;
+      public GetCourseResponse Course { get; set; } = default!; 
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (_courseService.GetAllACourses(1, 6) != null)
+
+
+            var course = await _courseService.GetCourseById(id);
+            if (course == null)
             {
-                Course = await _courseService.GetAllACourses(1,6);
+                return NotFound();
             }
+            else 
+            {
+                Course = course;
+            }
+            return Page();
         }
     }
 }
