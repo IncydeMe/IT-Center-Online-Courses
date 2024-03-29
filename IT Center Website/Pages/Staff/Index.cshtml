@@ -1,0 +1,26 @@
+﻿@page
+@model IT_Center_Website.Pages.Staff.IndexModel
+@{
+	Layout = "_StaffLayout";
+	ViewData["Title"] = "Staff Home";
+}
+<head>
+	<title>@ViewData["Title"]</title>
+</head>
+<body class="bg-gray-100 p-10">
+    <h1 class="text-3xl mb-4">Staff Dashboard</h1>
+    <div class="grid grid-cols-3 gap-4">
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="text-xl mb-2">Total Revenue</h2>
+            <p class="text-2xl">$123,456</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="text-xl mb-2">Total Learners</h2>
+            <p class="text-2xl">789</p>
+        </div>
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="text-xl mb-2">Highest Sales Course</h2>
+            <p class="text-2xl">Course Title</p>
+        </div>
+    </div>
+</body>
