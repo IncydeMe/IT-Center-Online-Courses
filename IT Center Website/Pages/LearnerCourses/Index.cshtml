@@ -94,8 +94,9 @@
                         <a asp-page="./Details" asp-route-id="@item.CourseId">Details</a>
                     </button>
                     <form method="post">
+                        <input name="id" type="hidden" value="@item.CourseId" />
                         <button type="submit" class="bg-[#FEBB8E] px-[20px] py-[8px]">
-                            <a asp-route-id="@item.CourseId">Join Now</a>
+                            Join Now
                         </button>
                     </form>
                 </div>

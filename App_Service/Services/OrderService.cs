@@ -1,5 +1,6 @@
 ﻿using App_BusinessObject.DTOs.Request.Order;
 using App_BusinessObject.DTOs.Response.Order;
+using App_BusinessObject.Models;
 using App_BusinessObject.Paginate;
 using App_Repository.Interfaces;
 using App_Repository.Repositories;
@@ -23,7 +24,7 @@ namespace App_Service.Services
         public async Task<IPaginate<GetOrderResponse>> GetAllOrders(int page, int size) => await _orderRepository.GetAllOrders(page, size);
         public async Task<IPaginate<GetOrderResponse>> GetUserOrderList(int accountId, int page, int size) => await _orderRepository.GetUserOrderList(accountId, page, size);
         public async Task<GetOrderResponse> GetOrderById(int orderId) => await _orderRepository.GetOrderById(orderId);
-        public async Task CreateOrder(CreateOrderRequest createOrderRequest) => await _orderRepository.CreateOrder(createOrderRequest);
+        public async Task<Order> CreateOrder(int accountId) => await _orderRepository.CreateOrder(accountId);
         public async Task<bool> ChangeStatus(int orderId) => await _orderRepository.ChangeStatus(orderId);
         public async Task<Dictionary<string, int>> GetMonthlyOrderCounts() => await _orderRepository.GetMonthlyOrderCounts();
         public async Task<int> GetTotalOrders() => await _orderRepository.GetTotalOrders();

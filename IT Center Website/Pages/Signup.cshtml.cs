@@ -35,6 +35,7 @@ namespace IT_Center_Website.Pages
             if (signup != null)
             {
                 HttpContext.Session.SetString("Token", signup.AccessToken);
+                HttpContext.Session.SetInt32("Id", signup.Id);
 
                 switch (signup.Role)
                 {
