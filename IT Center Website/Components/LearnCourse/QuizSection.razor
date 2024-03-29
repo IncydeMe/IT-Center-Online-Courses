@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNetCore.Components.Web;
+@using IT_Center_Website.Components;
+@inherits Microsoft.AspNetCore.Components.ComponentBase;
+
+@code {
+    [Parameter]
+    public Material QuizMaterial { get; set; } //Replace this with appropriate model
+}
+
+<div>
+    <h2>@QuizMaterial.Title</h2>
+    @foreach (var question in QuizMaterial.Questions)
+    {
+        <p>@question.Text</p>
+        @foreach (var option in question.Options)
+        {
+            <div>
+                <input type="radio" id="@option.Id" name="@question.Id" value="@option.Id">
+                <label for="@option.Id">@option.Text</label>
+            </div>
+        }
+    }
+</div>
