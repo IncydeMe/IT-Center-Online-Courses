@@ -5,8 +5,9 @@
 @{
 }
 
-
-<component type="typeof(VideoSection)" render-mode="ServerPrerendered" />
-
-
+@foreach (var lesson in Model.Lessons)
+{
+        <component type="typeof(VideoSection)" render-mode="ServerPrerendered"
+        param-VideoMaterial="@(lesson.MaterialUrl)" />
+}
 
