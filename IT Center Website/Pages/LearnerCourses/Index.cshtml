@@ -6,134 +6,135 @@
 
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = null;
+	ViewData["Title"] = "Index";
+	Layout = null;
 
-    var prevDisabled = Model.PageNumber == 1 ? "disabled" : "";
-    var nextDisabled = Model.PageNumber == Model.TotalPages ? "disabled" : "";
-    var prevPage = Model.PageNumber - 1;
-    var nextPage = Model.PageNumber + 1;
-    var prevUrl = "/LearnerCourses/Index?PageNumber=" + prevPage;
-    var nextUrl = "/LearnerCourses/Index?PageNumber=" + nextPage;
+	var prevDisabled = Model.PageNumber == 1 ? "disabled" : "";
+	var nextDisabled = Model.PageNumber == Model.TotalPages ? "disabled" : "";
+	var prevPage = Model.PageNumber - 1;
+	var nextPage = Model.PageNumber + 1;
+	var prevUrl = "/LearnerCourses/Index?PageNumber=" + prevPage;
+	var nextUrl = "/LearnerCourses/Index?PageNumber=" + nextPage;
 }
 
 
 
 <head>
-    <link rel="stylesheet" href="~/css/output.css" />
-    <link rel="stylesheet" href="~/css/input.css" />
+	<link rel="stylesheet" href="~/css/output.css" />
+	<link rel="stylesheet" href="~/css/input.css" />
 </head>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const optionsTypeData = [
-            { value: 'Filter 1', content: 'Filter 1' },
-            { value: 'Filter 2', content: 'Filter 2' },
-            { value: 'Filter 3', content: 'Filter 3' },
-            { value: 'Filter 4', content: 'Filter 4' },
-            { value: 'Filter 5', content: 'Filter 5' },
-            { value: 'Filter 6', content: 'Filter 6' }
-        ];
+	document.addEventListener("DOMContentLoaded", function () {
+		const optionsTypeData = [
+			{ value: 'Filter 1', content: 'Filter 1' },
+			{ value: 'Filter 2', content: 'Filter 2' },
+			{ value: 'Filter 3', content: 'Filter 3' },
+			{ value: 'Filter 4', content: 'Filter 4' },
+			{ value: 'Filter 5', content: 'Filter 5' },
+			{ value: 'Filter 6', content: 'Filter 6' }
+		];
 
-        const selectBox = document.getElementById("selectBox");
+		const selectBox = document.getElementById("selectBox");
 
-        // default option with empty value
-        let defaultOption = document.createElement("option");
-        defaultOption.value = "";
-        defaultOption.textContent = "Choose";
-        selectBox.appendChild(defaultOption);
+		// default option with empty value
+		let defaultOption = document.createElement("option");
+		defaultOption.value = "";
+		defaultOption.textContent = "Choose";
+		selectBox.appendChild(defaultOption);
 
-        //options
-        optionsTypeData.forEach(function (option) {
-            let optionElement = document.createElement("option");
-            optionElement.value = option.value;
-            optionElement.textContent = option.content;
-            selectBox.appendChild(optionElement);
-        });
-    });
+		//options
+		optionsTypeData.forEach(function (option) {
+			let optionElement = document.createElement("option");
+			optionElement.value = option.value;
+			optionElement.textContent = option.content;
+			selectBox.appendChild(optionElement);
+		});
+	});
 
-    //money
-    
+	//money
+
 </script>
 <head>
-    <link rel="stylesheet" href="~/css/output.css" />
-    <link rel="stylesheet" href="~/css/input.css" />
+	<link rel="stylesheet" href="~/css/output.css" />
+	<link rel="stylesheet" href="~/css/input.css" />
 </head>
 
 
 
 <body class="bg-[#FFF4E8] overflow-x-hidden">
-    <div id="header">
-        <component type="typeof(Header)" render-mode="ServerPrerendered" />
-    </div>
-    
-    <div class="flex justify-center gap-[700px] mt-[60px]">
-        <div class='search_name relative'>
-            <input type="search" name='search_name' placeholder='Course name...' class='bg-[#E5E4E4] border border-[#3D4449]
+	<div id="header">
+		<component type="typeof(Header)" render-mode="ServerPrerendered" />
+	</div>
+
+	<div class="flex justify-center gap-[700px] mt-[60px]">
+		<div class='search_name relative'>
+			<input type="search" name='search_name' placeholder='Course name...' class='bg-[#E5E4E4] border border-[#3D4449]
                     h-10 pl-[50px] pr-10 rounded-[5px] text-sm focus:outline-none w-[500px]' />
-            <button class='absolute left-[20px] top-[8px]'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 29 29" fill="none">
-                    <path d="M27.6251 27.625L21.2915 21.2915M21.2915 21.2915C22.3749 20.2081 23.2343 18.9219 23.8206 17.5064C24.4069 16.0909 24.7087 14.5738 24.7087 13.0417C24.7087 11.5095 24.4069 9.99241 23.8206 8.57691C23.2343 7.16141 22.3749 5.87525 21.2915 4.79187C20.2081 3.70849 18.922 2.84911 17.5065 2.26279C16.091 1.67647 14.5739 1.37469 13.0417 1.37469C11.5096 1.37469 9.99247 1.67647 8.57697 2.26279C7.16147 2.84911 5.87531 3.70849 4.79193 4.79187C2.60395 6.97985 1.37476 9.94739 1.37476 13.0417C1.37476 16.1359 2.60395 19.1035 4.79193 21.2915C6.97991 23.4794 9.94745 24.7086 13.0417 24.7086C16.136 24.7086 19.1035 23.4794 21.2915 21.2915Z" stroke="#3D4449" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            </button>
-        </div>
-        @*filter*@
-        <div class="border border-[#3D4449] rounded-[50px] flex items-center px-[20px] gap-[10px]">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="18" viewBox="0 0 30 18" fill="none">
-                <path d="M10 16.25C10 15.9185 10.1317 15.6005 10.3661 15.3661C10.6005 15.1317 10.9185 15 11.25 15H18.75C19.0815 15 19.3995 15.1317 19.6339 15.3661C19.8683 15.6005 20 15.9185 20 16.25C20 16.5815 19.8683 16.8995 19.6339 17.1339C19.3995 17.3683 19.0815 17.5 18.75 17.5H11.25C10.9185 17.5 10.6005 17.3683 10.3661 17.1339C10.1317 16.8995 10 16.5815 10 16.25ZM5 8.75C5 8.41848 5.1317 8.10054 5.36612 7.86612C5.60054 7.6317 5.91848 7.5 6.25 7.5H23.75C24.0815 7.5 24.3995 7.6317 24.6339 7.86612C24.8683 8.10054 25 8.41848 25 8.75C25 9.08152 24.8683 9.39946 24.6339 9.63388C24.3995 9.8683 24.0815 10 23.75 10H6.25C5.91848 10 5.60054 9.8683 5.36612 9.63388C5.1317 9.39946 5 9.08152 5 8.75ZM0 1.25C0 0.918479 0.131696 0.600537 0.366117 0.366117C0.600537 0.131696 0.918479 0 1.25 0H28.75C29.0815 0 29.3995 0.131696 29.6339 0.366117C29.8683 0.600537 30 0.918479 30 1.25C30 1.58152 29.8683 1.89946 29.6339 2.13388C29.3995 2.3683 29.0815 2.5 28.75 2.5H1.25C0.918479 2.5 0.600537 2.3683 0.366117 2.13388C0.131696 1.89946 0 1.58152 0 1.25Z" fill="#3D4449" />
-            </svg>
-            <select class='h-[40px] border-none outline-none font-bold text-[#3D4449] bg-transparent' name="" id="selectBox">
-                @*render from code*@
-            </select>
-        </div>
-    </div>
+			<button class='absolute left-[20px] top-[8px]'>
+				<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 29 29" fill="none">
+					<path d="M27.6251 27.625L21.2915 21.2915M21.2915 21.2915C22.3749 20.2081 23.2343 18.9219 23.8206 17.5064C24.4069 16.0909 24.7087 14.5738 24.7087 13.0417C24.7087 11.5095 24.4069 9.99241 23.8206 8.57691C23.2343 7.16141 22.3749 5.87525 21.2915 4.79187C20.2081 3.70849 18.922 2.84911 17.5065 2.26279C16.091 1.67647 14.5739 1.37469 13.0417 1.37469C11.5096 1.37469 9.99247 1.67647 8.57697 2.26279C7.16147 2.84911 5.87531 3.70849 4.79193 4.79187C2.60395 6.97985 1.37476 9.94739 1.37476 13.0417C1.37476 16.1359 2.60395 19.1035 4.79193 21.2915C6.97991 23.4794 9.94745 24.7086 13.0417 24.7086C16.136 24.7086 19.1035 23.4794 21.2915 21.2915Z" stroke="#3D4449" stroke-linecap="round" stroke-linejoin="round" />
+				</svg>
+			</button>
+		</div>
+		@*filter*@
+		<div class="border border-[#3D4449] rounded-[50px] flex items-center px-[20px] gap-[10px]">
+			<svg xmlns="http://www.w3.org/2000/svg" width="30" height="18" viewBox="0 0 30 18" fill="none">
+				<path d="M10 16.25C10 15.9185 10.1317 15.6005 10.3661 15.3661C10.6005 15.1317 10.9185 15 11.25 15H18.75C19.0815 15 19.3995 15.1317 19.6339 15.3661C19.8683 15.6005 20 15.9185 20 16.25C20 16.5815 19.8683 16.8995 19.6339 17.1339C19.3995 17.3683 19.0815 17.5 18.75 17.5H11.25C10.9185 17.5 10.6005 17.3683 10.3661 17.1339C10.1317 16.8995 10 16.5815 10 16.25ZM5 8.75C5 8.41848 5.1317 8.10054 5.36612 7.86612C5.60054 7.6317 5.91848 7.5 6.25 7.5H23.75C24.0815 7.5 24.3995 7.6317 24.6339 7.86612C24.8683 8.10054 25 8.41848 25 8.75C25 9.08152 24.8683 9.39946 24.6339 9.63388C24.3995 9.8683 24.0815 10 23.75 10H6.25C5.91848 10 5.60054 9.8683 5.36612 9.63388C5.1317 9.39946 5 9.08152 5 8.75ZM0 1.25C0 0.918479 0.131696 0.600537 0.366117 0.366117C0.600537 0.131696 0.918479 0 1.25 0H28.75C29.0815 0 29.3995 0.131696 29.6339 0.366117C29.8683 0.600537 30 0.918479 30 1.25C30 1.58152 29.8683 1.89946 29.6339 2.13388C29.3995 2.3683 29.0815 2.5 28.75 2.5H1.25C0.918479 2.5 0.600537 2.3683 0.366117 2.13388C0.131696 1.89946 0 1.58152 0 1.25Z" fill="#3D4449" />
+			</svg>
+			<select class='h-[40px] border-none outline-none font-bold text-[#3D4449] bg-transparent' name="" id="selectBox">
+				@*render from code*@
+			</select>
+		</div>
+	</div>
 
-    <h1 class="text-[56px] ml-[60px] font-bold text-[#FD7575]">
-        Courses:
-    </h1>
-    <div class="flex justify-center">
-        <div class="grid grid-cols-3 gap-x-[80px] mt-[50px] mb-[150px] ">
-            @foreach (var item in Model.Course)
-            {
-                <div class="w-[350px] h-[450px] bg-[#fefefe] rounded-bl-[20px] rounded-tr-[25px]">
-                    <img class="w-[350px] rounded-tr-[25px] h-[227px] object-cover" src="@Html.DisplayFor(modelItem => item.ImageUrl)" />
-                    <div class="h-[120px]">
-                        <h2 class="text-[40px] pl-[15px] text-[#2F2155] font-bold leading-[60px]">@Html.DisplayFor(modelItem => item.Price) VND</h2>
-                        <p class="text-[24px] text-[#2F2155] pl-[15px] leading-[30px] font-normal">@Html.DisplayFor(modelItem => item.CourseName)</p>
-                    </div>
-                    <div class="flex justify-center items-center gap-[110px] mt-[40px]">
-                        <button class="bg-[#FDDB9E] px-[20px] py-[8px] rounded-[8px]">
-                            <a asp-page="./Details" asp-route-id="@item.CourseId">Details</a>
-                        </button>
-                        <button class="bg-[#FEBB8E] px-[20px] py-[8px] rounded-[8px]">
-                            Join now
-                        </button>
-                    </div>
+	<h1 class="text-[56px] ml-[60px] font-bold text-[#FD7575]">
+		Courses:
+	</h1>
+	<div class="flex justify-center">
+		<div class="grid grid-cols-3 gap-x-[80px] mt-[50px] mb-[150px] ">
+			@foreach (var item in Model.Course)
+			{
+				<div class="w-[350px] h-[450px] bg-[#fefefe] rounded-bl-[20px] rounded-tr-[25px]">
+					<img class="w-[350px] rounded-tr-[25px] h-[227px] object-cover" src="@Html.DisplayFor(modelItem => item.ImageUrl)" />
+					<div class="h-[120px]">
+						<h2 class="text-[40px] pl-[15px] text-[#2F2155] font-bold leading-[60px]">@Html.DisplayFor(modelItem => item.Price) VND</h2>
+						<p class="text-[24px] text-[#2F2155] pl-[15px] leading-[30px] font-normal">@Html.DisplayFor(modelItem => item.CourseName)</p>
+					</div>
+					<div class="flex justify-center items-center gap-[110px] mt-[40px]">
+						<button class="bg-[#FDDB9E] px-[20px] py-[8px] rounded-[8px]">
+							<a asp-page="./Details" asp-route-id="@item.CourseId">Details</a>
+						</button>
+						<button class="bg-[#FEBB8E] px-[20px] py-[8px] rounded-[8px]">
+							Join now
+						</button>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
 
-    
-    </div>
+	<!--Pagination-->
+	<div class="flex justify-center items-center">
+		<a href="@prevUrl" class=" text-white px-4 py-2 m-2 @prevDisabled">
+			<img src="~/images/icon/prev_icon.png" />
+		</a>
+		@foreach (var i in Enumerable.Range(1, Model.TotalPages))
+		{
+			var url = "/LearnerCourses/Index?PageNumber=" + i;
+			var active = i == Model.PageNumber ? "bg-blue-500" : "bg-gray-300";
+			<a href="@url" class="text-white px-4 py-2 m-2 @active">
+				<p>@i</p>
+			</a>
+		}
+		<span>Page @Model.PageNumber of @Model.TotalPages</span>
+		<a href="@nextUrl" class="bg-[#5635AE] rounded-[30px] px-[8px] py-[8px] ml-[20px] @nextDisabled">
+			<img src="~/images/icon/next-icon.png" />
+		</a>
+	</div>
 
-    <!--Pagination-->
-    <div class="flex justify-center items-center">
-        <a href="@prevUrl" class=" text-white px-4 py-2 m-2 @prevDisabled">
-            <img src="~/images/icon/prev_icon.png" />
-        </a>
-        @foreach (var i in Enumerable.Range(1, Model.TotalPages))
-        {
-            var url = "/LearnerCourses/Index?PageNumber=" + i;
-            var active = i == Model.PageNumber ? "bg-blue-500" : "bg-gray-300";
-            <a href="@url" class="text-white px-4 py-2 m-2 @active">
-                <p>@i</p>
-            </a>
-        }
-        <span>Page @Model.PageNumber of @Model.TotalPages</span>
-        <a href="@nextUrl" class="bg-[#5635AE] rounded-[30px] px-[8px] py-[8px] ml-[20px] @nextDisabled">
-            <img src="~/images/icon/next-icon.png" />
-        </a>
-    </div>
-
-    <div id="header">
-        <component type="typeof(Footer)" render-mode="ServerPrerendered" />
-    </div>
+	<div id="header">
+		<component type="typeof(Footer)" render-mode="ServerPrerendered" />
+	</div>
 </body>
 
