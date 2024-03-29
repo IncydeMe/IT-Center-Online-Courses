@@ -5,3 +5,15 @@
 body{
     font-family:'Avenir', sans-serif;
 }
+
+.coursechart {
+    height: fit-content;
+}
+
+.orderchart {
+    height: fit-content;
+}
+
+.revenuechart {
+    height: fit-content;
+}

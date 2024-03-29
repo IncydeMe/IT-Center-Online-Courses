@@ -1,5 +1,6 @@
 ﻿using App_BusinessObject.DTOs.Request.OwnedCourse;
 using App_BusinessObject.DTOs.Response.OwnedCourse;
+using App_BusinessObject.Models;
 using App_BusinessObject.Paginate;
 using App_Repository.Interfaces;
 using App_Repository.Repositories;
@@ -25,5 +26,7 @@ namespace ITCenterService
         public async Task CreateOwnedCourse(CreateOwnedCourseRequest createOwnedCourseRequest) => await _ownedCourseRepository.CreateOwnedCourse(createOwnedCourseRequest);
 
         public async Task<IPaginate<GetOwnedCourseResponse>> GetOwnedCourse(int accountId, int page, int size) => await _ownedCourseRepository.GetAllOwnedCourse(accountId, page, size);
+
+        public async Task<List<Lesson>> GetLessonInOwnedCourse(int courseId) => await _ownedCourseRepository.GetLessonInOwnedCourse(courseId);
     }
 }

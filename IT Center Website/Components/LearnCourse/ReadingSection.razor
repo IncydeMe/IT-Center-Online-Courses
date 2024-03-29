@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Components.Web;
+@using IT_Center_Website.Components;
+@inherits Microsoft.AspNetCore.Components.ComponentBase;
+
+@code {
+    [Parameter]
+    public string ReadingMaterial { get; set; } //Replace this with appropriate model
+}
+
+<div>
+    @ReadingMaterial
+</div>

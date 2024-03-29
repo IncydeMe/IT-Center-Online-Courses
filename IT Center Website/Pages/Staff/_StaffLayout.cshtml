@@ -1,13 +1,24 @@
-﻿<!DOCTYPE html>
+﻿@using IT_Center_Website.Components;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title</title
+    <link rel="stylesheet" href="/css/input.css" />
+    <link rel="stylesheet" href="/css/output.css" />
+
 </head>
 <body>
-    <div>
-        @RenderBody()
+    <div class="flex w-screen">
+        <div class="">
+            <component type="typeof(AdminSidebar)" render-mode="ServerPrerendered"/>
+        </div>
+        <div class="w-full">
+            @RenderBody()
+        </div>
     </div>
 </body>
 </html>

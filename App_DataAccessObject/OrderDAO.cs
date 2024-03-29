@@ -102,19 +102,35 @@ namespace App_DataAccessObject
 
         public async Task<GetOrderResponse> GetOrderById(int orderId)
         {
-            Order? order = await _dbContext.Orders.FirstOrDefaultAsync(x => x.OrderId == orderId);
-            if (order == null)
+            return await _dbContext.Orders.Select(or => new GetOrderResponse
             {
-                return null;
-            }
-                GetOrderResponse response = _mapper.Map<GetOrderResponse>(order);
-                return response;
+                OrderId = or.OrderId,
+                AccountId = or.AccountId,
+                CreatedDate = or.CreatedDate,
+                Status = or.Status
+            }).FirstOrDefaultAsync(o => o.OrderId == orderId);
         }
 
-        public async Task CreateOrder(CreateOrderRequest createOrderRequest)
+        public async Task<Order> CreateOrder(int accountId)
         {
-            await _dbContext.Orders.AddAsync(_mapper.Map<Order>(createOrderRequest));
+            Account acc = await _dbContext.Accounts.FirstOrDefaultAsync(a => a.AccountId == accountId);
+            if (acc == null) throw new Exception();
+
+            DateTime createDate = DateTime.Now;
+
+            Order newOrder = new Order
+            {
+                OrderId = 0,
+                AccountId = accountId,
+                CreatedDate = createDate,
+                Status = false //Not Paid
+            };
+            _dbContext.Orders.Add(newOrder);
+
+            //Save data for id auto generate
             await _dbContext.SaveChangesAsync();
+
+            return await _dbContext.Orders.FirstOrDefaultAsync(o => o.OrderId == newOrder.OrderId);
         }
 
         public async Task<bool> ChangeStatus(int orderId)
@@ -129,6 +145,16 @@ namespace App_DataAccessObject
                 await _dbContext.SaveChangesAsync();
                 return true;
         }
+
+        public async Task<Dictionary<string, double>> GetDailyRevenue(int month, int year)
+        {
+            return await _dbContext.OrderDetails
+                .Where(od => od.Order.CreatedDate.Month == month && od.Order.CreatedDate.Year == year)
+                .GroupBy(od => new { od.Order.CreatedDate.Day })
+                .Select(g => new { Day = g.Key.Day, Revenue = g.Sum(od => od.Course.Price) })
+                .ToDictionaryAsync(x => $"{month.ToString().PadLeft(2, '0')}-{x.Day.ToString().PadLeft(2, '0')}", x => x.Revenue);
+        }
+
         #endregion
     }
 }

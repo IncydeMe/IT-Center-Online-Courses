@@ -42,6 +42,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\Learner\OwnedCourse\" />
+    <Folder Include="Pages\Staff\Courses\" />
     <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
 

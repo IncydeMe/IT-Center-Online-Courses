@@ -167,6 +167,13 @@ namespace App_DataAccessObject
 			}
 			return false;
 		}
+
+        // Make methods to count all students in the account table (roleid = 3)
+        public int CountAllStudents()
+        {
+            return _dbContext.Accounts.Include(x => x.Role).Where(x => x.RoleId == 3).Count();
+        }
+
         #endregion
 
         #region AuthenticationFunction
