@@ -33,29 +33,6 @@
 				<input asp-for="Course.CategoryName" disabled />
 			</div>
 		</div>
-		<!--Instructors List for the Course: No Instructors-->
-		<div>
-			<h2>Instructors</h2>
-			<table>
-				<thead>
-					<tr>
-						<th>Instructor ID</th>
-						<th>Instructor Name</th>
-						<th>Instructor Email</th>
-					</tr>
-				</thead>
-				<tbody>
-					@foreach (var instructor in Model.Instructors)
-					{
-						<tr>
-							<td>@instructor.Id</td>
-							<td>@instructor.Name</td>
-							<td>@instructor.Email</td>
-						</tr>
-					}
-				</tbody>
-			</table>
-		</div>
 	</form>
 	<button>Go Back</button>
 </body>
