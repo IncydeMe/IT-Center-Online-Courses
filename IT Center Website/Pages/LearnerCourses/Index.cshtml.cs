@@ -17,61 +17,57 @@ using App_Service.Services;
 
 namespace IT_Center_Website.Pages.Courses
 {
-    public class IndexModel : PageModel
-    {
-        private readonly IOrderService _orderService;
-        private readonly IOrderDetailService _orderDetailService;
-        private readonly ICourseService _courseService;
-        private readonly IPaymentService _paymentService;
-        private readonly int size = 3;
+	public class IndexModel : PageModel
+	{
+		private readonly IOrderService _orderService;
+		private readonly IOrderDetailService _orderDetailService;
+		private readonly ICourseService _courseService;
+		private readonly IPaymentService _paymentService;
+		private readonly int size = 3;
 
-        public IndexModel(ICourseService courseService, IOrderService orderService, IOrderDetailService orderDetailService,
-            IPaymentService paymentService)
-        {
-            _courseService = courseService;
-            _orderService = orderService;
-            _orderDetailService = orderDetailService;
-            _paymentService = paymentService;
-        }
+		public IndexModel(ICourseService courseService, IOrderService orderService, IOrderDetailService orderDetailService,
+			IPaymentService paymentService)
+		{
+			_courseService = courseService;
+			_orderService = orderService;
+			_orderDetailService = orderDetailService;
+			_paymentService = paymentService;
+		}
 
-        public List<GetCourseResponse> Course { get; set; } = default!;
+		public List<GetCourseResponse> Course { get; set; } = default!;
 
-        [BindProperty(SupportsGet = true)]
-        public int PageNumber { get; set; }
-        public int TotalPages { get; set; }
+		[BindProperty(SupportsGet = true)]
+		public int PageNumber { get; set; }
+		public int TotalPages { get; set; }
 
-        public async Task OnGetAsync()
-        {
-            if (_courseService.GetAllCourses(1, 6) != null)
-            {
-                Course = (List<GetCourseResponse>)await _courseService.GetAllCourses(1, 6);
-                if (PageNumber == 0)
-                {
-                    PageNumber = 1;
-                }
+		public async Task OnGetAsync()
+		{
+			if (PageNumber == 0)
+			{
+				PageNumber = 1;
+			}
 
-                var courses = await _courseService.GetAllCourses(PageNumber, size);
+			var courses = await _courseService.GetAllCourses(PageNumber, size);
 
-                if (courses.Items != null)
-                {
-                    Course = (List<GetCourseResponse>)courses.Items;
-                }
-            }
-        }
+			if (courses.Items != null)
+			{
+				Course = (List<GetCourseResponse>)courses.Items;
+			}
+		}
 
-        public async Task<IActionResult> OnPostAsync(int id)
-        {
-            Order createdOrder = await _orderService.CreateOrder((int)HttpContext.Session.GetInt32("Id"));
+		public async Task<IActionResult> OnPostAsync(int id)
+		{
+			Order createdOrder = await _orderService.CreateOrder((int)HttpContext.Session.GetInt32("Id"));
 
-            await _orderDetailService.CreateOrderDetail(new CreateOrderDetailRequest
-            {
-                OrderId = createdOrder.OrderId,
-                CourseIds = new List<int> { id }
-            });
+			await _orderDetailService.CreateOrderDetail(new CreateOrderDetailRequest
+			{
+				OrderId = createdOrder.OrderId,
+				CourseIds = new List<int> { id }
+			});
 
-            PaymentLinkResponse response = await _paymentService.CreatePayment(createdOrder);
+			PaymentLinkResponse response = await _paymentService.CreatePayment(createdOrder);
 
-            return Redirect(response.PaymentUrl);
-        }
-    }
+			return Redirect(response.PaymentUrl);
+		}
+	}
 }
