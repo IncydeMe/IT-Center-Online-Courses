@@ -1,60 +1,9 @@
-@*
-@using Microsoft.AspNetCore.Components.Web;
-@using IT_Center_Website.Components;
-
-
-
-<head>
-    <link rel="stylesheet" href="~/css/input.css" />
-    <link rel="stylesheet" href="~/css/output.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-</head>
-
-<body>
-    <header class="flex">
-        <div>
-            <h3>ITCO Group</h3>
-        </div>
-        <div>
-            <ul class="flex items-center">
-                <li>
-                    <a class="text-blue-200">Home</a>
-                </li>
-                <li>
-                    <a>
-                        Courses
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        Pricing
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        Blogs
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        About Us
-                    </a>
-                </li>
-            </ul>
-            <ul>
-                <a>Login</a>
-                <a>Become a member</a>
-            </ul>
-        </div>
-    </header>
-</body>
-
-*@
-
 @using Microsoft.AspNetCore.Components.Web;
 @using IT_Center_Website.Components;
 @inherits Microsoft.AspNetCore.Components.ComponentBase
+@inject HttpContextAccessor HttpContextAccessor;
 @page "/header"
+
 <head>
     @*<link rel="stylesheet" href="css/Header/Header.css" />*@
     <link rel="stylesheet" href="css/output.css" />
@@ -89,15 +38,27 @@
                     <img src="images/header/line_between.png" alt="line" />
                 </li>
             </ul>
-            
-            <ul class="member_btn flex items-center text-[18px] gap-[30px]">
-                <li class="cursor-pointer hover:text-[#5635AE] transition-[0.3s]">
-                    <a href="Login">Login</a>
-                </li>
-                <li class="register_btn border cursor-pointer border-[#5635AE] px-[23px] py-[7px] rounded-[40px] hover:bg-[#5635AE] hover:text-[#fff] transition-[0.3s]  ">
-                    <a class="">Become a member</a>
-                </li>
-            </ul>
+            @if(HttpContextAccessor.HttpContext.Session.GetString("token") == null)
+            {
+                <ul class="member_btn flex items-center text-[18px] gap-[30px]">
+                    <li class="cursor-pointer hover:text-[#5635AE] transition-[0.3s]">
+                        <a href="Login">Login</a>
+                    </li>
+                    <li class="register_btn border cursor-pointer border-[#5635AE] px-[23px] py-[7px] rounded-[40px] hover:bg-[#5635AE] hover:text-[#fff] transition-[0.3s]  ">
+                        <a class="">Become a member</a>
+                    </li>
+                </ul>
+            }
+            else {
+                <ul class="member_btn flex items-center text-[18px] gap-[30px]">
+                    <li class="cursor-pointer hover:text-[#5635AE] transition-[0.3s]">
+                        <a href="Login">Account</a>
+                    </li>
+                    <li class="cursor-pointer hover:text-[#5635AE] transition-[0.3s]">
+                        <a href="Login">Logout</a>
+                    </li>
+                </ul>
+            }
         </div>
     </header>
 </body>
