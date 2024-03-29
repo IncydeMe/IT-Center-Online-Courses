@@ -31,26 +31,23 @@ namespace IT_Center_Website.Pages.Courses
 
         public async Task OnGetAsync()
         {
-            if (_courseService.GetAllCourses(1, 6) != null)
+            if (PageNumber == 0)
             {
-                Course = (List<GetCourseResponse>)await _courseService.GetAllCourses(1, 6);
-                if (PageNumber == 0)
-                {
-                    PageNumber = 1;
-                }
-
-                var courses = await _courseService.GetAllCourses(PageNumber, size);
-
-                if (courses.Items != null)
-                {
-                    Course = (List<GetCourseResponse>)courses.Items;
-                }
+                PageNumber = 1;
             }
+
+            var courses = await _courseService.GetAllCourses(PageNumber, size);
+
+            if (courses.Items != null)
+            {
+                Course = (List<GetCourseResponse>)courses.Items;
+            }
+
         }
 
         public async Task OnPostAsync(int id)
         {
-                
+
         }
     }
 }
