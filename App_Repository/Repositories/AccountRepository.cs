@@ -21,6 +21,7 @@ namespace App_Repository.Repositories
         public async Task<UpdateAccountResponse> UpdateAccountInformation(int id, UpdateAccountRequest updateAccountRequest)
             => await AccountDAO.Instance.UpdateAccountInformation(id, updateAccountRequest);
         public async Task<bool> ChangeAccountStatus(int id) => await AccountDAO.Instance.ChangeAccountStatus(id);
+        public int CountAllStudents() => AccountDAO.Instance.CountAllStudents();
 
         public async Task<LoginResponse> Login(LoginRequest loginRequest) => await AccountDAO.Instance.Login(loginRequest);
         public async Task<LoginResponse> SignUp(SignUpRequest signUpRequest) => await AccountDAO.Instance.SignUp(signUpRequest);

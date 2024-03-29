@@ -37,5 +37,7 @@ namespace App_Service.Services
         public async Task<List<Course>> GetAllCourses() => await _courseRepository.GetAllCourses();
 
         public async Task<int> GetTotalCourses() => await _courseRepository.GetTotalCourses();
+
+        public async Task<Dictionary<string, int>> GetCourseCountsByCategory() => await _courseRepository.GetCourseCountsByCategory();
     }
 }
